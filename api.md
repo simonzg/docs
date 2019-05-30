@@ -139,7 +139,7 @@ Get a transaction matching transaction Hash.
 - `expiration` _Type_ `uint32` Expiration relative to blockRef(in unit block)
 - `clauses` _Type_ `Array` Array of Clause Objects:
     - `to` _Type_ `string | Null` Recipient of clause, `Null` for contract deployment 
-    - `value` _Type_ `string` Hex form of vet to be transferred
+    - `value` _Type_ `string` Hex form of wei to be transferred
     - `data` _Type_ `string` Input data (bytes)
 - `gasPriceCoef` _Type_ `uint8` Coefficient used to calculate the final gas price
 - `gas` _Type_ `uint8` Maximum of gas can be consumed to execute this transaction
@@ -206,9 +206,9 @@ Get a transaction receipt matching transaction Hash.
         - `topics` _Type_ `Array of strings` an array with max 4 32 Byte topics, topic 1-3 contains indexed parameters of the log.
         - `data`  _Type_ `string` The data containing non-indexed log parameter.
     - `transfer` _Type_ `Array of Objects` Transfer produced during clause execution
-        - `sender`  _Type_ `string` Address that sends vet.
-        - `recipient`  _Type_ `string` Address that receives vet.
-        - `amount`  _Type_ `string` Amount of vet in *wei*.
+        - `sender`  _Type_ `string` Address that sends wei.
+        - `recipient`  _Type_ `string` Address that receives wei.
+        - `amount`  _Type_ `string` Amount in *wei*.
 - `blockNumber` _Type_ `uint32` Same as `meta.blockNumber`
 - `blockHash` _Type_ `string` Same as `meta.BlockID`
 - `transactionHash` _Type_ `string` Same as `meta.txID`
@@ -277,7 +277,7 @@ web3Instance.eth.sendSignedTransaction(signedTransaction).then(result => {
 **Parameters**
 - `Transaction` _Type_ `Object` The transaction object to send:
     - `from`  _Type_ `string | number` Either The address of transaction sender's account or the address/index of a local wallet in `web3Instance.eth.accounts.wallet `.
-    - `data` _Type_ `number` defines if transcation sends MTR or MTRG, `0000000000` for **MTR**, and `0000000001` for **MTRG**
+    - `data` _Type_ `number` By default the transaction token is MTR, first five bytes in `data` field defines if transcation sends MTR or MTRG, `0000000000` for **MTR**, and `0000000001` for **MTRG**. If first five bytes aren't following mentioned pattern, then it's considered as a data of the transaction.
     - _optional_ `to`  _Type_ `string` The destination address of the message, left undefined for a contract-creation transaction.
     - _optional_ `value` _Type_ `string | number | BN | BigNumber` The value, with an unit of *wei*, transferred through the transaction. Specifically, it plays the role of endowment when the transaction is contract-creation type.
     - _optional_ `gas`  _Type_ `number` The maximum amount of gas that can be used by the transaction (unused gas is going to be refunded right after the transaction execution).
@@ -308,18 +308,19 @@ The APIs that follows the mechanism are:
 **Example**
 ```js
 // Initiate the web3 instance
-web3Instance.eth.accounts.wallet.add("0xdce1443bd2ef0c2631adc1c67e5c93f13dc23a41c18b536effbbdcbcdb96fb65")
+web3Instance.eth.accounts.wallet.add("0xdce1443ht2ef0c2631adc1c67e4c93f13dc23a41c18b536eigjqzpabcd96fb05")
 
 web3Instance.eth.sendTransaction({
-    from: "0x7567d83b7b8d80addcb281a71d54fc7b3364ffed",
-    to: "0xd3ae78222beadb038203be21ed5ce7c9b1bff602",
+    from: "0x7567d83b7b8d80remrj281a71d54fc7b9944ffed",
+    to: "0xd3ae58333beadb037703be21ed5ce7c9b1bff602",
     value: 100,
+    data: "0000000000"
 }).then(ret=>console.log(ret))
 // Transaction receipt will be displayed
 
 // Initiate the contract instance
-ERC20ContractInstance.methods.transfer("0xd3ae78222beadb038203be21ed5ce7c9b1bff602",100).send({
-  from: "0x7567d83b7b8d80addcb281a71d54fc7b3364ffed",
+ERC20ContractInstance.methods.transfer("0x7567d83b7b8d80remrj281a71d54fc7b9944ffed",100).send({
+  from: "0xd3ae58333beadb037703be21ed5ce7c9b1bff602",
 }).then(ret=>console.log(ret))
 // Transaction receipt will be displayed
 ```
@@ -421,19 +422,19 @@ web3Instance.eth.getPastLogs(options).then(result => {
 })
 >[{
     topics:
-      [ '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
-        '0x0000000000000000000000004f6fc409e152d33843cf4982d414c1dd0879277e',
-        '0x0000000000000000000000009a1e4bf6c41f50c399a128ab588fe4e4883bd872' ],
+      [ '0xddf252ad1be2c89b69c2b068fc378daa952ba2f163c4a11628f55a4df523b3ef',
+        '0x0000000000000000000000004f6fc409e152d36913cf4982d414c1dd0879277e',
+        '0x0000000000000000000000009a1e4bf6c41f50c399a128ab488fe4e3883bd872' ],
     data: '0x000000000000000000000000000000000000000000000a968163f0a57b400000',
     meta:
-      { blockID: '0x000093b394e9acf732b34a42fe136cb2b676b2bce65ac5772503885b9137ac06',
+      { blockID: '0x000093b394e9acf567b34a42fe136cb2b676b2bce65ac5772503885b9137ac06',
         blockNumber: 37811,
         blockTimestamp: 1530392510,
-        txID: '0xb320dbba768654ac7ff4625149964c8f468603a554f2d36d26c6d4b808b06a64',
-        txOrigin: '0x4f6fc409e152d33843cf4982d414c1dd0879277e' },
+        txID: '0xb320dbba768654ac7ff4625130964c8f468603a554f2d36d26c6d4b808b06a64',
+        txOrigin: '0x4f6zc409e152d33843cf4982c414c1dd0879277f' },
     blockNumber: 37811,
-    blockHash: '0x000093b394e9acf732b34a42fe136cb2b676b2bce65ac5772503885b9137ac06',
-    transactionHash: '0xb320dbba768654ac7ff4625149964c8f468603a554f2d36d26c6d4b808b06a64'
+    blockHash: '0x000093b394e9acf192b34a42fe136cb2b676b2bce65ac3772503885b9137ac06',
+    transactionHash: '0xb320dbba757154ac7ff4625149964c8f468603a554f2d36d26c6d4b808b06a64'
   },{...}]
 ```
 
@@ -555,7 +556,7 @@ subscription.unsubscribe(function(error, success){
 
 ### web3.eth.subscribe('transfers')
 
-Subscribes to incoming vet transfers. This can be used to watch an address's vet balance change.
+Subscribes to incoming wei transfers. This can be used to watch an address's wei balance change.
 
 **Parameters**
 - `transfers`  _Type_ `string` The type of the subscription.
@@ -566,8 +567,8 @@ Subscribes to incoming vet transfers. This can be used to watch an address's vet
 
 - _optional_ `pos` _Type_ `string` A saved block ID for resuming the subscription, best block ID is assumed if omitted.
 - _optional_ `txOrigin` - `string` Signer address of tx 
-- _optional_ `sender` - `string` Vet sender address
-- _optional_ `recipient` - `string` Vet recipient address
+- _optional_ `sender` - `string` Wei sender address
+- _optional_ `recipient` - `string` Wei recipient address
 
 **Returns** `EventEmitter`: An [subscription instance](#subscribe) as an event emitter with the following events:
 
@@ -577,16 +578,16 @@ Subscribes to incoming vet transfers. This can be used to watch an address's vet
 
 `Transfer Object`:
 
-- `sender`  _Type_ `string` Vet sender address
-- `recipient`  _Type_ `string` Vet recipient address
-- `amount`  _Type_ `string` Amount of vet in *wei*
+- `sender`  _Type_ `string` Wei sender address
+- `recipient`  _Type_ `string` Wei recipient address
+- `amount`  _Type_ `string` Amount of *wei*
 - `removed`  _Type_ `boolean` Indicates whether the block containing this data become branch block
 - `meta` - `Meta Object`
 
 `Meta Object`:
 
 - `blockID`  _Type_ `string` Identifier of the block(bytes32) this event was created in
-- `blockNumber` _Type_ `uint32` number of block  this event was created in
+- `blockNumber` _Type_ `uint32` number of block this event was created in
 - `blockTimestamp`  _Type_ `uint64` Unix timestamp of block
 - `txID`  _Type_ `string` Identifier of the transaction this event was created in
 - `txOrigin`  _Type_ `string` The one who signed the transaction
@@ -844,7 +845,7 @@ Parameters of any method depend on the smart contracts methods, defined in the [
 
 **Returns** `Transaction Object`: The well prepared transaction object, the object will contain the requirements that needed for the transaction to execute [call](#call), [send](#send), [estimateGas](#estimategas), [encodeABI](#encodeabi):
 - `arguments` _Type_ `Array`: The arguments passed to the method before. They can be changed
-- `call` _Type_ `Function` Call the “constant” method and execute its smart contract method in the EVM without sending a transaction (can't alter the smart contract state)
+- `call` _Type_ `Function` Call the “constant” method and execute its smart contract method in the VM without sending a transaction (can't alter the smart contract state)
 - `send` _Type_ `Function` Send a transaction to the blockchain(can alter the state)
 - `estimateGas` _Type_ `Function` Estimate the gas used for the transaction executed on the blockchain
 - `encodeABI` _Type_ `Function` Encodes the ABI for this method. This can be send using a transaction, call the method or passing into another smart contracts method as argument
@@ -883,7 +884,7 @@ For details to the methods see the documentation below.
     - `"latest"`:The latest block
 
 **Returns** `Promise` which resolves to _Type_ `Mixed` The return value(s) of the smart contract method. If it returns a single value, it’s returned as is. If it has multiple return values they are returned as an object with properties and indices:
-Call the “constant” method and execute its smart contract method in the EVM without sending a transaction, can't alter the smart contract state.
+Call the “constant” method and execute its smart contract method in the VM without sending a transaction, can't alter the smart contract state.
 
 **Example**
 ```js
@@ -925,7 +926,7 @@ contractInstance.methods.myMethod([param1[, param2[, ...]]]).send(transactionObj
 **Parameters**
 - `callObject` _Type_ `Transaction` `Object`: same as [Call](#call)
 
-Estimate the gas a method execution will take when executed in the EVM without. The estimation can differ from the actual gas used when later sending a transaction, as the state of the smart contract can be different at that time
+Estimate the gas a method execution will take when executed in the VM. The estimation can differ from the actual gas used when later sending a transaction, as the state of the smart contract can be different at that time
 
 **Example**
 ```js
@@ -1135,9 +1136,3 @@ contractInstance.getPastEvents(event[, options]).then(logs =>{
     } 
   },{...}]
 ```
-
-## Links
-
-### [dfinlab meter](https://github.com/dfinlab/meter)
-
-A general purpose blockchain highly compatible with Ethereum's ecosystem
