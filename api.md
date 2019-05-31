@@ -313,7 +313,7 @@ web3Instance.eth.accounts.wallet.add("0xdce1443ht2ef0c2631adc1c67e4c93f13dc23a41
 web3Instance.eth.sendTransaction({
     from: "0x7567d83b7b8d80remrj281a71d54fc7b9944ffed",
     to: "0xd3ae58333beadb037703be21ed5ce7c9b1bff602",
-    value: 100,
+    value: 100000000000000000000,
     data: "0000000000"
 }).then(ret=>console.log(ret))
 // Transaction receipt will be displayed
