@@ -8,17 +8,21 @@ You can communicate with Meter via commonly used Web3 interface thanks to our _M
 
 You would need:
 - nodejs version 10.15.1 or above,
-- [meterify](https://github.com/dfinlab/meterify)
-- [web3](https://github.com/ethereum/web3.js/) version 1.0.0-beta.37
-- [solc](https://www.npmjs.com/package/solc) version 0.4.24
+    - [Here is the guide](https://tecadmin.net/install-nodejs-with-nvm/#) on how to install Node.js and manage different versions
+- [meterify](https://www.npmjs.com/package/meterify)
+    - ```bash
+    npm i meterify
+    ```
+- [web3](https://www.npmjs.com/package/web3/v/1.0.0-beta.37) version 1.0.0-beta.37
+    - ```bash
+    npm i web3@1.0.0-beta.37
+    ```
+- [solc](https://www.npmjs.com/package/solc/v/0.4.24) version 0.4.24
+    - ```bash
+    npm i solc@0.4.24
+    ```
 
-```bash
-npm i meterify
-npm i web3@1.0.0-beta.37
-npm i solc@0.4.24
-```
-
-Example code to set up connection to our testnet:
+After everything is set up, you can check if all works properly by testing connection to our testnet simply running the code below:
 
 ```js
 const meterify = require("meterify").meterify;
@@ -26,8 +30,13 @@ const Web3 = require("web3");
 const web3 = meterify(new Web3(), "http://test.meter.io:8669");
 ```
 
+If the code above runs without any errors, it means you're good to go!
+
 ## Getting started
 
+After successfully establishing the connection to our testnet, we can begin interacting with it.
+
+You can use any coding environment that suits your needs, [VS Code](https://code.visualstudio.com/) is one of the good options.
 
 ### Create accounts
 In this example we would need two accounts, you can create accounts using web3 API method which will return you the private key needed to add your account to the meterify wallet:
@@ -75,7 +84,7 @@ web3.eth.sendTransaction({from: 'some_address1',to: 'some_address2', value: '100
 
 ### Compile and deploy the smart contract
 
-We are using sample contract token available from this repository.
+We are using sample contract token available [here](https://gist.github.com/unstppbl/f51d9cc6e1f10692dae28fb86cee856e).
 
 Sample code below
 
