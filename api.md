@@ -1,10 +1,12 @@
-## API reference
+# Web3 API reference
 
 ------
 
-## web3.eth
+### Get MTRG balance
+```js
+web3.eth.getBalance(address[,blockNumberOrHash])
+```
 
-### web3.eth.getBalance(address[,blockNumberOrHash])
 Queries the MTRG balance of an address.
 
 **Parameters**
@@ -26,7 +28,11 @@ web3Instance.eth.getBalance(address[,blockNumberOrHash]).then(result => {
 > "100000000000000000"
 ```
 
-### web3.eth.getEnergy(address[,blockNumberOrHash])
+### Get MTR balance
+```js
+web3.eth.getEnergy(address[,blockNumberOrHash])
+```
+
 Queries the MTR balance of an address
 
 **Parameters**
@@ -48,7 +54,10 @@ web3Instance.eth.getEnergy(address[,blockNumberOrHash]).then(result => {
 > "1000000000000000000"
 ```
 
-### web3.eth.getChainTag()
+### Get genesis block information
+```js
+web3.eth.getChainTag()
+```
 Returns genesis block information, chain tag is the last byte of the genesis block ID.
 
 **Returns** `Promise` which resolves to `string` representing the chain tag
@@ -61,7 +70,10 @@ web3Instance.eth.getChainTag().then(result => {
 > "0x27"
 ```
 
-### web3.eth.getBlockNumber()
+### Query current best block number
+```js
+web3.eth.getBlockNumber()
+```
 Gets the current best block number
 
 **Returns** `Promise` resolving with `number`
@@ -74,8 +86,10 @@ web3Instance.eth.getBlockNumber().then(result => {
 > 100
 ```
 
-### web3.eth.getBlock(blockNumberOrHash)
-
+### Get block by number or hash
+```js 
+web3.eth.getBlock(blockNumberOrHash)
+```
 Gets a block matching the block number or block hash.
 
 **Parameters**
@@ -125,7 +139,10 @@ web3Instance.eth.getBlock(blockNumberOrHash).then(result => {
 }
 ```
 
-### web3.eth.getTransaction(transactionID)
+### Get transaction according to transaction hash
+```js
+web3.eth.getTransaction(transactionID)
+```
 Get a transaction matching transaction Hash.
 
 **Parameters**
@@ -180,7 +197,10 @@ web3Instance.eth.getTransaction(transactionID).then(result => {
 }
 ```
 
-### web3.eth.getTransactionReceipt(transactionHash)
+### Get transaction receipt by transaction hash
+```js
+web3.eth.getTransactionReceipt(transactionHash)
+```
 Get a transaction receipt matching transaction Hash.
 
 **Parameters**
@@ -253,7 +273,10 @@ web3Instance.eth.getTransactionReceipt(transactionHash).then(result => {
 ```
 
 
-### web3.eth.sendSignedTransaction(signedTransaction)
+### Send a signed transaction
+```js
+web3.eth.sendSignedTransaction(signedTransaction)
+```
 Send a signed transaction to the network.
 
 **Parameters**
@@ -273,7 +296,10 @@ web3Instance.eth.sendSignedTransaction(signedTransaction).then(result => {
 > "TransactionID will be displayed if sent successfully"
 ```
 
-### web3.eth.sendTransaction(Transaction)
+### Send transaction
+```js
+web3.eth.sendTransaction(Transaction)
+```
 **Parameters**
 - `Transaction` _Type_ `Object` The transaction object to send:
     - `from`  _Type_ `string | number` Either The address of transaction sender's account or the address/index of a local wallet in `web3Instance.eth.accounts.wallet `.
@@ -328,12 +354,15 @@ ERC20ContractInstance.methods.transfer("0x7567d83b7b8d80remrj281a71d54fc7b9944ff
 !> **This is not the only way for developers signing a transaction! <br>
 We encourage developers find a proper way to manage private key and sign a transaction.**
 
-### web3.eth.call(callObject[, blockNumberOrHash])
+### Execute a non-commited message call 
+```js
+web3.eth.call(callObject[, blockNumberOrHash])
+```
 Executes a message call, which is directly executed in the VM based on the specified block's state, but he never committed to the blockchain.
 
 **Parameters**
 - `callObject` _Type_ `Object` Transaction Object:
-    - _optional_ `from`  _Type_ `string | number` Either The address of transaction sender"s account or the address/index of a local wallet in `web3.eth.accounts.wallet `.
+    - _optional_ `from`  _Type_ `string | number` Either The address of transaction sender's account or the address/index of a local wallet in `web3.eth.accounts.wallet `.
     - _optional_ `to`  _Type_ `string` The destination address of the message, left undefined for a contract-creation transaction.
     - _optional_ `value`- `number|string|BN|BigNumber` The value, with an unit of *wei*, transferred through the transaction. Specifically, it plays the role of endowment when the transaction is contract-creation type.
     - _optional_ `gas`   _Type_ `number` The maximum amount of gas that can be used by the transaction (unused gas is going to be refunded right after the transaction execution).
@@ -356,7 +385,10 @@ web3Instance.eth.call(callObject[, blockNumberOrHash]).then(result => {
 > "0x00000000000000000000000000000000000000000000000000000000000000"
 ```
 
-### web3.eth.estimateGas(callObject)
+### Execute a message call or transaction
+```js
+web3.eth.estimateGas(callObject)
+```
 Executes a message call or transaction and returns the amount of the gas used.
 
 **Parameters**
@@ -383,7 +415,10 @@ web3Instance.eth.estimateGas(callObject).then(result => {
 > 1000
 ```
 
-### web3.eth.getPastLogs(options)
+### Get past logs
+```js
+web3.eth.getPastLogs(options)
+```
 Gets past logs, matching the given options.
 
 **Parameters**
@@ -438,7 +473,10 @@ web3Instance.eth.getPastLogs(options).then(result => {
   },{...}]
 ```
 
-### web3.eth.subscribe(type [, options] [, callback])
+### Subscribe to specific events
+```js
+web3.eth.subscribe(type [, options] [, callback])
+```
 The `web3Instance.eth.subscribe` function lets you subscribe to specific events in the blockchain.
 
 **Parameters**
@@ -459,8 +497,10 @@ The `web3Instance.eth.subscribe` function lets you subscribe to specific events 
 web3Instance.eth.subscribe('logs', {} ,function(){ ... });
 ```
 
-### web3.eth.clearSubscriptions()
-
+### Reset subscriptions
+```js
+web3.eth.clearSubscriptions()
+```
 Resets subscriptions.
 
 **Example** 
@@ -472,7 +512,10 @@ web3Instance.eth.subscribe('logs', {} ,function(){ ... })
 web3Instance.eth.clearSubscriptions()
 ```
 
-### web3.eth.subscribe('newBlockHeaders')
+### Subscribe to new block headers
+```js
+web3.eth.subscribe('newBlockHeaders')
+```
 Subscribes to incoming block headers. This can be used as ticker to check for changes on the blockchain.
 
 
@@ -554,8 +597,10 @@ subscription.unsubscribe(function(error, success){
 }
 ```
 
-### web3.eth.subscribe('transfers')
-
+### Subscribe to incoming transfers 
+```js
+web3.eth.subscribe('transfers')
+```
 Subscribes to incoming wei transfers. This can be used to watch an address's wei balance change.
 
 **Parameters**
@@ -641,8 +686,10 @@ subscription.unsubscribe(function(error, success){
 }
 ```
 
-### web3.eth.subscribe('logs')
-
+### Subscribe to logs
+```js
+web3.eth.subscribe('logs')
+```
 Subscribes to incoming logs, filtered by the given options.
 
 **Parameters**
@@ -732,7 +779,7 @@ subscription.unsubscribe(function(error, success){
 }
 ```
 
-### web3.eth.Contract
+### web3 Contract instance
 
 The `web3Instance.eth.Contract` object makes it easy to interact with smart contracts on the blockchain. When you create a new contract object you give it the json interface of the respective smart contract and web3 will auto convert all calls into low level ABI calls over RESTful HTTP API for you.
 
@@ -953,7 +1000,9 @@ console.log(data)
 #### Contract events
 
 ##### once
-
+```js
+contractInstance.once(event[, options], callback)
+```
 Subscribes to an event and unsubscribes immediately after the first event or error. Will only fire for a single event.
 
 **Parameters**
@@ -970,7 +1019,6 @@ none
 
 **Example**
 ```js
-contractInstance.once(event[, options], callback)
 contractInstance.once('Transfer', {
   _from: '0x7567d83b7b8d80addcb281a71d54fc7b3364ffed'
 }), (error, result) => {
@@ -1007,6 +1055,9 @@ contractInstance.once('Transfer', {
 ```
 
 ##### myEvent
+```js
+contractInstance.events.myEvent( [options][, callback])
+```
 Subscribe to an event
 
 **Parameters**
@@ -1024,7 +1075,6 @@ For the structure of a returned `Log Object` see [getPastEvents](#getpastevents)
 
 **Example**
 ```js
-contractInstance.events.myEvent( [options][, callback])
 contractInstance.events.myEvent({
   _from: '0x7567d83b7b8d80addcb281a71d54fc7b3364ffed'
 }), (error, result) => {
@@ -1064,8 +1114,10 @@ contractInstance.events.myEvent({
 
 Same as [myEvent](#myevent) but receives all events from this smart contract. Optionally the filter property can filter those events.
 
-#### GetPastEvents
-
+##### GetPastEvents
+```js
+contractInstance.getPastEvents(event[, options])
+```
 Gets past events for this contract
 
 **Parameters**
