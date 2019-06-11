@@ -84,7 +84,7 @@ web3.eth.sendTransaction({from: 'some_address1',to: 'some_address2', value: '100
 
 ### Compile and deploy the smart contract
 
-We are using sample contract token available [here](https://gist.github.com/unstppbl/f51d9cc6e1f10692dae28fb86cee856e).
+We are using sample contract token available [here](https://github.com/meterio/meterify/blob/master/test/sample_token.sol).
 
 Sample code below
 
