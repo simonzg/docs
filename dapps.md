@@ -1,12 +1,14 @@
 
 ## Intro
-Meter offers an opportunity to act as an API for the world. Dapps can use meter to run on and quickly onboard users, while others can use meter as a quick way to reach settlement.
-
 You can communicate with Meter via commonly used Web3 interface thanks to our _Meterify_ library.
+
+DApps can use Meter to run on and quickly onboard users, while others can use Meter in order to reach settlement.
+
 
 ## Prerequisites
 
-You would need:
+You will need:
+
 - nodejs version 10.15.1 or above,
     - [Here is the guide](https://tecadmin.net/install-nodejs-with-nvm/#) on how to install Node.js and manage different versions
 - [meterify](https://www.npmjs.com/package/meterify)
@@ -22,7 +24,7 @@ You would need:
     npm i solc@0.4.24
     ```
 
-After everything is set up, you can check if all works properly by testing connection to our testnet simply running the code below:
+After everything is set up, you can check if all works properly by testing connection to our testnet by simply running the code below either from the NodeJS REPL environment, or creating an `index.js` file with the code and running `node index.js`:
 
 ```js
 const meterify = require("meterify").meterify;
@@ -31,6 +33,10 @@ const web3 = meterify(new Web3(), "http://test.meter.io:8669");
 ```
 
 If the code above runs without any errors, it means you're good to go!
+
+For the example please refer to this asciinema: 
+
+[![asciicast](https://asciinema.org/a/emWfC7pdhxDSB6pMMogtP58UA.svg)](https://asciinema.org/a/emWfC7pdhxDSB6pMMogtP58UA)
 
 ## Getting started
 
