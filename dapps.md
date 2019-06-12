@@ -36,7 +36,7 @@ If the code above runs without any errors, it means you're good to go!
 
 For the example please refer to this asciinema: 
 
-[![asciicast](https://asciinema.org/a/emWfC7pdhxDSB6pMMogtP58UA.svg)](https://asciinema.org/a/emWfC7pdhxDSB6pMMogtP58UA)
+![](./_media/meterify.svg "web3 meterify example")
 
 ## Getting started
 
