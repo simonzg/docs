@@ -1,4 +1,4 @@
 * [Home](/)
-* [Web3 API](api.md "web3 api")
-* [Mining guide](mining.md "cryptocurrency mining, meter")
-* [dApps guide](dapps.md "dApps in a nutshell")
+* [Web3 API](api.md "Web3 API")
+* [Mining guide](mining.md "Mining meter")
+* [dApps guide](dapps.md "dApps guide")
