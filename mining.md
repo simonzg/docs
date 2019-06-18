@@ -1,6 +1,6 @@
 # Guide on mining Meter
 
-Meter uses SHA256 and miners could directly use bitcoin mining hardware to mine the meter(MTR) coin.  The mining setup is very similar between the two as well except meter uses an account based system instead of UTXO.  Existing mining pool has to make a small change to add the account based address into the configuration.
+Meter uses SHA256 and miners could directly use bitcoin mining hardware to mine the meter(MTR) coin. The mining setup is very similar between the two as well except meter uses an account based system instead of UTXO. Existing mining pool has to make a small change to add the account based address into the configuration.
 
 A [mining pool](https://en.wikipedia.org/wiki/Mining_pool) is the pooling of resources by miners, who share their processing power over a network, to split the reward equally, according to the amount of work they contributed to the probability of finding a block.
 
@@ -8,7 +8,7 @@ A [mining pool](https://en.wikipedia.org/wiki/Mining_pool) is the pooling of res
 
 **Production parameters**
 
-The following are the rough production paramenters for different minging hardware.  On the Testnet we are tuned to have 1meter=10kwh on Antminer S9.  In addition, the response parameters are still relatively slow.  When we getting closer to the mainnet launch, the production parameters will be tuned to mining hardware that is at the efficiency frontier.  The reward will also respond faster to the hashing rate changes.
+The following are the rough production parameters for different mining hardware. On the Testnet we are tuned to have 1 meter = 10 kwh on Antminer S9. In addition, the response parameters are still relatively slow. When we getting closer to the mainnet launch, the production parameters will be tuned to mining hardware that is at the efficiency frontier. The reward will also respond faster to the hashing rate changes.
 
 |                      | Power | Hash | Efficiency | Meter/Day | Margin Index |
 |----------------------|-------|------|------------|-----------|--------------|
@@ -23,18 +23,28 @@ The following are the rough production paramenters for different minging hardwar
 
 To efficiently mine Meter coins you will need ASIC miners. Follow [this guide](https://www.bitcoin.com/guides/how-to-setup-a-bitcoin-asic-miner-and-what-they-are) on installing and configuring your ASICs.
 
-We are actively working with mining pools for meter support.  Please
-We have two mining pools currently running for test purposes, you can connect to them here:
+We are actively working with mining pools for meter support. We have two mining pools currently running for test purposes, you can connect to them here:
 ```
 stratum+tcp://34.222.111.82:3256
 stratum+tcp://54.184.235.97:3256
 ```
-You could use http://54.184.235.97:8088/stats to view the its pool status.
-BE AWARE NO REWARD will be distributed from these pools as the logic has not been implemented yet.
+
+In order to configure your miner to join our mining pool you need to go to `Miner configuration` tab of your ASIC's web panel, and set the following fields as seen on the example below:
+
+![miner_configuration_example](./conf_s9.png)
+
+* URL - is the address of the mining pool
+* Worker - is your Meter wallet address
+* Password - your password
+
+
+You could use http://54.184.235.97:8088/stats to view the pool status.
+
+!> BE AWARE NO REWARD will be distributed from these pools as the logic has not been implemented yet.
 
 ## Start your own mining pool on Meter network
 
-We provided an example implementation of meter mining pool [github.com/meterio/meter-nomp](https://github.com/meterio/meter-nomp) based on the opensource nomp bticoin mining pool.  The code was provided to show the needed change from standard bitcoin mining pools and was not intended to be used in a production environment.  The following are the requirements for running meter nomp:
+We provided an example implementation of meter mining pool [github.com/meterio/meter-nomp](https://github.com/meterio/meter-nomp) based on the opensource nomp bticoin mining pool. The code was provided to show the needed change from standard bitcoin mining pools and was not intended to be used in a production environment. The following are the requirements for running meter nomp:
 
 ### Requirements
 * [Node.js](http://nodejs.org/) v0.10+ ([follow these installation instructions](https://tecadmin.net/install-nodejs-with-nvm/#))
@@ -43,7 +53,7 @@ We provided an example implementation of meter mining pool [github.com/meterio/m
 
     A coin daemon is a meter full node that monitors the transactions on both Meter PoW and PoS chains
 
-    On testnet, you will have to connect your mining pool to one of the coin deamons setup by the Meter team. In the future, the pool operator should setup its own coin deamon.
+    On testnet, you will have to connect your mining pool to one of the coin deamons setup by the Meter team. In the future, the pool operator should setup its own coin daemon.
 
     Here is Meter test coin daemon's configuration:
 
@@ -73,6 +83,7 @@ git clone https://github.com/meterio/meter-nomp.git
 cd meter-nomp
 npm update
 ```
+
 ### Configuration
 
 #### Portal config
@@ -245,6 +256,7 @@ Explanation for each field:
 #### Coin config
 Inside the `coins` directory, ensure a json file exists for meter coin. If it does not you will have to create it.
 Here is an example of the required fields:
+
 ````js
 {
     "name": "Meter",
@@ -253,15 +265,17 @@ Here is an example of the required fields:
 }
 ````
 
-For additional documentation how to configure coins and their different algorithms
+For additional documentation on how to configure coins and their different algorithms
 see [these instructions](github.com/meterio/meter-stratum-pool#module-usage).
 
 
 #### Pool config
 There is a json config file `meter.json`. Make sure to configure fields in this file, especially address fields.
-Assuming the miners'
+
+Assuming the miner's account in Meter for receveing reward is the `rewardBeneficiary` field, in the example it is: `0a05c2d862ca051010698b69b54278cbaf945ccb`.
 
 The daemons field should be configured as follows:
+
 ```js
 [
     {
