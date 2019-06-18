@@ -1,14 +1,14 @@
 # Guide on mining Meter
 
-Meter mining is very similar to bitcoin mining, so it requires minimum changes.
+Meter uses SHA256 and miners could directly use bitcoin mining hardware to mine the meter(MTR) coin.  The mining setup is very similar between the two as well except meter uses an account based system instead of UTXO.  Existing mining pool has to make a small change to add the account based address into the configuration.
 
-A [mining pool](https://en.wikipedia.org/wiki/Mining_pool) is the pooling of resources by miners, who share their processing power over a network, to split the reward equally, according to the amount of work they contributed to the probability of finding a block. 
+A [mining pool](https://en.wikipedia.org/wiki/Mining_pool) is the pooling of resources by miners, who share their processing power over a network, to split the reward equally, according to the amount of work they contributed to the probability of finding a block.
 
 ?> To start mining you should either join to a mining pool or create one by yourself
 
 **Production parameters**
 
-Testnet mining Tuned for AntMiner S9, mainnet will target at efficiency frontier
+The following are the rough production paramenters for different minging hardware.  On the Testnet we are tuned to have 1meter=10kwh on Antminer S9.  In addition, the response parameters are still relatively slow.  When we getting closer to the mainnet launch, the production parameters will be tuned to mining hardware that is at the efficiency frontier.  The reward will also respond faster to the hashing rate changes.
 
 |                      | Power | Hash | Efficiency | Meter/Day | Margin Index |
 |----------------------|-------|------|------------|-----------|--------------|
@@ -23,30 +23,33 @@ Testnet mining Tuned for AntMiner S9, mainnet will target at efficiency frontier
 
 To efficiently mine Meter coins you will need ASIC miners. Follow [this guide](https://www.bitcoin.com/guides/how-to-setup-a-bitcoin-asic-miner-and-what-they-are) on installing and configuring your ASICs.
 
+We are actively working with mining pools for meter support.  Please
 We have two mining pools currently running for test purposes, you can connect to them here:
 ```
 stratum+tcp://34.222.111.82:3256
 stratum+tcp://54.184.235.97:3256
 ```
+You could use http://54.184.235.97:8088/stats to view the its pool status.
+BE AWARE NO REWARD will be distributed from these pools as the logic has not been implemented yet.
 
-## Start your own mining pool on Meter network 
+## Start your own mining pool on Meter network
 
-In order to start a mining pool you will need our NodeJS mining portal application. Which is located here [github.com/meterio/meter-nomp](https://github.com/meterio/meter-nomp). Download it and follow instructions below.
+We provided an example implementation of meter mining pool [github.com/meterio/meter-nomp](https://github.com/meterio/meter-nomp) based on the opensource nomp bticoin mining pool.  The code was provided to show the needed change from standard bitcoin mining pools and was not intended to be used in a production environment.  The following are the requirements for running meter nomp:
 
 ### Requirements
 * [Node.js](http://nodejs.org/) v0.10+ ([follow these installation instructions](https://tecadmin.net/install-nodejs-with-nvm/#))
 * [Redis](http://redis.io/) key-value store v2.6+ ([follow these instructions](http://redis.io/topics/quickstart))
-* Connection to coin daemon
+* Connection to coin daemon running on the meter network
 
-    Coin daemon is a program that implements the Meter protocol for remote procedure call (RPC) use.  
-    
-    You will need to connect to our coin daemon in order to run the pool. Later on we will publish source code of our daemon, so everyone can run the daemon locally.
-    
-    Here is Meter public coin daemon's configuration:
-    
+    A coin daemon is a meter full node that monitors the transactions on both Meter PoW and PoS chains
+
+    On testnet, you will have to connect your mining pool to one of the coin deamons setup by the Meter team. In the future, the pool operator should setup its own coin deamon.
+
+    Here is Meter test coin daemon's configuration:
+
     ```js
     {
-        "host": "n01.meter.io",
+        "host": "test.meter.io",
         "port": 8332,
         "user": "testuser",
         "password": "testpass"
@@ -81,10 +84,10 @@ Explanation for each field:
     /* Specifies the level of log output verbosity. Anything more severe than the level specified
        will also be logged. */
     "logLevel": "debug", //or "warning", "error"
-    
+
     /* By default meter-NOMP logs to console and gives pretty colors. If you direct that output to a
        log file then disable this feature to avoid nasty characters in your log file. */
-    "logColors": true, 
+    "logColors": true,
 
 
     /* The NOMP CLI (command-line interface) will listen for commands on this port. For example,
@@ -99,30 +102,30 @@ Explanation for each field:
         "enabled": true,
         "forks": "auto"
     },
-    
+
     /* Pool config file will inherit these default values if they are not set. */
     "defaultPoolConfigs": {
-    
+
         /* Poll RPC daemons for new blocks every this many milliseconds. */
         "blockRefreshInterval": 1000,
-        
+
         /* If no new blocks are available for this many seconds update and rebroadcast job. */
         "jobRebroadcastTimeout": 55,
-        
+
         /* Disconnect workers that haven't submitted shares for this many seconds. */
         "connectionTimeout": 600,
-        
+
         /* (For MPOS mode) Store the block hashes for shares that aren't block candidates. */
         "emitInvalidBlockHashes": false,
-        
+
         /* This option will only authenticate miners using an address or mining key. */
         "validateWorkerUsername": true,
-        
+
         /* Enable for client IP addresses to be detected when using a load balancer with TCP
            proxy protocol enabled, such as HAProxy with 'send-proxy' param:
            http://haproxy.1wt.eu/download/1.5/doc/configuration.txt */
         "tcpProxyProtocol": false,
-        
+
         /* If under low-diff share attack we can ban their IP to reduce system/network load. If
            running behind HAProxy be sure to enable 'tcpProxyProtocol', otherwise you'll end up
            banning your own IP address (and therefore all workers). */
@@ -133,7 +136,7 @@ Explanation for each field:
             "checkThreshold": 500, //Perform check when this many shares have been submitted
             "purgeInterval": 300 //Every this many seconds clear out the list of old bans
         },
-        
+
         /* Used for storing share and block submission data and payment processing. */
         "redis": {
             "host": "127.0.0.1",
@@ -256,12 +259,13 @@ see [these instructions](github.com/meterio/meter-stratum-pool#module-usage).
 
 #### Pool config
 There is a json config file `meter.json`. Make sure to configure fields in this file, especially address fields.
+Assuming the miners'
 
 The daemons field should be configured as follows:
 ```js
 [
     {
-        "host": "n01.meter.io",
+        "host": "test.meter.io",
         "port": 8332,
         "user": "testuser",
         "password": "testpass"
@@ -335,7 +339,7 @@ Description of options:
                 "variancePercent": 30 //Allow time to very this % from target without retargeting
             }
         },
-        "3256": { //Another port for your miners to connect to, for ASIC miner 
+        "3256": { //Another port for your miners to connect to, for ASIC miner
             "diff": 200000 //The pool difficulty
             "varDiff": {
                 "minDiff": 100000,
@@ -376,7 +380,7 @@ Description of options:
            transaction data. Assume its supported but if you have problems try disabling it. */
         "disableTransactions": true
     },
-    
+
     /* Enabled this mode and shares will be inserted into in a MySQL database. You may also want
        to use the "emitInvalidBlockHashes" option below if you require it. The config options
        "redis" and "paymentProcessing" will be ignored/unused if this is enabled. */
@@ -398,7 +402,7 @@ Description of options:
 }
 ````
 
-You can create as many of these pool config files as you want (such as one pool per coin you wish to operate).
+You can create as many of these pool config files as you want
 If you are creating multiple pools, ensure that they have unique stratum ports.
 
 For more information on these configuration options see the [pool module documentation](https://github.com/meterio/meter-stratum-pool#module-usage).
@@ -410,6 +414,3 @@ After all the configuration files has been set up, you're ready to start your mi
 ```bash
 node init.js
 ```
-
-
-
