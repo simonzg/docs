@@ -31,7 +31,7 @@ stratum+tcp://34.222.111.82:3256
 stratum+tcp://54.184.235.97:3256
 ```
 
-The following are the rough production parameters for different mining hardware. On the Testnet we are tuned to have 1 meter = 10 kwh on Antminer S9. In addition, the response parameters are still relatively slow. When we getting closer to the mainnet launch, the production parameters will be tuned to mining hardware that is at the efficiency frontier. The reward will also respond faster to the hashing rate changes.
+The following are the rough production parameters for different mining hardware on the Meter testnet, tuned to 1 meter = 10 kwh on an Antminer S9:
 
 |                      | Power | Hash | Efficiency | Meter/Day | Margin Index |
 |----------------------|-------|------|------------|-----------|--------------|
@@ -39,6 +39,10 @@ The following are the rough production parameters for different mining hardware.
 | WhatsMiner M10       | 3500  | 55   | 63.64      | 129.36    | 1.54         |
 | Inno Silicon T3+ 52T | 2200  | 52   | 42.31      | 79.42     | 2.32         |
 | AntMiner S17Pro      | 2094  | 53   | 39.51      | 80.95     | 2.48         |
+
+These results are still relatively slow now. However, closer to the mainnet launch, parameters will be tuned to more efficient mining hardware, and achieve faster end results.
+
+The Meter mining pool status statistics can be viewed at http://54.184.235.97:8088/stats.
 
 ### Joining the Meter Mining Pool
 
@@ -54,39 +58,22 @@ Where:
 * `Worker` is the Meter wallet address.
 * `Password` is the password associated with the wallet.
 
-Pool status statistics can be viewed at http://54.184.235.97:8088/stats.
-
 ## Starting a Mining Pool on the Meter Network
 
-We provided an example implementation of the Meter mining pool [github.com/meterio/meter-nomp](https://github.com/meterio/meter-nomp), based on the open source nomp Bitcoin mining pool. The code was provided to show the needed change from standard bitcoin mining pools and was not intended to be used in a production environment. The following are the requirements for running meter nomp:
+An example implementation of the Meter mining pool is available on [GitHub](https://github.com/meterio/meter-nomp), based on the open source nomp Bitcoin mining pool. This code has been provided to show the changes needed compared to standard bitcoin mining pools, and is not intended to be used in a production environment.
 
 ### Requirements
+
+There are three things required to run Meter nomp: Node.js, Redis, and a connection to a coin daemon on the Meter Network, which is a Meter full node that monitors transactions on both the Meter PoW and PoS chains.
+
+On the testnet, coin deamons have already been setup by the Meter team. Normally a pool operator would setup its own coin daemon, and this will be possible in the future.
+
+The following are the minimal version requirements for Node.js and Redis. If older versions than the following are used (e.g. installed by a package manager) then problems will arise:
+
 * [Node.js](http://nodejs.org/) v0.10+ ([follow these installation instructions](https://tecadmin.net/install-nodejs-with-nvm/#))
 * [Redis](http://redis.io/) key-value store v2.6+ ([follow these instructions](http://redis.io/topics/quickstart))
-* Connection to coin daemon running on the meter network
 
-    A coin daemon is a meter full node that monitors the transactions on both Meter PoW and PoS chains
-
-    On testnet, you will have to connect your mining pool to one of the coin deamons setup by the Meter team. In the future, the pool operator should setup its own coin daemon.
-
-    Here is Meter test coin daemon's configuration:
-
-    ```js
-    {
-        "host": "test.meter.io",
-        "port": 8332,
-        "user": "testuser",
-        "password": "testpass"
-    }
-    ```
-
-#### Be aware {docsify-ignore}
-Those are minimal requirements. If you use old versions of Node.js or Redis that may come with your system package manager then you will have problems. Follow the linked instructions to get the last stable versions.
-
-
-[**Redis security warning**](http://redis.io/topics/security): be sure firewall access to redis - an easy way is to
-include `bind 127.0.0.1` in your `redis.conf` file. Also it's a good idea to learn about and understand software that
-you are using - a good place to start with redis is [data persistence](http://redis.io/topics/persistence).
+**Important Warning!** It is always a good idea to learn about and understand any software that you are using. An important security measure to implement for nomp is to secure Redis so it cannot be accessed externally. An easy way to do this is to include `bind 127.0.0.1` in your `redis.conf` file, and use a firewall with strict rules in place to only allow accessing Redis locally. For more information please read [Security](http://redis.io/topics/security). Another good place to start for additional information about using Redis for nomp is [Data Persistence](http://redis.io/topics/persistence).
 
 ### Downloading & Installing
 
@@ -98,13 +85,13 @@ cd meter-nomp
 npm update
 ```
 
-### Configuration
+### Portal Configuration
 
-#### Portal config
 Inside the `config_example.json` file, ensure the default configuration will work for your environment, then copy the file to `config.json`.
 
-Explanation for each field:
-````js
+**Field Description**
+
+```js
 {
     /* Specifies the level of log output verbosity. Anything more severe than the level specified
        will also be logged. */
@@ -264,31 +251,28 @@ Explanation for each field:
         "useMintpal": true
     }
 }
-````
+```
 
+### Coin Configuration
 
-#### Coin config
-Inside the `coins` directory, ensure a json file exists for meter coin. If it does not you will have to create it.
-Here is an example of the required fields:
+Inside the `coins` directory, ensure that a json file exists for Meter coin, and if no create it. Here is an example of what the file should look like:
 
-````js
+```js
 {
     "name": "Meter",
     "symbol": "MTR",
     "algorithm": "sha256",
 }
-````
+```
 
-For additional documentation on how to configure coins and their different algorithms
-see [these instructions](github.com/meterio/meter-stratum-pool#module-usage).
+For additional documentation on how to configure coins and their different algorithms see [these instructions](github.com/meterio/meter-stratum-pool#module-usage).
 
 
-#### Pool config
-There is a json config file `meter.json`. Make sure to configure fields in this file, especially address fields.
+### Pool Configuration
 
-Assuming the miner's account in Meter for receveing reward is the `rewardBeneficiary` field, in the example it is: `0a05c2d862ca051010698b69b54278cbaf945ccb`.
+There is a json config file `meter.json`. Make sure to configure the appropriate fields in this file, especially the address fields and the `daemon`/`daemons` fields.
 
-The daemons field should be configured as follows:
+For example, assuming the miner's account in Meter for receiving a reward is the `rewardBeneficiary` field, in the example configuration below the value is `0a05c2d862ca051010698b69b54278cbaf945ccb`. In the same example, the value for Meter test coin in the `daemons` section is configured as follows:
 
 ```js
 [
@@ -301,8 +285,9 @@ The daemons field should be configured as follows:
 ]
 ```
 
-Description of options:
-````js
+**Field Description**
+
+```js
 {
     "enabled": true, //Set this to false and a pool will not be created from this config file
     "coin": "meter.json", //Reference to coin config file in 'coins' directory
@@ -428,14 +413,13 @@ Description of options:
         "autoCreateWorker": false
     }
 }
-````
+```
 
-You can create as many of these pool config files as you want
-If you are creating multiple pools, ensure that they have unique stratum ports.
+You can create as many of these pool config files as you want. If you are creating multiple pools, ensure that they have unique stratum ports.
 
 For more information on these configuration options see the [pool module documentation](https://github.com/meterio/meter-stratum-pool#module-usage).
 
-### Start the portal
+### Start the Portal
 
 After all the configuration files has been set up, you're ready to start your mining pool in NodeJS:
 
