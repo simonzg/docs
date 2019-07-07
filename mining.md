@@ -1,12 +1,35 @@
-# Guide on mining Meter
+# Meter Mining Guide
 
-Meter uses SHA256 and miners could directly use bitcoin mining hardware to mine the meter(MTR) coin. The mining setup is very similar between the two as well except meter uses an account based system instead of UTXO. Existing mining pool has to make a small change to add the account based address into the configuration.
+Mining is how cryptocurrency is created, and Meter (MTR) is no exception to this. It is sometimes the easiest or only way to acquire coins in the early stages of their existence, and involves the use of specialized hardware to get rewarded for processing transaction blocks on a blockchain.  
 
-A [mining pool](https://en.wikipedia.org/wiki/Mining_pool) is the pooling of resources by miners, who share their processing power over a network, to split the reward equally, according to the amount of work they contributed to the probability of finding a block.
+## How to Mine
 
-?> To start mining you should either join to a mining pool or create one by yourself
+Miners can start mining Meter (MTR) either with their own equipment, or as part of an existing mining pool. Each has its own benefits and drawbacks, and it is up to the miner to determine which approach suits them best.
 
-**Production parameters**
+### What is a Mining Pool?
+
+A [mining pool](https://en.wikipedia.org/wiki/Mining_pool) is the pooling of resources by miners, who share their processing power over a network. Miners split the reward equally, according to the amount of work they contributed towards the probability of finding a block.
+
+## Mining Hardware
+
+ASIC miners are specialized hardware machines that are required to efficiently mine Meter.
+
+Since Meter uses SHA256, the same as Bitcoin, miners can use the same hardware for mining both coins, and the mining setup for the two is very similar.
+
+### Hardware Setup Guide
+
+Meter uses an account based system, rather than the UTXO based method that Bitcoin uses. However, this difference only amounts to a small change that needs to be made in the configuration.
+
+Follow [this guide](https://www.bitcoin.com/guides/how-to-setup-a-bitcoin-asic-miner-and-what-they-are) on installing and configuring your ASICs.
+
+## The Meter Mining Pool
+
+Meter is actively working with mining pools for support. However, in the meantime there are two dedicated Meter mining pools currently running for test purposes:
+
+```
+stratum+tcp://34.222.111.82:3256
+stratum+tcp://54.184.235.97:3256
+```
 
 The following are the rough production parameters for different mining hardware. On the Testnet we are tuned to have 1 meter = 10 kwh on Antminer S9. In addition, the response parameters are still relatively slow. When we getting closer to the mainnet launch, the production parameters will be tuned to mining hardware that is at the efficiency frontier. The reward will also respond faster to the hashing rate changes.
 
@@ -17,34 +40,25 @@ The following are the rough production parameters for different mining hardware.
 | Inno Silicon T3+ 52T | 2200  | 52   | 42.31      | 79.42     | 2.32         |
 | AntMiner S17Pro      | 2094  | 53   | 39.51      | 80.95     | 2.48         |
 
+### Joining the Meter Mining Pool
 
+!> BE AWARE NO REWARD will be distributed from these pools, as the logic has not been implemented yet.
 
-## Join a mining pool
-
-To efficiently mine Meter coins you will need ASIC miners. Follow [this guide](https://www.bitcoin.com/guides/how-to-setup-a-bitcoin-asic-miner-and-what-they-are) on installing and configuring your ASICs.
-
-We are actively working with mining pools for meter support. We have two mining pools currently running for test purposes, you can connect to them here:
-```
-stratum+tcp://34.222.111.82:3256
-stratum+tcp://54.184.235.97:3256
-```
-
-In order to configure your miner to join our mining pool you need to go to `Miner configuration` tab of your ASIC's web panel, and set the following fields as seen on the example below:
+In order to configure a miner to join a Meter mining pool, the following fields in the `Miner configuration` tab of the ASIC's web panel need to be set:
 
 ![miner_configuration_example](./conf_s9.png)
 
-* URL - is the address of the mining pool
-* Worker - is your Meter wallet address
-* Password - your password
+Where:
 
+* `URL` is the address of the mining pool.
+* `Worker` is the Meter wallet address.
+* `Password` is the password associated with the wallet.
 
-You could use http://54.184.235.97:8088/stats to view the pool status.
+Pool status statistics can be viewed at http://54.184.235.97:8088/stats.
 
-!> BE AWARE NO REWARD will be distributed from these pools as the logic has not been implemented yet.
+## Starting a Mining Pool on the Meter Network
 
-## Start your own mining pool on Meter network
-
-We provided an example implementation of meter mining pool [github.com/meterio/meter-nomp](https://github.com/meterio/meter-nomp) based on the opensource nomp bticoin mining pool. The code was provided to show the needed change from standard bitcoin mining pools and was not intended to be used in a production environment. The following are the requirements for running meter nomp:
+We provided an example implementation of the Meter mining pool [github.com/meterio/meter-nomp](https://github.com/meterio/meter-nomp), based on the open source nomp Bitcoin mining pool. The code was provided to show the needed change from standard bitcoin mining pools and was not intended to be used in a production environment. The following are the requirements for running meter nomp:
 
 ### Requirements
 * [Node.js](http://nodejs.org/) v0.10+ ([follow these installation instructions](https://tecadmin.net/install-nodejs-with-nvm/#))
