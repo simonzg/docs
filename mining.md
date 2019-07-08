@@ -93,7 +93,7 @@ On the testnet, coin deamons have already been setup by the Meter team. Normally
 The following are the minimal version requirements for Node.js and Redis. If older versions than the following are used (e.g. installed by a package manager) then problems will arise:
 
 * [Node.js](http://nodejs.org/) v0.10+ ([follow these installation instructions](https://tecadmin.net/install-nodejs-with-nvm/#))
-* [Redis](http://redis.io/) key-value store v2.6+ ([follow these instructions](http://redis.io/topics/quickstart))
+* [Redis](http://redis.io/) v2.6+ ([follow these instructions](http://redis.io/topics/quickstart))
 
 **Important Warning!** It is always a good idea to learn about and understand any software that you are using. An important security measure to implement for nomp is to secure Redis so it cannot be accessed externally. An easy way to do this is to include `bind 127.0.0.1` in your `redis.conf` file, and use a firewall with strict rules in place to only allow accessing Redis locally. For more information please read [Security](http://redis.io/topics/security). Another good place to start for additional information about using Redis for nomp is [Data Persistence](http://redis.io/topics/persistence).
 
@@ -105,6 +105,49 @@ Clone the repository and run `npm update` for all the dependencies to be install
 git clone https://github.com/meterio/meter-nomp.git
 cd meter-nomp
 npm update
+```
+
+### Optional: Using Docker
+
+Rather than using the host system's Redis and Node.js, it is possible to containerize everything using Docker. The following describes this optional approach with Docker Compose. Do the following before continuing with the remaining steps, and in further sections any additional adjustments that need to be made will be highlighted.
+
+Create the following `docker-compose.yml` file inside the `meter-nomp` sub-directory in the previous step.
+
+```version: '3.5'
+services:
+  redis:
+    image: "redis:alpine"
+    networks:
+      backend:
+        ipv4_address: 172.16.238.10
+  node:
+    image: "node:10"
+    user: "node"
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - frontend
+      - backend
+    expose:
+      - "8088:8088"
+    command: "npm init.js"
+
+  networks:
+    frontend:
+      name: nomp_frontend
+      driver: custom-driver-1
+    backend:
+      driver: bridge
+      ipam:
+        driver: default
+        config:
+        - subnet: 172.16.238.0/24
+          gateway: 172.16.238.1
+
 ```
 
 ### Portal Configuration
