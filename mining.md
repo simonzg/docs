@@ -104,7 +104,7 @@ Clone the repository and run `npm update` for all the dependencies to be install
 ```bash
 git clone https://github.com/meterio/meter-nomp.git
 cd meter-nomp
-npm update
+npm install
 ```
 
 ### Optional: Using Docker
@@ -113,7 +113,8 @@ Rather than using the host system's Redis and Node.js, it is possible to contain
 
 Create the following `docker-compose.yml` file inside the `meter-nomp` sub-directory in the previous step.
 
-```version: '3.5'
+```
+version: '3.5'
 services:
   redis:
     image: "redis:alpine"
@@ -126,11 +127,7 @@ services:
     working_dir: /home/node/meter-nomp
     volumes:
       - ./:/home/node/meter-nomp
-    depends_on:
-      redis:
-        condition: service_healthy
     networks:
-      - frontend
       backend:
         ipv4_address: 172.16.238.11
     ports:
@@ -153,21 +150,18 @@ services:
       # MySQL Port (not enabled in the example)
       # - "3306:3306"
       # Other ports as required
-    command: "npm init.js"
+    command: >
+      sh -c "npm update &&
+             node init.js"
 
-  networks:
-    frontend:
-      name: nomp_frontend
-      driver: custom-driver-1
-    backend:
-      name: nomp_backend
-      driver: bridge
-      ipam:
-        driver: default
-        config:
-        - subnet: 172.16.238.0/24
-          gateway: 172.16.238.1
-
+networks:
+  backend:
+    name: nomp_backend
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.16.238.0/24
 ```
 
 ### Portal Configuration
@@ -361,14 +355,14 @@ For additional documentation on how to configure coins and their different algor
 
 ### Pool Configuration
 
-There is a json config file `meter.json`. Make sure to configure the appropriate fields in this file, especially the address fields and the `daemon`/`daemons` fields.
+There is a json config file `meter.json` in the `pool_configs` sub-directory. Make sure to configure the appropriate fields in this file, especially the address fields and the `daemon`/`daemons` fields.
 
 For example, assuming the miner's account in Meter for receiving a reward is the `rewardBeneficiary` field, in the example configuration below the value is `0a05c2d862ca051010698b69b54278cbaf945ccb`. In the same example, the value for Meter test coin in the `daemons` section is configured as follows:
 
 ```js
 [
     {
-        "host": "test.meter.io",
+        "host": "127.0.0.1",
         "port": 8332,
         "user": "testuser",
         "password": "testpass"
@@ -514,10 +508,70 @@ For more information on these configuration options see the [pool module documen
 
 After all the configuration files have been set up, it is time to start the mining pool.
 
+#### Using Local Host Resources (no Docker)
+
 If everything is installed locally on the host, initiate using the following:
 
 ```bash
-node init.js
+$ node init.js
 ```
 
-If using the Docker approach, then the following steps need to be taken:
+#### Using Docker
+
+*Step 1:* If using the Docker approach, make sure on first run to remove the dependencies in `node_modules` and it is empty.
+
+The reason for this is that there may be a version mismatch if dependencies were installed outside the container, as might have happened if `npm install` or `npm update` were run from the host. The `docker-compose.yml` file takes care of installing the dependencies, and automatically starting the application.
+
+```bash
+$ rm -fr node_modules/*
+```
+Or remove it entirely:
+
+```bash
+$ rm -fr node_modules
+```
+
+*Step 2:* Ensure the latest version of `docker-compose` is installed.
+
+```bash
+$ sudo curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+$ sudo chmod +x /usr/local/bin/docker-compose
+```
+
+*Step 3:* Check that `docker-compose` was installed correctly.
+
+```bash
+$ docker-compose --version
+docker-compose version 1.24.1, build 4667896b
+```
+
+*Step 4:* Double check the configuration details and then start Docker.
+
+```bash
+docker-compose up
+```
+
+*Step 5:* Watch the log output for any errors.
+
+The following errors are known to occur upon startup when the daemon is not running in the background:
+
+```bash
+[Payments]	[meter] Error with payment processing daemon {"type":"offline","message":"connect ECONNREFUSED 127.0.0.1:8332"}
+[Website]	[meter] Could not dumpprivkey for meter {"type":"offline","message":"connect ECONNREFUSED 127.0.0.1:8332"}
+[Pool]	[meter] (Thread 2) Could not start pool, error with init batch RPC call: {"type":"offline","message":"connect ECONNREFUSED 127.0.0.1:8332"}
+[Pool]	[meter] (Thread 1) Could not start pool, error with init batch RPC call: {"type":"offline","message":"connect ECONNREFUSED 127.0.0.1:8332"}
+```
+
+*Step 6*: Press `Ctrl+C` to stop.
+
+```bash
+Gracefully stopping... (press Ctrl+C again to force)
+Stopping meter-nomp_node_1  ... done
+Stopping meter-nomp_redis_1 ... done
+```
+
+*Step 7*: When wishing to start again in detached mode us the `-d` flag with `docker-compose`.
+
+```bash
+docker-compose up -d
+```
