@@ -86,7 +86,7 @@ An example implementation of the Meter mining pool is available on [GitHub](http
 
 ### Requirements
 
-There are three things required to run Meter nomp: Node.js, Redis, and a connection to a coin daemon on the Meter Network, which is a Meter full node that monitors transactions on both the Meter PoW and PoS chains.
+There are three things required to run Meter nomp: Node.js, a database (Redis or MySQL), and a connection to a coin daemon on the Meter Network, which is a Meter full node that monitors transactions on both the Meter PoW and PoS chains.
 
 On the testnet, coin deamons have already been setup by the Meter team. Normally a pool operator would setup its own coin daemon, and this will be possible in the future.
 
@@ -95,7 +95,7 @@ The following are the minimal version requirements for Node.js and Redis. If old
 * [Node.js](http://nodejs.org/) v0.10+ ([follow these installation instructions](https://tecadmin.net/install-nodejs-with-nvm/#))
 * [Redis](http://redis.io/) v2.6+ ([follow these instructions](http://redis.io/topics/quickstart))
 
-**Important Warning!** It is always a good idea to learn about and understand any software that you are using. An important security measure to implement for nomp is to secure Redis so it cannot be accessed externally. An easy way to do this is to include `bind 127.0.0.1` in your `redis.conf` file, and use a firewall with strict rules in place to only allow accessing Redis locally. For more information please read [Security](http://redis.io/topics/security). Another good place to start for additional information about using Redis for nomp is [Data Persistence](http://redis.io/topics/persistence).
+**Important Warning!** It is always a good idea to learn about and understand any software that you are using. An important security measure to implement for nomp is to secure the database so it cannot be accessed externally. An easy way to do this for Redis is to include `bind 127.0.0.1` in your `redis.conf` file, and use a firewall with strict rules in place to only allow accessing Redis locally. For more information please read [Security](http://redis.io/topics/security). Another good place to start for additional information about using Redis for nomp is [Data Persistence](http://redis.io/topics/persistence).
 
 ### Downloading & Installing
 
@@ -134,11 +134,24 @@ services:
       backend:
         ipv4_address: 172.16.238.11
     ports:
+    # The following ports should be exposed to support
+    # the example setup in the remainder of this document.
+      # Web interface
       - "8088:8088"
+      # CLI
       - "17117:17117"
+      # Algorithm Switching
       - "3333:3333"
+      - "4444:4444"
+      - "5555:5555"
+      # Payment Processing Daemon Port
       - "8332:8332"
+      # Pool Connection Ports
       - "3008:3008"
+      - "3032:3032"
+      - "3256:3256"
+      # MySQL Port (not enabled in the example)
+      # - "3306:3306"
       # Other ports as required
     command: "npm init.js"
 
@@ -159,7 +172,7 @@ services:
 
 ### Portal Configuration
 
-Inside the `config_example.json` file, ensure the default configuration will work for your environment, then copy the file to `config.json`. If using the Docker approach outlined above, change the `redis` sections to replace `127.0.0.1` with `172.16.238.10` as follows:
+Inside the `config_example.json` file, ensure the default configuration will work for your environment, then copy the file to `config.json`. If using the Docker example outlined above, change the `redis` sections to replace `127.0.0.1` with `172.16.238.10` as follows:
 
 ```js
 "redis": {
