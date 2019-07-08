@@ -1,14 +1,36 @@
 # Meter Mining Guide
 
-Mining is how cryptocurrency is created, and Meter (MTR) is no exception to this. It is sometimes the easiest or only way to acquire coins in the early stages of their existence, and involves the use of specialized hardware to get rewarded for processing transaction blocks on a blockchain.  
+Mining is how cryptocurrency is created and one way to acquire coins. It is an intensive computing activity, and involves the use of specialized hardware to get rewarded for processing transaction blocks on a blockchain. Meter (MTR) itself is no exception to this.
+
+There are a number of interlinked factors to consider when it comes to mining. Just to name a few:
+
+* Whether it is more economical or profitable to mine or buy cryptocurrency.
+* What blockchain to focus on, and why.
+* How to approach mining. For example, doing it all yourself, cooperating with others, or have somebody else do it for you.
+
+# Making The Case for Mining
+
+Every miner will have their own reasons whether or not to choose mining. For example, under some circumstances it may be highly profitable to mine, while in other situations the costs may be too high and the return on investment too low.
+
+When it comes to owning equipment, the main expenses involved will include the cost of the equipment, and the expenses involved in operating and maintaining it. Mining equipment is specialized hardware that is much more expensive than a standard PC computer, and requires a big upfront investment. That equipment also needs to be housed somewhere, under optimal conditions, such as keeping it cool while running. And, the other big operational factor is the price of electricity and dependability of delivery wherever the equipment is being operated.
+
+When these challenges can be met in the right combination, the other side that needs to be looked at is the return. If the expenses are manageable, and the return on each coin is high enough, then that should equate to a good profit margin. However, it may be the case that at the time of mining a coin it is not actively being traded yet, but the anticipated return sometime later is expected to be profitable.
+
+Mining Meter at this time is in the testing phase, and production mining is set to begin soon. This provides a very good incentive for early adopters to more easily and economically acquire MTR through mining, before it becomes more widely available, and as more miners begin to direct their resources towards the Meter Network.     
 
 ## How to Mine
 
-Miners can start mining Meter (MTR) either with their own equipment, or as part of an existing mining pool. Each has its own benefits and drawbacks, and it is up to the miner to determine which approach suits them best.
+Generally speaking, miners may choose to operate their own equipment, and gain all the rewards for their efforts, or join together with others in a mining pool, and share the rewards (see What is a Mining Pool). In some cases people can subscribe to a pool and gain some of the rewards, but without owning any equipment of their own. This is called cloud mining. Each has its own benefits and drawbacks, and it is up to each person to determine which approach suits them best.
+
+The remainder of this document is in support of those that already operate their own equipment, or wish to, and are interested in mining Meter. Primarily this will include those that will mine directly on their own, mining pools that choose to support Meter, or those that want to setup cloud mining for Meter. However, this information might also be of interest to others, such as those that are already part of a mining pool, and want to request that their pool add support for Meter.  
 
 ### What is a Mining Pool?
 
-A [mining pool](https://en.wikipedia.org/wiki/Mining_pool) is the pooling of resources by miners, who share their processing power over a network. Miners split the reward equally, according to the amount of work they contributed towards the probability of finding a block.
+When miners group together to use their combined processing power this is called a mining pool. The rewards from mining are split proportionally according to the amount of hash power miners contribute to the pool.
+
+Mining pools can be split into both public ones and private ones. Public pools will generally charge a fee
+
+Mining is strictly voluntary, and as such miners can opt to switch their mining capabilities whenever they choose, according to their own objectives or criteria. For example, if a miner that traditionally was in a Bitcoin mining pool decided to divert some or all processing power to mine another blockchain, such as Meter, it is simply a case of making a few minor configuration changes to point the mining equipment to the new pool.
 
 ## Mining Hardware
 
@@ -266,7 +288,6 @@ Inside the `coins` directory, ensure that a json file exists for Meter coin, and
 ```
 
 For additional documentation on how to configure coins and their different algorithms see [these instructions](github.com/meterio/meter-stratum-pool#module-usage).
-
 
 ### Pool Configuration
 
