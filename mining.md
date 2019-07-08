@@ -123,17 +123,23 @@ services:
   node:
     image: "node:10"
     user: "node"
-    working_dir: /home/node/app
+    working_dir: /home/node/meter-nomp
     volumes:
-      - ./:/home/node/app
+      - ./:/home/node/meter-nomp
     depends_on:
       redis:
         condition: service_healthy
     networks:
       - frontend
-      - backend
-    expose:
+      backend:
+        ipv4_address: 172.16.238.11
+    ports:
       - "8088:8088"
+      - "17117:17117"
+      - "3333:3333"
+      - "8332:8332"
+      - "3008:3008"
+      # Other ports as required
     command: "npm init.js"
 
   networks:
@@ -141,6 +147,7 @@ services:
       name: nomp_frontend
       driver: custom-driver-1
     backend:
+      name: nomp_backend
       driver: bridge
       ipam:
         driver: default
@@ -152,7 +159,14 @@ services:
 
 ### Portal Configuration
 
-Inside the `config_example.json` file, ensure the default configuration will work for your environment, then copy the file to `config.json`.
+Inside the `config_example.json` file, ensure the default configuration will work for your environment, then copy the file to `config.json`. If using the Docker approach outlined above, change the `redis` sections to replace `127.0.0.1` with `172.16.238.10` as follows:
+
+```js
+"redis": {
+    "host": "172.16.238.10",
+    "port": 6379
+}
+```
 
 **Field Description**
 
@@ -479,14 +493,18 @@ For example, assuming the miner's account in Meter for receiving a reward is the
 }
 ```
 
-You can create as many of these pool config files as you want. If you are creating multiple pools, ensure that they have unique stratum ports.
+Many of these pool config files can be created. If this is the case, they must have unique stratum ports.
 
 For more information on these configuration options see the [pool module documentation](https://github.com/meterio/meter-stratum-pool#module-usage).
 
 ### Start the Portal
 
-After all the configuration files has been set up, you're ready to start your mining pool in NodeJS:
+After all the configuration files have been set up, it is time to start the mining pool.
+
+If everything is installed locally on the host, initiate using the following:
 
 ```bash
 node init.js
 ```
+
+If using the Docker approach, then the following steps need to be taken:
