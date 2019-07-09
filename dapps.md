@@ -136,7 +136,7 @@ For the example please refer to this asciinema:
 First, download a sample smart contract, which will be used by the app.
 
 ```bash
-$ wget https://github.com/meterio/meterify/blob/master/test/sample_token.sol
+$ wget https://raw.githubusercontent.com/meterio/meterify/master/test/sample_token.sol
 ```
 
 Next, add each of the following function code snippets in every step to `index.js`.

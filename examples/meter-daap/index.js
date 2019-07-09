@@ -1,22 +1,46 @@
+const fs = require("fs");
 const meterify = require("meterify").meterify;
 const Web3 = require("web3");
 const web3 = meterify(new Web3(), "http://test.meter.io:8669");
 
-function createAccounts(){
-  var accounts = {};
-  accounts.alice = web3.eth.accounts.create();
-  accounts.bob = web3.eth.accounts.create();
+var accounts = createAccounts({"alice":{},"bob":{}});
+addAccountsToWallet(accounts);
+
+//send_MTR(accounts.alice.address, accounts.bob.address);
+//send_MTRG(accounts.alice.address, accounts.bob.address);
+
+var data = loadContract('sample_token.sol');
+
+//deployContract(data,accounts.alice.address);
+
+function createAccounts(accounts){
+  console.log("Creating Accounts");
+
+  for(key in accounts){
+    accounts[key] = web3.eth.accounts.create();
+    console.log("Account "+accounts[key].address+" Created.");
+  }
+
+  console.log("All Accounts Created");
   return accounts;
 }
 
 function addAccountsToWallet(accounts){
-  web3.eth.accounts.wallet.add(accounts.alice.private_key);
-  web3.eth.accounts.wallet.add(accounts.bob.private_key);
-  web3.eth.accounts.wallet;
+  console.log("Adding Accounts to Wallet");
+
+  for(var key in accounts){
+    web3.eth.accounts.wallet.add(accounts[key].privateKey);
+    console.log("Added Private Key "+accounts[key].privateKey+" to Wallet");
+  }
+
+  console.log("Added All Accounts to Wallet");
+  //web3.eth.accounts.wallet;
   return;
 }
 
 function send_MTR(fromAddress,toAddress){
+  console.log("Sending MTR from Alice to Bob");
+
   web3.eth.sendTransaction(
     {
       from: fromAddress,
@@ -28,12 +52,17 @@ function send_MTR(fromAddress,toAddress){
     receipt => {}
   ).then(
     data => {
-      console.log(data)
+      console.log("MTR sent from Alice to Bob: "+JSON.stringify(data));
+      next();
     }
-  );
+  ).catch(function(error){
+    console.log("Error: "+error);
+  });
 }
 
 function send_MTRG(fromAddress,toAddress){
+  console.log("Sending MTRG from Alice to Bob");
+
   web3.eth.sendTransaction(
     {
       from: fromAddress,
@@ -42,13 +71,19 @@ function send_MTRG(fromAddress,toAddress){
       data: '01'
     }
   ).then(
-    receipt => {
-      console.log(receipt)
+    receipt => {}
+  ).then(
+    data => {
+      console.log("MTRG sent from Alice to Bob: "+JSON.stringify(data));
+      next();
     }
-  );
+  ).catch(function(error){
+    console.log("Error: "+error);
+  });
 }
 
 function loadContract(file){
+  console.log("Loading contract: "+file);
   const contractFile = fs.readFileSync(file).toString();
   const solc = require('solc');
   const compiledCode = solc.compile(contractFile);
@@ -59,10 +94,13 @@ function loadContract(file){
   let token_byteCode = compiledCode.contracts[':SAMPLEToken'].bytecode
   data.token_byteCode = "0x" + token_byteCode;
 
+  console.log("Contract Loaded.");
   return data;
 }
 
 function deployContract(data,address){
+  console.log("Deploying contract.");
+
   contractInstance = new web3.eth.Contract(data.token_abiDefinition)
   contractInstance.options.data = data.token_byteCode
   contractInstance.deploy(
@@ -84,6 +122,7 @@ function deployContract(data,address){
     (
       newContractInstance
     ) => {
+      console.log("Contract deployed.");
       contractInstance.options.address = newContractInstance.options.address;
       registerEvents(contractInstance);
     }
@@ -96,9 +135,14 @@ function registerEvents(contractInstance){
       if (error) {
           console.log(error)
       } else {
-          console.log(result)
+          contractReady(result,contractInstance);
       }
   })
+}
+
+function contractReady(result,contractInstance){
+  console.log(result);
+  transferFrom(contractInstance, accounts.alice.address, accounts.bob.address);
 }
 
 function transferFrom(contractInstance, fromAddress, toAddress){
