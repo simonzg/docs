@@ -1,30 +1,82 @@
+# DApps Using Meter
 
-## Intro
-You can communicate with Meter via commonly used Web3 interface thanks to our _Meterify_ library.
+DApps are decentralized applications that utilize blockchains to store their history of operation (e.g. transactions). They can also consist of functional code, called smart contracts, that is published to the blockchain. The same as any kind of application, a DApp will have some kind of an interface, which might be a graphical client, a command line client or an API.
 
-DApps can use Meter to run on and quickly onboard users, while others can use Meter in order to reach settlement.
+At this time, DApps are generally related to categories such as finance, exchanges, and gambling, but social applications and games also exist. At the same time, there are numerous untapped opportunities to develop DApps for other categories that don't yet exist, or for which there are few DApps for at this time.
 
+* [Developing an Example DApp](#example-dapp)
+* [Building the Example on Linux Using Docker](#example-with-docker)
+* [Building the Example on Linux Without Docker](#example-no-docker)
+* [Create the Application Functions](#create-application-functions)
+* [Load, Deploy, and Test a Smart Contract](#example-smart-contract)
 
-## Prerequisites
+<a name="example-dapp"/>
 
-You will need:
+## Developing an Example DApp
 
-- nodejs version 10.15.1 or above,
-    - [Here is the guide](https://tecadmin.net/install-nodejs-with-nvm/#) on how to install Node.js and manage different versions
-- [meterify](https://www.npmjs.com/package/meterify)
-    - ```bash
-    npm i meterify
-    ```
-- [web3](https://www.npmjs.com/package/web3/v/1.0.0-beta.37) version 1.0.0-beta.37
-    - ```bash
-    npm i web3@1.0.0-beta.37
-    ```
-- [solc](https://www.npmjs.com/package/solc/v/0.4.24) version 0.4.24
-    - ```bash
-    npm i solc@0.4.24
-    ```
+The Meter blockchain provides a great foundation for creating DApps, using common development tools that are also used for other blockchains. One prime example is that it is possible to utilize `Web3` with Meter using the `Meterify` library.
 
-After everything is set up, you can check if all works properly by testing connection to our testnet by simply running the code below either from the NodeJS REPL environment, or creating an `index.js` file with the code and running `node index.js`:
+As with any app, a DApp needs an identified use case. In the blockchain world the most common use case is a transaction, where cryptocurrency is sent between two accounts. It is very easy to create an example of this kind of transaction using Web3 and the Meter blockchain, where Alice wishes to send some MTR and MTRG to Bob's account.  
+
+There are two approaches below for building the example app on Linux, one with Docker and one without.
+
+<a name="example-with-docker"/>
+
+## Building the Example on Linux Using Docker
+
+### Step 1: Ensure the latest version of `docker-compose` is installed.
+
+```bash
+$ sudo curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+$ sudo chmod +x /usr/local/bin/docker-compose
+```
+
+### Step 2: Check that docker-compose was installed correctly.
+
+```bash
+$ docker-compose --version
+docker-compose version 1.24.1, build 4667896b
+```
+
+### Step 3: Create a project directory (e.g. `meter-dapp`).
+
+```bash
+$ mkdir meter-dapp
+$ cd meter-dapp
+```
+
+### Step 4: Initialize the app directory.
+
+```bash
+$ npm init
+```
+
+### Step 5: Create a `docker-compose.yml` file.
+
+A copy of this file can be found here: [./examples/meter-dapp/docker-compose.yml](./examples/meter-dapp/docker-compose.yml)
+
+```
+version: '3.5'
+services:
+  node:
+    image: "node:10"
+    user: "node"
+    working_dir: /home/node/meter-daap
+    volumes:
+      - ./:/home/node/meter-daap
+    command: >
+      sh -c "rm -rf node_modules
+            npm init -y &&
+            npm install meterify --save &&
+            rm -rf node_modules/*/.git/
+            npm install web3@1.0.0-beta.37 --save &&
+            npm install solc@0.4.24 --save &&
+            node index.js"
+```
+
+### Step 6: Create a file called `index.js`.
+
+This will initially test the connection to the testnet.
 
 ```js
 const meterify = require("meterify").meterify;
@@ -32,118 +84,416 @@ const Web3 = require("web3");
 const web3 = meterify(new Web3(), "http://test.meter.io:8669");
 ```
 
-If the code above runs without any errors, it means you're good to go!
+### Step 7: Run `docker-compose` to use the test application.
 
-For the example please refer to this asciinema: 
+```bash
+$ docker-compose up
+```
 
-![](./_media/meterify.svg "web3 meterify example")
+If there are no errors the connection was successful.
 
-## Getting started
+### Step 8: Stop Docker using `Ctrl+C`.
 
-After successfully establishing the connection to our testnet, we can begin interacting with it.
+```bash
+Ctrl+C
+```
 
-You can use any coding environment that suits your needs, [VS Code](https://code.visualstudio.com/) is one of the good options.
+Continue to *Building the Main App* below the next section.
 
-### Create accounts
-In this example we would need two accounts, you can create accounts using web3 API method which will return you the private key needed to add your account to the meterify wallet:
+<a name="example-no-docker"/>
+
+## Building the Example on Linux Without Docker
+
+### Step 1: Ensure Node.js version 10.15.1 or above is installed.
+
+[Here is a guide](https://tecadmin.net/install-nodejs-with-nvm/#) on how to install Node.js and manage different versions.
+
+### Step 2: Create a project directory (e.g. `meter-dapp`).
+
+```bash
+$ mkdir meter-dapp
+$ cd meter-dapp
+```
+
+### Step 3: Initialize the app directory.
+
+```bash
+$ npm init
+```
+
+### Step 4: Install the app prerequisites.
+
+- [meterify](https://www.npmjs.com/package/meterify)
+- [web3](https://www.npmjs.com/package/web3/v/1.0.0-beta.37) version 1.0.0-beta.37
+- [solc](https://www.npmjs.com/package/solc/v/0.4.24) version 0.4.24
+
+```bash
+npm install meterify --save
+npm install web3@1.0.0-beta.37 --save
+npm install solc@0.4.24 --save
+```
+
+### Step 5: Create a file called `index.js`.
+
+This will initially test the connection to the testnet.
 
 ```js
-web3.eth.accounts.create()
+const fs = require("fs");
+const meterify = require("meterify").meterify;
+const Web3 = require("web3");
+const web3 = meterify(new Web3(), "http://test.meter.io:8669");
 ```
 
-Sample accounts:
-```
-"address": 	"some_address1",
-"private key": "some_key1"
+### Step 6: Run the test connection app.
 
-"address":	"some_address2",
-"private_key": "some_key2"
-
+```bash
+$ node index.js
 ```
 
-Now we need to add our accounts to wallet using account's private key:
+If the code above runs without any errors the connection was successful.
+
+<a name="create-application-functions"/>
+
+## Create the Application Functions
+
+<!--For the example please refer to this asciinema:
+
+![](./_media/meterify.svg "web3 meterify example") -->
+
+Next, follow each step to add function and other code snippets `index.js`. The full file project files can also be found here:
+
+* [./examples/meter-dapp/index.js](./examples/meter-dapp/index.js)
+* [./examples/meter-dapp/sample_token.sol](./examples/meter-dapp/sample_token.sol)
+* [./examples/meter-dapp/docker-compose.yml](./examples/meter-dapp/docker-compose.yml)
+
+### Step 1:" Create two accounts, one for Alice and one for Bob.
 
 ```js
-web3.eth.accounts.wallet.add('some_key1')
+function createAccounts(accounts){
+  console.log("Creating Accounts");
 
-web3.eth.accounts.wallet.add('some_key2')
+  for(key in accounts){
+    accounts[key] = web3.eth.accounts.create();
+    console.log("Account "+accounts[key].address+" Created.");
+  }
 
-web3.eth.accounts.wallet;
+  console.log("All Accounts Created");
+  return accounts;
+}
 ```
 
-### Send transactions between accounts
-
-The unit in meterify is Wei. 1 MTR = 10e18 Wei and 1 MTRG = 10e18 WeiG
-
- - transfer MTR
-
- ```js
-web3.eth.sendTransaction({from: 'some_address1', to: 'some_address2', value: '1000000000000000000', data: '00'}).then(receipt => {}).then(data => {console.log(data)});
-```
-
-- transfer MTRG
+### Step 2: Add the account private keys for each account to the wallet.
 
 ```js
-web3.eth.sendTransaction({from: 'some_address1',to: 'some_address2', value: '1000000000000000000', data: '01'}).then(receipt => {console.log(receipt)})
+function addAccountsToWallet(accounts){
+  console.log("Adding Accounts to Wallet");
+
+  for(var key in accounts){
+    web3.eth.accounts.wallet.add(accounts[key].privateKey);
+    console.log("Added Private Key "+accounts[key].privateKey+" to Wallet");
+  }
+
+  console.log("Added All Accounts to Wallet");
+  return;
+}
 ```
 
+### Step 3: Send MTR from one account to another.
 
-### Compile and deploy the smart contract
-
-We are using sample contract token available [here](https://github.com/meterio/meterify/blob/master/test/sample_token.sol).
-
-Sample code below
-
-- Load the contract
+*Note:* The unit in `meterify` is Wei, where 1 MTR = 10e18 Wei.
 
 ```js
-const contractFile = fs.readFileSync('sample_token.sol').toString();
-const solc = require('solc');
-const compiledCode = solc.compile(contractFile);
+function send_MTR(fromAddress,toAddress){
+  console.log("Sending MTR");
 
-const token_abiDefinition = JSON.parse(compiledCode.contracts[':SAMPLEToken'].interface)
-let token_byteCode = compiledCode.contracts[':SAMPLEToken'].bytecode
-token_byteCode = "0x" + token_byteCode;
-```
-- Deploy the contract byte code to blockchain
-
-```js
-contractInstance = new web3.eth.Contract(token_abiDefinition)
-contractInstance.options.data = token_byteCode
-contractInstance.deploy({arguments: ['some_address1', '1000000000', 'Sample Token', '3', 'STOKEN']}).send({from: 'some_address1', gas: 4700000 }).then((newContractInstance) => {console.log(newContractInstance.options.address)})
-```
-
-- Once the contract is deployed, the contract address is printed out. Set contract option address like the following.
-
-```js
-contractInstance.options.address = '0x83DE872pb4C33e77D12a75511C9eA78AD7Q2B4A6'
-```
-
-### Register events
-
-After the contract is deployed, we can register the events.
-
-```js
-contractInstance.events.allEvents({}, (error, result) => {
-    if (error) {
-        console.log(error)
-    } else {
-        console.log(result)
+  web3.eth.sendTransaction(
+    {
+      from: fromAddress,
+      to: toAddress,
+      value: '1000000000000000000',
+      data: '00'
     }
-})
+  ).then(
+    receipt => {}
+  ).then(
+    data => {
+      console.log("MTR sent: "+JSON.stringify(data));
+      next();
+    }
+  ).catch(function(error){
+    console.log("Error: "+error);
+  });
+}
 ```
 
-Some examples of calling contract's methods:
+### Step 4: Send MTRG from one account to another.
 
+*Note:* The unit in meterify is Wei, where 1 MTRG = 10e18 WeiG.
 
 ```js
-contractInstance.methods._transferFrom('some_address1','some_address2','9999').send({from:'some_address1',gas: 4700000}).then(data => {console.log(data)}).catch(err => {console.log(err)})
+function send_MTRG(fromAddress,toAddress){
+  console.log("Sending MTRG");
 
-contractInstance.methods.getAccountBalanceOf('some_address1').send({from: 'some_address1',gas: 4700000}).then(data => {console.log(data)}).catch(err => {console.log(err)})
+  web3.eth.sendTransaction(
+    {
+      from: fromAddress,
+      to: toAddress,
+      value: '1000000000000000000',
+      data: '01'
+    }
+  ).then(
+    receipt => {}
+  ).then(
+    data => {
+      console.log("MTRG sent: "+JSON.stringify(data));
+      next();
+    }
+  ).catch(function(error){
+    console.log("Error: "+error);
+  });
+}
+```
 
-contractInstance.methods.getAccountBalanceOf('some_address1').call({from:'some_address1',gas: 4700000}).then(data => {console.log(data)}).catch(err => {console.log(err)})
+### Step 10: Begin the function calling sequence.
 
-contractInstance.methods.mintToken('some_address1', '99999999999999999999999').send({from: 'some_address1',gas: 4700000}).then(data => {console.log(data)}).catch(err => {console.log(err)})
+This code can go either before or after the functions.
+
+```js
+var accounts = createAccounts({"bob":{}});
+
+/* Alice should be a pre-existing account that already contains some MTR.
+ * Add Alice's public and private keys to the following object.
+ */
+accounts.alice = {"address":"0x...","privateKey":"0x..."};
+addAccountsToWallet(accounts);
+
+send_MTR(accounts.alice.address, accounts.bob.address);
+send_MTRG(accounts.alice.address, accounts.bob.address);
 
 ```
 
+### Step 11: Run the application.
+
+_Using Docker:_
+
+```bash
+$ docker-compose up
+```
+
+_Without Docker:_
+
+```bash
+$ node index.js
+```
+
+### Step 12 (Docker Only): Comment out dependency installation.
+
+Do this after the first run in `docker-compose.yml` to stop repeated initialization and dependency installation on each Docker run.
+
+```
+version: '3.5'
+services:
+  node:
+    image: "node:10"
+    user: "node"
+    working_dir: /home/node/meter-daap
+    volumes:
+      - ./:/home/node/meter-daap
+    command: node index.js
+#    command: >
+#      sh -c "rm -rf node_modules
+#            npm init -y &&
+#            npm install meterify --save &&
+#            rm -rf node_modules/*/.git/
+#            npm install web3@1.0.0-beta.37 --save &&
+#            npm install solc@0.4.24 --save &&
+#            node index.js"
+```
+<a name="example-smart-contract"/>
+
+## Load, Deploy, and Test a Smart Contract
+
+The following modifications to the example demonstrate the use of a sample smart contract on the Meter blockchain. Again, follow the steps to add code snippets to the existing `index.js` file.
+
+### Step 1: Load the sample smart contract.
+
+The file can be found here: [./examples/meter-dapp/sample_token.sol](./examples/meter-dapp/sample_token.sol)
+
+```js
+function loadContract(file){
+  console.log("Loading contract: "+file);
+  const contractFile = fs.readFileSync(file).toString();
+  const solc = require('solc');
+  const compiledCode = solc.compile(contractFile);
+
+  var data = {};
+
+  data.token_abiDefinition = JSON.parse(compiledCode.contracts[':SAMPLEToken'].interface)
+  let token_byteCode = compiledCode.contracts[':SAMPLEToken'].bytecode
+  data.token_byteCode = "0x" + token_byteCode;
+
+  console.log("Contract Loaded.");
+  return data;
+}
+```
+
+### Step 2: Deploy the contract byte code to blockchain.
+
+```js
+function deployContract(data,address){
+  console.log("Deploying contract.");
+
+  contractInstance = new web3.eth.Contract(data.token_abiDefinition)
+  contractInstance.options.data = data.token_byteCode
+  contractInstance.deploy(
+    {
+      arguments: [
+        address,
+        '1000000000',
+        'Sample Token',
+        '3',
+        'STOKEN'
+      ]
+    }
+  ).send(
+    {
+      from: address,
+      gas: 4700000
+    }
+  ).then(
+    (
+      newContractInstance
+    ) => {
+      console.log("Contract deployed.");
+      contractInstance.options.address = newContractInstance.options.address;
+      registerEvents(contractInstance);
+    }
+  );
+}
+```
+
+### Step 3: Register contract events.
+
+Additionally, call some example functions within `contractReady` when the contract is ready.
+
+```js
+function registerEvents(contractInstance){
+  contractInstance.events.allEvents(
+    {}, (error, result) => {
+      if (error) {
+          console.log(error)
+      } else {
+        console.log("Contract Ready.");
+          contractReady(result,contractInstance);
+      }
+  })
+}
+
+function contractReady(result,contractInstance){
+  transferFrom(contractInstance, accounts.alice.address, accounts.bob.address);
+}
+
+```
+
+### Step 4: Transfer cryptocurrency between two accounts.
+
+```js
+function transferFrom(contractInstance, fromAddress, toAddress){
+  contractInstance.methods._transferFrom(
+    fromAddress,
+    toAddress,
+    '9999'
+  ).send(
+    {
+      from:fromAddress,
+      gas: 4700000
+    }
+  ).then(
+    data => {
+      console.log(data)}
+    ).catch(
+      err => {console.log(err)}
+  )
+}
+```
+
+### Step 4: Get an account balance.
+
+```js
+function getAccountBalanceOf(contractInstance,address){
+  contractInstance.methods.getAccountBalanceOf(
+    address
+  ).send(
+    {
+      from: address,
+      gas: 4700000
+    }).then(
+      data => {
+        console.log(data)
+      }
+    ).catch(err => {
+      console.log(err)
+    }
+  )
+}
+```
+
+### Step 5: Minting some coins.
+
+```js
+function mintToken(contractInstance,address){
+  contractInstance.methods.mintToken(
+    address,
+    '99999999999999999999999'
+  ).send(
+    {
+      from: address,
+      gas: 4700000
+    }
+  ).then(
+    data => {
+      console.log(data)
+    }
+  ).catch(
+    err => {
+      console.log(err)
+    }
+  )
+}
+
+```
+
+### Step 6: Add the `loadContract` and `deployContract` function calls.
+
+```js
+var accounts = createAccounts({"bob":{}});
+
+/* Alice should be a pre-existing account that already contains some MTR.
+ * Add Alice's public and private keys to the following object.
+ */
+accounts.alice = {"address":"0x...","privateKey":"0x..."};
+addAccountsToWallet(accounts);
+
+send_MTR(accounts.alice.address, accounts.bob.address);
+send_MTRG(accounts.alice.address, accounts.bob.address);
+
+var data = loadContract('sample_token.sol');
+
+/* The following function requires some energy first. Uncomment when the Alice account has some.*/
+
+deployContract(data, accounts.alice.address);
+```
+
+### Step 7: Run the application.
+
+_Using Docker:_
+
+```bash
+$ docker-compose up
+```
+
+_Without Docker:_
+
+```bash
+$ node index.js
+```
