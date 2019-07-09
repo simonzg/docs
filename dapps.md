@@ -4,13 +4,14 @@ DApps are decentralized applications that utilize blockchains to store their his
 
 At this time, DApps are generally related to categories such as finance, exchanges, and gambling, but social applications and games also exist. At the same time, there are numerous untapped opportunities to develop DApps for other categories that don't yet exist, or for which there are few DApps for at this time.
 
-[Developing an Example DApp](#example-dapp)
-[Building the Example on Linux Using Docker](#example-with-docker)
-[Building the Example on Linux Without Docker](#example-no-docker)
-[Create the Application Functions](#create-application-functions)
-[Load, Deploy, and Test a Smart Contract](#example-smart-contract)
+* [Developing an Example DApp](#example-dapp)
+* [Building the Example on Linux Using Docker](#example-with-docker)
+* [Building the Example on Linux Without Docker](#example-no-docker)
+* [Create the Application Functions](#create-application-functions)
+* [Load, Deploy, and Test a Smart Contract](#example-smart-contract)
 
 <a name="example-dapp"/>
+
 ## Developing an Example DApp
 
 The Meter blockchain provides a great foundation for creating DApps, using common development tools that are also used for other blockchains. One prime example is that it is possible to utilize `Web3` with Meter using the `Meterify` library.
@@ -20,6 +21,7 @@ As with any app, a DApp needs an identified use case. In the blockchain world th
 There are two approaches below for building the example app on Linux, one with Docker and one without.
 
 <a name="example-with-docker"/>
+
 ## Building the Example on Linux Using Docker
 
 ### Step 1: Ensure the latest version of `docker-compose` is installed.
@@ -99,6 +101,7 @@ Ctrl+C
 Continue to *Building the Main App* below the next section.
 
 <a name="example-no-docker"/>
+
 ## Building the Example on Linux Without Docker
 
 ### Step 1: Ensure Node.js version 10.15.1 or above is installed.
@@ -150,6 +153,7 @@ $ node index.js
 If the code above runs without any errors the connection was successful.
 
 <a name="create-application-functions"/>
+
 ## Create the Application Functions
 
 <!--For the example please refer to this asciinema:
@@ -302,6 +306,7 @@ services:
 #            node index.js"
 ```
 <a name="example-smart-contract"/>
+
 ## Load, Deploy, and Test a Smart Contract
 
 The following modifications to the example demonstrate the use of a sample smart contract on the Meter blockchain. Again, follow the steps to add code snippets to the existing `index.js` file.
