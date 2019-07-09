@@ -13,6 +13,9 @@ var data = loadContract('sample_token.sol');
 
 //deployContract(data,accounts.alice.address);
 
+/* This creates new accounts from an object, and adds the new accounts to the object.
+*/
+
 function createAccounts(accounts){
   console.log("Creating Accounts");
 
@@ -24,6 +27,8 @@ function createAccounts(accounts){
   console.log("All Accounts Created");
   return accounts;
 }
+
+/* This adds the accounts to the wallet. */
 
 function addAccountsToWallet(accounts){
   console.log("Adding Accounts to Wallet");
@@ -37,6 +42,11 @@ function addAccountsToWallet(accounts){
   //web3.eth.accounts.wallet;
   return;
 }
+
+/* This will send MTR from one address to another, using the account value.
+ * The sending account therefore requires gas. This example does not yet
+ * have functionality to do that.
+*/
 
 function send_MTR(fromAddress,toAddress){
   console.log("Sending MTR from Alice to Bob");
@@ -60,6 +70,11 @@ function send_MTR(fromAddress,toAddress){
   });
 }
 
+/* This will send MTRG from one address to another, using the account value.
+ * The sending account therefore requires gas. This example does not yet
+ * have functionality to do that.
+*/
+
 function send_MTRG(fromAddress,toAddress){
   console.log("Sending MTRG from Alice to Bob");
 
@@ -82,6 +97,8 @@ function send_MTRG(fromAddress,toAddress){
   });
 }
 
+/* This loads a smart contract from a file. */
+
 function loadContract(file){
   console.log("Loading contract: "+file);
   const contractFile = fs.readFileSync(file).toString();
@@ -97,6 +114,8 @@ function loadContract(file){
   console.log("Contract Loaded.");
   return data;
 }
+
+/* This deploys the smart contract. */
 
 function deployContract(data,address){
   console.log("Deploying contract.");
@@ -129,6 +148,11 @@ function deployContract(data,address){
   );
 }
 
+/* This allows events to be registered to the contract.
+ * When a contract event occurs a log or error message
+ * will be displayed in the console.
+*/
+
 function registerEvents(contractInstance){
   contractInstance.events.allEvents(
     {}, (error, result) => {
@@ -140,10 +164,18 @@ function registerEvents(contractInstance){
   })
 }
 
+/* This provides a place to start calling functions
+ * for testing the smart contract.
+ */
+
 function contractReady(result,contractInstance){
   console.log(result);
   transferFrom(contractInstance, accounts.alice.address, accounts.bob.address);
 }
+
+/* This uses the smart contract methods for sending cryptocurrency
+ * from one account to another.
+ */
 
 function transferFrom(contractInstance, fromAddress, toAddress){
   contractInstance.methods._transferFrom(
@@ -163,6 +195,10 @@ function transferFrom(contractInstance, fromAddress, toAddress){
   )
 }
 
+/* This uses the smart contract methods for requesting
+ * account balances.
+ */
+
 function getAccountBalanceOf(contractInstance,address){
   contractInstance.methods.getAccountBalanceOf(
     address
@@ -179,6 +215,9 @@ function getAccountBalanceOf(contractInstance,address){
     }
   )
 }
+
+/* This uses the smart contract methods for minting tokens.
+ */
 
 function mintToken(contractInstance,address){
   contractInstance.methods.mintToken(
