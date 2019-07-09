@@ -162,8 +162,9 @@ If the code above runs without any errors the connection was successful.
 
 Next, follow each step to add function and other code snippets `index.js`. The full file project files can also be found here:
 
--[./examples/meter-dapp/index.js](./examples/meter-dapp/index.js)
--[./examples/meter-dapp/sample_token.sol](./examples/meter-dapp/sample_token.sol) -[./examples/meter-dapp/docker-compose.yml](./examples/meter-dapp/docker-compose.yml)
+* [./examples/meter-dapp/index.js](./examples/meter-dapp/index.js)
+* [./examples/meter-dapp/sample_token.sol](./examples/meter-dapp/sample_token.sol)
+* [./examples/meter-dapp/docker-compose.yml](./examples/meter-dapp/docker-compose.yml)
 
 ### Step 1:" Create two accounts, one for Alice and one for Bob.
 
