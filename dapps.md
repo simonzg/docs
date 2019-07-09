@@ -259,13 +259,16 @@ function send_MTRG(fromAddress,toAddress){
 This code can go either before or after the functions.
 
 ```js
-var accounts = createAccounts({"alice":{},"bob":{}});
+var accounts = createAccounts({"bob":{}});
+
+/* Alice should be a pre-existing account that already contains some MTR.
+ * Add Alice's public and private keys to the following object.
+ */
+accounts.alice = {"address":"0x...","privateKey":"0x..."};
 addAccountsToWallet(accounts);
 
-/* The following functions require some gas first. Uncomment when the Alice account has some gas.*/
-
-//send_MTR(accounts.alice.address, accounts.bob.address);
-//send_MTRG(accounts.alice.address, accounts.bob.address);
+send_MTR(accounts.alice.address, accounts.bob.address);
+send_MTRG(accounts.alice.address, accounts.bob.address);
 
 ```
 
@@ -380,6 +383,7 @@ function registerEvents(contractInstance){
       if (error) {
           console.log(error)
       } else {
+        console.log("Contract Ready.");
           contractReady(result,contractInstance);
       }
   })
@@ -462,19 +466,22 @@ function mintToken(contractInstance,address){
 ### Step 6: Add the `loadContract` and `deployContract` function calls.
 
 ```js
-var accounts = createAccounts({"alice":{},"bob":{}});
+var accounts = createAccounts({"bob":{}});
+
+/* Alice should be a pre-existing account that already contains some MTR.
+ * Add Alice's public and private keys to the following object.
+ */
+accounts.alice = {"address":"0x...","privateKey":"0x..."};
 addAccountsToWallet(accounts);
 
-/* The following functions require some gas first. Uncomment when the Alice account has some.*/
-
-//send_MTR(accounts.alice.address, accounts.bob.address);
-//send_MTRG(accounts.alice.address, accounts.bob.address);
+send_MTR(accounts.alice.address, accounts.bob.address);
+send_MTRG(accounts.alice.address, accounts.bob.address);
 
 var data = loadContract('sample_token.sol');
 
 /* The following function requires some energy first. Uncomment when the Alice account has some.*/
 
-//deployContract(data,accounts.alice.address);
+deployContract(data, accounts.alice.address);
 ```
 
 ### Step 7: Run the application.
