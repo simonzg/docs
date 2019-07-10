@@ -317,7 +317,7 @@ The following modifications to the example demonstrate the use of a sample smart
 
 ### Step 1: Load the sample smart contract.
 
-The file can be found here: [./examples/meter-dapp/sample_token.sol](./examples/meter-dapp/sample_token.sol)
+The file can be found here: [examples/meter-dapp/sample_token.sol](https://github.com/xiaohanzhu/docs/blob/master/examples/meter-daap/sample_token.sol)
 
 ```js
 function loadContract(file){
