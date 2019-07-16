@@ -182,29 +182,13 @@ try {
 }
 ```
 
-Modify it so that it will only wait for the web3 instance, and then call the `getBlock` method for best block. For now comment out the unnecessary lines of code and add the call to `getBlock`.
+Modify it so that it will only wait for the web3 instance, and then call the `getBlock` method for best block. Remove the unnecessary lines of code and add the call to `getBlock`.
 
 ```js
 try {
   // Get network provider and web3 instance.
   const web3 = await getWeb3();
 
-  /*
-  // Use web3 to get the user's accounts.
-  const accounts = await web3.eth.getAccounts();
-
-  // Get the contract instance.
-  const networkId = await web3.eth.net.getId();
-  const deployedNetwork = SimpleStorageContract.networks[networkId];
-  const instance = new web3.eth.Contract(
-    SimpleStorageContract.abi,
-    deployedNetwork && deployedNetwork.address,
-  );
-
-  // Set web3, accounts, and contract to the state, and then proceed with an
-  // example of interacting with the contract's methods.
-  this.setState({ web3, accounts, contract: instance }, this.runExample);
-  */
   web3.eth.getBlock("best").then(
     res => console.log(res)
   );
@@ -227,4 +211,217 @@ Using meterify.
 App.js:31 {number: 108368, id: "0x0001a7508282b4eb009eb87c2a2394bcc504242fccfff2f1d811565589e83c78", size: 782, parentID: "0x0001a74f39fcc39b38dbbf4ce2a5cefa4ab274bc956c918acea64894de849553", timestamp: 1563282171, …}
 ```
 
-## Getting More Advanced  
+## Update the View
+
+Sending data to the console is fine for testing and troubleshooting. But a React app is nothing without its GUI. There are just a few adjustments to the code to make to send the `getBlock` return data onto the screen.
+
+First, take a look at the `render` function at the end of `App.js`.
+
+```js
+render() {
+  if (!this.state.web3) {
+    return <div>Loading Web3, accounts, and contract...</div>;
+  }
+  return (
+    <div className="App">
+      <h1>Good to Go!</h1>
+      <p>Your Truffle Box is installed and ready.</p>
+      <h2>Smart Contract Example</h2>
+      <p>
+        If your contracts compiled and migrated successfully, below will show
+        a stored value of 5 (by default).
+      </p>
+      <p>
+        Try changing the value stored on <strong>line 40</strong> of App.js.
+      </p>
+      <div>The stored value is: {this.state.storageValue}</div>
+    </div>
+  );
+}
+```
+
+Modify the text slightly to align more closely with the data we receive from `getBlock`.
+
+```js
+render() {
+  if (!this.state.block) {
+    return <div>Loading...</div>;
+  }
+  return (
+    <div className="App">
+      <h1>Best Block Data</h1>
+      <ul>
+        <li>Number: {this.state.block.number}</li>
+        <li>ID: {this.state.block.id}</li>
+        <li>Size: {this.state.block.size}</li>
+        <li>Parent ID: {this.state.block.parentID}</li>
+        <li>Timestamp: {this.state.block.timestamp}</li>
+      </ul>
+    </div>
+  );
+}
+```
+
+As you can see, the data in the rendered view is going to come from the `this.state.block` object. This object does not yet exist in the code. Add it up just below the start of the `App` component definition.
+
+```js
+class App extends Component {
+  state = { block: {number:0, id: null, size: 0, parentID: null, timestamp: 0} };
+
+  ...
+
+}  
+```
+
+Now, the next important step is to update the state after the data becomes available from the `getBlock` function call. Otherwise the `block` object will remain in its default state.
+
+Remember the code section where `getBlock` was called.
+
+```js
+web3.eth.getBlock("best").then(
+  res => console.log(res)
+);
+```
+
+Instead of sending `res` to the console, use it to update `state` instead.
+
+```js
+web3.eth.getBlock("best").then(
+  res => {
+    this.setState({ block:res });
+  }
+);
+```
+
+## Getting More Advanced With Meter and React  
+
+The basic fundamentals of working with the `meterify` library and React are now in place. However, the Meter blockchain exists for more than simply displaying some basic read-only info in a view. This is only the first step. Let's add some additional functionality that is likely to be more common, sending a transaction between two accounts.
+
+This part of the tutorial is going to need at least one extra thing, and that is the public and private keys of an existing testnet account that has some MTR and/or MTRG. This will be the sender. Let's call her Alice. She wants to send some cryptocurrency to her friend Bob, the receiver.
+
+First let's make some changes to the view to show the wallets of Alice and Bob. The app should have a nice presentation, without spending too much time on the layout and styling. Bootstrap is good choice to help with this. Install it, together with `jquery` and `popper.js`, as a dependencies in the `client` directory of the project.
+
+```bash
+$ npm install bootstrap jquery popper.js --save
+```
+
+Then, open `index.js`, also located in the `src` directory. Add them to the very top of `index.js`, where the other import statements are located.
+
+```js
+import 'bootstrap/dist/css/bootstrap.min.css';
+import $ from 'jquery';
+import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+```
+
+The entire `index.js` file should now look something like this:
+
+```js
+import 'bootstrap/dist/css/bootstrap.min.css';
+import $ from 'jquery';
+import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+
+ReactDOM.render(<App />, document.getElementById('root'));
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: http://bit.ly/CRA-PWA
+serviceWorker.unregister();
+
+```
+
+Close `index.js`. No more changes need to be made to it.
+
+Back in `App.js` it is time to adjust the UI to display two accounts, one for Alice and one for Bob. Change the content of the render function. Don't worry if you don't understand how to create a layout in Bootstrap. Some comment annotations have been added to make clear what is important to focus on.
+
+```js
+render() {
+  if (!this.state.block) {
+    return <div>Loading...</div>;
+  }
+  return (
+    <div className="App">
+      <div class="card-deck">
+
+        <!-- This card is the UI for the account of Alice -->
+        <div class="card">
+          <div class="card-header bg-primary"><h2>Alice</h2></div>
+          <div class="card-body">Balance: {this.state.accounts.alice.balance}</div>
+          <div class="card-footer"><!--Leave empty for now. --></div>
+        </div>
+
+        <!-- This card is the UI for the account of Bob -->
+        <div class="card">
+          <div class="card-header bg-success"><h2>Bob</h2></div>
+          <div class="card-body">Balance: {this.state.accounts.bob.balance}</div>
+          <div class="card-footer"><!--Leave empty for now. --></div>
+        </div>
+
+      </div>
+    </div>
+
+  );
+}
+```
+
+Bob's doesn't yet have an account, and Alice's existing account details need to be entered before any sending transaction from her can happen. Bob's account can be generated with added changes to the app, again using the `meterify` library, and then a button in the view can trigger the account creation.
+
+Modify Bob's account card to add the button.
+
+```js
+<!-- This card is the UI for the account of Bob -->
+<div class="card">
+  <div class="card-header bg-success"><h2>Bob</h2></div>
+  <div class="card-body">
+    Account Public Key: {this.state.accounts.bob.account}
+    Balance: {this.state.accounts.bob.balance}
+  </div>
+  <div class="card-footer">
+  <!-- Add the account create button here. -->
+  <button type="button" class="btn btn-secondary" id="create-bob-account">Create New Account</button>
+  </div>
+</div>
+```
+
+Now, Alice will need a place to enter her public and private keys, the amount she wants to send to Bob, and a button to initiate the transaction.
+
+```js
+render() {
+  if (!this.state.block) {
+    return <div>Loading...</div>;
+  }
+  return (
+    <div className="App">
+      <div class="card-deck">
+
+        <!-- This card is the UI for the account of Alice -->
+        <div class="card">
+          <div class="card-header bg-primary"><h2>Alice</h2></div>
+          <div class="card-body">Balance: {this.state.accounts.alice.balance}</div>
+          <div class="card-footer"><!--Leave empty for now. --></div>
+        </div>
+
+        <!-- This card is the UI for the account of Bob -->
+        <div class="card">
+          <div class="card-header bg-success"><h2>Bob</h2></div>
+          <div class="card-body">Balance: {this.state.accounts.bob.balance}</div>
+          <div class="card-footer"><!--Leave empty for now. --></div>
+        </div>
+
+      </div>
+    </div>
+
+  );
+}
+```
