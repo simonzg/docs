@@ -343,7 +343,7 @@ serviceWorker.unregister();
 
 Close `index.js`. No more changes need to be made to it.
 
-Back in `App.js` it is time to adjust the UI to display two accounts, one for Alice and one for Bob. Change the content of the render function. Don't worry if you don't understand how to create a layout in Bootstrap. Some comment annotations have been added to make clear what is important to focus on.
+Back in `App.js` it is time to adjust the UI to display two accounts, one for Alice and one for Bob. Change the content of the render function. Don't worry if you don't understand how to create a layout in Bootstrap. Some comment annotations have been added to make clear what is important to focus on. The comments can be found in the `{/* ... */}` sections (React doesn't use HTML commenting style when rendering).
 
 ```js
 render() {
@@ -354,17 +354,17 @@ render() {
     <div className="App">
       <div class="card-deck">
 
-        <!-- This card is the UI for the account of Alice -->
+        {/* This card is the UI for the account of Alice */}
         <div class="card">
           <div class="card-header bg-primary"><h2>Alice</h2></div>
-          <div class="card-body">Balance: {this.state.accounts.alice.balance}</div>
+          <div class="card-body">Balance: {}</div>
           <div class="card-footer"><!--Leave empty for now. --></div>
         </div>
 
-        <!-- This card is the UI for the account of Bob -->
+        {/* This card is the UI for the account of Bob */}
         <div class="card">
           <div class="card-header bg-success"><h2>Bob</h2></div>
-          <div class="card-body">Balance: {this.state.accounts.bob.balance}</div>
+          <div class="card-body">Balance: {}</div>
           <div class="card-footer"><!--Leave empty for now. --></div>
         </div>
 
@@ -377,51 +377,92 @@ render() {
 
 Bob's doesn't yet have an account, and Alice's existing account details need to be entered before any sending transaction from her can happen. Bob's account can be generated with added changes to the app, again using the `meterify` library, and then a button in the view can trigger the account creation.
 
-Modify Bob's account card to add the button.
+Modify Bob's account card to add the button, and two fields to hold his account details, for the public key (AKA address), and private key. If anyone was able to get a hold of Bob's private key they would be able to sign transactions on his account, and potentially take all his Meter. This is why a password field is used for the private key, to keep it hidden from anyone else (even Alice).
 
 ```js
-<!-- This card is the UI for the account of Bob -->
+{/* This card is the UI for the account of Bob */}
 <div class="card">
   <div class="card-header bg-success"><h2>Bob</h2></div>
   <div class="card-body">
-    Account Public Key: {this.state.accounts.bob.account}
-    Balance: {this.state.accounts.bob.balance}
+    <div class="form-group">
+      {/* Text field for the public key (AKA account) */}
+      <label for="bob-account">Public Key:</label>
+      <input type="text" class="form-control" id="bob-account">
+    </div>
+    <div class="form-group">
+      {/* Password field for masking the secret key */}
+      <label for="bob-privateKey">Secret Key:</label>
+      <input type="password" class="form-control" id="bob-privateKey">
+    </div>
+    Balance: {}
   </div>
   <div class="card-footer">
-  <!-- Add the account create button here. -->
+  {/* Add the account create button here. */}
   <button type="button" class="btn btn-secondary" id="create-bob-account">Create New Account</button>
   </div>
 </div>
 ```
 
-Now, Alice will need a place to enter her public and private keys, the amount she wants to send to Bob, and a button to initiate the transaction.
+Now, Alice will need a place to enter her public and private keys, the amount she wants to send to Bob, and something to initiate the transaction.
+
+Modify Alice's account card to add a text field for her account public key, a password field to mask her private key that signs the transaction, another text field for the amount she will send Bob, and a button to begin sending.
 
 ```js
-render() {
-  if (!this.state.block) {
-    return <div>Loading...</div>;
-  }
-  return (
-    <div className="App">
-      <div class="card-deck">
-
-        <!-- This card is the UI for the account of Alice -->
-        <div class="card">
-          <div class="card-header bg-primary"><h2>Alice</h2></div>
-          <div class="card-body">Balance: {this.state.accounts.alice.balance}</div>
-          <div class="card-footer"><!--Leave empty for now. --></div>
-        </div>
-
-        <!-- This card is the UI for the account of Bob -->
-        <div class="card">
-          <div class="card-header bg-success"><h2>Bob</h2></div>
-          <div class="card-body">Balance: {this.state.accounts.bob.balance}</div>
-          <div class="card-footer"><!--Leave empty for now. --></div>
-        </div>
-
-      </div>
+{/* This card is the UI for the account of Alice */}
+<div class="card">
+  <div class="card-header bg-primary"><h2>Alice</h2></div>
+  <div class="card-body">
+    <div class="form-group">
+      {/* Text field for the public key (AKA account) */}
+      <label for="alice-account">Public Key:</label>
+      <input type="text" class="form-control" id="alice-account">
     </div>
+    <div class="form-group">
+      {/* Password field for masking the secret key */}
+      <label for="alice-privateKey">Secret Key:</label>
+      <input type="password" class="form-control" id="alice-privateKey">
+    </div>
+    Balance: {}
+  </div>
+  <div class="card-footer">
+    <div class="form-group">
+      {/* Text field for the amount */}
+      <label for="alice-send-crypto-amount">Amount to Send:</label>
+      <input type="text" class="form-control" id="alice-send-crypto-amount">
+    </div>
+    {/* Add the send crypto button here. */}
+    <button type="button" class="btn btn-secondary" id="alice-send-crypto-btn">Send Crypto</button>
+  </div>
+</div>
+```
 
-  );
+We will make some other small changes to the render function later. For now, recall our `state` definition from earlier.
+
+```js
+class App extends Component {
+  state = { block: {number:0, id: null, size: 0, parentID: null, timestamp: 0} };
+  ...
 }
+```
+
+This needs to be modified to reflect the current scenario. The state should hold some of the account details for Alice and Bob, particularly the accounts, private keys, and balances. We have a very convenient way to do this, by simply tracking the state of the `web3` instance. This will become obvious later why this is a good way to approach this.
+
+```js
+class App extends Component {
+  state = { web3: null };
+...
+}
+```
+
+Next, remove or comment out the `getBlock` section of code, and replace it with a call to `setState`, but using the `web3` instance instead.
+
+```js
+
+/*web3.eth.getBlock("latest").then(
+  res => {
+    this.setState({ block: res });
+  }
+);*/
+
+this.setState({ web3 });
 ```
