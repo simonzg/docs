@@ -302,7 +302,7 @@ This part of the tutorial is going to need at least one extra thing, and that is
 First let's make some changes to the view to show the wallets of Alice and Bob. The app should have a nice presentation, without spending too much time on the layout and styling. Bootstrap is good choice to help with this. Install it, together with `jquery` and `popper.js`, as a dependencies in the `client` directory of the project.
 
 ```bash
-$ npm install bootstrap jquery popper.js --save
+$ npm install bootstrap jquery popper.js material-ui --save
 ```
 
 Then, open `index.js`, also located in the `src` directory. Add them to the very top of `index.js`, where the other import statements are located.
