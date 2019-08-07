@@ -35,4 +35,10 @@ search: true
 # Introduction
 
 
-# Authentication
+# API Documentation
+
+
+# Guides and Tutorials
+
+
+# Other Resources
