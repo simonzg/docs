@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;bash&quot;]">
+  <body class="index" data-languages="[]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -210,9 +210,6 @@
     </a>
     <div class="toc-wrapper">
       <img src="images/logo.png" class="logo" alt="Logo" />
-        <div class="lang-selector">
-              <a href="#" data-language-name="bash">bash</a>
-        </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -220,37 +217,29 @@
       <ul id="toc" class="toc-list-h1">
           <li>
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
-          </li>
-          <li>
-            <a href="#api-documentation" class="toc-h1 toc-link" data-title="API Documentation">API Documentation</a>
-          </li>
-          <li>
-            <a href="#guides-and-tutorials" class="toc-h1 toc-link" data-title="Guides and Tutorials">Guides and Tutorials</a>
-          </li>
-          <li>
-            <a href="#other-resources" class="toc-h1 toc-link" data-title="Other Resources">Other Resources</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#api-documentation" class="toc-h2 toc-link" data-title="API Documentation">API Documentation</a>
+                  </li>
+                  <li>
+                    <a href="#guides-and-tutorials" class="toc-h2 toc-link" data-title="Guides and Tutorials">Guides and Tutorials</a>
+                  </li>
+                  <li>
+                    <a href="#contributing" class="toc-h2 toc-link" data-title="Contributing">Contributing</a>
+                  </li>
+                  <li>
+                    <a href="#other-resources" class="toc-h2 toc-link" data-title="Other Resources">Other Resources</a>
+                  </li>
+              </ul>
           </li>
       </ul>
         <ul class="toc-footer">
             <li><a href='./index.html'>Documentation Home</a></li>
-            <li><a href='./meterify.dapps.html'>DApp Tutorials</a></li>
-            <li><a href='./examples/index.html'>Examples</a></li>
+            <li><a href='./meterify.html'>API Documentation</a></li>
+            <li><a href='./meterify.dapps.html'>DApp Tutorial</a></li>
+            <li><a href='./meterify.examples.html'>Examples</a></li>
             <li><a href='./mining.html'>Mining Guide</a></li>
-            <li><hr></li>
-            <li>API Documentation</li>
-            <li><a href='./meterify.html'>meterify</a></li>
-            <li><a href='./meterify.module.options.html'>meterify.module.options</a></li>
-            <li><a href='./meterify.eth.html'>meterify.eth</a></li>
-            <li><a href='./meterify.eth.subscribe.html'>meterify.eth.subscribe</a></li>
-            <li><a href='./meterify.eth.Contract.html'>meterify.eth.Contract</a></li>
-            <li><a href='./meterify.eth.Iban.html'>meterify.eth.Iban</a></li>
-            <li><a href='./meterify.eth.personal.html'>meterify.eth.personal</a></li>
-            <li><a href='./meterify.eth.accounts.html'>meterify.eth.accounts</a></li>
-            <li><a href='./meterify.eth.ens.html'>meterify.eth.ens</a></li>
-            <li><a href='./meterify.eth.abi.html'>meterify.eth.abi</a></li>
-            <li><a href='./meterify.eth.net.html'>meterify.eth.net</a></li>
-            <li><a href='./meterify.shh.html'>meterify.shh</a></li>
-            <li><a href='./meterify.utils.html'>meterify.utils</a></li>
+            <li><a href='./contributing/index.html'>Contributing</a></li>
             <li><hr></li>
             <li><a href='https://www.meter.io/claim-your-meter/'>Request Test Tokens</a></li>
             <li><a href='https://www.meter.io'>Meter.io</a></li>
@@ -259,12 +248,23 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1><h1 id='api-documentation'>API Documentation</h1><h1 id='guides-and-tutorials'>Guides and Tutorials</h1><h1 id='other-resources'>Other Resources</h1>
+        <h1 id='introduction'>Introduction</h1>
+<p>Meter is a new economic design and consensus protocol for decentralized businesses and finance. Meter&#39;s technical foundation builds on battle hardened open source solutions, and extends them in new ways to deliver on the promise of the protocol, and provide a powerful approach to DeFi infrastructure.</p>
+<h2 id='api-documentation'>API Documentation</h2>
+<p>The <a href="meterify.html">API documentation</a> focuses on the use of the <code>metrify</code> library to develop DApps for the Meter blockchain. As a testament to our open source approach, <code>meterify</code> extends the well known <code>web3</code> library, and much of its relevant open source documentation has been merged with information more specific to Meter.</p>
+<h2 id='guides-and-tutorials'>Guides and Tutorials</h2>
+<p>Several guides and tutorials have been written to explain how to work with the Meter blockchain. They cover development topics, such as how to build <a href="meterify.dapps.html">DApps and work with smart contracts</a>, and <a href="mining.html">mining</a>.</p>
+<h2 id='contributing'>Contributing</h2>
+<p>You can find a set of <a href="contributing/">writing guidelines</a> to follow if you wish to add new content, or modify any existing documentation. When you are finished your contribution, submit a merge request and one of the Meter term will review the content and provide any feedback.</p>
+<h2 id='other-resources'>Other Resources</h2>
+<ul>
+<li><a href="https://www.meter.io/claim-your-meter">Request Test Tokens</a></li>
+<li><a href="https://docsend.com/view/6gebiph">Read the Whitepaper</a></li>
+<li><a href="https://github.com/ethereum/web3.js">web3</a></li>
+</ul>
+
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="bash">bash</a>
-          </div>
       </div>
     </div>
   </body>

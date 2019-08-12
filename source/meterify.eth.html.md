@@ -7,7 +7,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
 toc_footers:
 - <a href='./index.html'>Documentation Home</a>
 - <a href='./meterify.dapps.html'>DApp Tutorials</a>
-- <a href='./examples/index.html'>Examples</a>
+- <a href='./meterify.examples.html'>Examples</a>
 - <a href='./meterify.mining.html'>Mining Guide</a>
 - <hr>
 - API Documentation

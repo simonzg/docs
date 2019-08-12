@@ -23,7 +23,7 @@ toc_footers:
 - <a href='./meterify.utils.html'>meterify.utils</a>
 - <hr>
 - <a href='./meterify.dapps.html'>DApp Tutorial</a>
-- <a href='./examples/index.html'>Examples</a>
+- <a href='./meterify.examples.html'>Examples</a>
 - <a href='./mining.html'>Mining Guide</a>
 - <a href='./contributing/index.html'>Contributing</a>
 - <hr>  
