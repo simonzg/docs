@@ -6,6 +6,9 @@ language_tabs: # must be one of https://git.io/vQNgJ
 
 toc_footers:
 - <a href='./index.html'>Documentation Home</a>
+- <a href='./meterify.dapps.html'>DApp Tutorials</a>
+- <a href='./meterify.examples.html'>Examples</a>
+- <a href='./meterify.mining.html'>Mining Guide</a>
 - <hr>
 - API Documentation
 - <a href='./meterify.html'>meterify</a>
@@ -21,11 +24,6 @@ toc_footers:
 - <a href='./meterify.eth.net.html'>meterify.eth.net</a>
 - <a href='./meterify.shh.html'>meterify.shh</a>
 - <a href='./meterify.utils.html'>meterify.utils</a>
-- <hr>
-- <a href='./meterify.dapps.html'>DApp Tutorial</a>
-- <a href='./meterify.examples.html'>Examples</a>
-- <a href='./mining.html'>Mining Guide</a>
-- <a href='./contributing/index.html'>Contributing</a>
 - <hr>  
 - <a href='https://www.meter.io/claim-your-meter/'>Request Test Tokens</a>
 - <a href='https://www.meter.io'>Meter.io</a>
@@ -39,12 +37,12 @@ This module allows you to interact with a Meter blockchain and any deployed smar
 
 Although the `meterify.eth` module inherits from `web.eth`, there are some feature differences between the two. The following is a list of extended features in `meterify.eth`
 
-### Extended Properties
+## Extended Properties
 
 - currentProvider
 - givenProvider
 
-### Extended Methods
+## Extended Methods
 
 - getBlockRef
 - getBlockUncleCount
@@ -69,55 +67,55 @@ If you want to circumvent the checksum check you can make an address all lower- 
     > ["0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe" ,"0x85F43D8a49eeB85d32Cf465507DD71d507100C1d"]
 ```
 
-# subscribe
+## subscribe
 
 For `meterify.eth.subscribe` see the [`subscribe`](meterify.eth.subscribe.html) reference documentation.
 
-# Contract
+## Contract
 
 For `meterify.eth.Contract` see the [`Contract`](meterify.eth.Contract.html) reference documentation.
 
-# Iban
+## Iban
 
 For `meterify.eth.Iban` see the [`Iban`](meterify.eth.Iban.html) reference documentation.
 
-# personal
+## personal
 
 For `meterify.eth.personal` see the [`personal`](meterify.eth.personal.html) reference documentation.
 
-# accounts
+## accounts
 
 For `meterify.eth.accounts` see the [`accounts`](meterify.eth.accounts.html) reference documentation.
 
-# ens
+## ens
 
 For `meterify.eth.ens` see the [`ens`](meterify.eth.ens.html) reference documentation.
 
-# abi
+## abi
 
 For `meterify.eth.abi` see the [`abi`](meterify.eth.abi.html) reference documentation.
 
-# net
+## net
 
 For `meterify.eth.net` see the [`net`](meterify.eth.net.html) reference documentation.
 
-# options
+## options
 
 For `meterify.eth.options` see the [`options`](meterify.module.options.html) reference documentation.
 
-# getProtocolVersion
+## getProtocolVersion
 
 ```javascript
     meterify.eth.getProtocolVersion([callback])
 ```
+
+Returns the protocol version of the node.
 
 > Example
 
 ```javascript
     meterify.eth.getProtocolVersion().then(console.log);
 ```
-
-Returns the protocol version of the node.
 
 ```bash
     > "63"
@@ -128,9 +126,7 @@ Type | Description
 ------- | -----------
 `Promise<string>` | The protocol version.
 
-
-
-# isSyncing
+## isSyncing
 
 ```javascript
     meterify.eth.isSyncing([callback])
@@ -138,22 +134,7 @@ Type | Description
 
 Checks if the node is currently syncing and returns either a syncing object, or `false`.
 
-> Example
-
-```javascript
-    meterify.eth.isSyncing()
-    .then(console.log);
-
-    > {
-        startingBlock: 100,
-        currentBlock: 312,
-        highestBlock: 512,
-        knownStates: 234566,
-        pulledStates: 123455
-    }
-```
-
-<a name="eth-issyncing-return"/>
+<a name="eth-issyncing-return">
 
 Returns
 
@@ -169,8 +150,22 @@ Property | Type | Description
 `knownStates` | `Number`| The estimated states to download
 `pulledStates` | `Number`| The already downloaded states
 
+Example
 
-# getCoinbase
+```javascript
+    meterify.eth.isSyncing()
+    .then(console.log);
+
+    > {
+        startingBlock: 100,
+        currentBlock: 312,
+        highestBlock: 512,
+        knownStates: 234566,
+        pulledStates: 123455
+    }
+```
+
+## getCoinbase
 
 ```javascript
     meterify.eth.getCoinbase([callback])
@@ -178,20 +173,20 @@ Property | Type | Description
 
 Returns the coinbase address to which mining rewards will go.
 
-> Example
-
-```javascript
-    meterify.eth.getCoinbase().then(console.log);
-    > "0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe"
-```
-
 Returns
 
 Type | Description
 ------- | -----------
 `Promise<string>` | The coinbase address set in the node for mining rewards.
 
-# isMining
+Example
+
+```javascript
+    meterify.eth.getCoinbase().then(console.log);
+    > "0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe"
+```
+
+## isMining
 
 ```javascript
     meterify.eth.isMining([callback])
@@ -199,20 +194,20 @@ Type | Description
 
 Checks whether the node is mining or not.
 
-> Example
-
-```javascript
-    meterify.eth.isMining().then(console.log);
-    > true
-```
-
 Returns
 
 Type | Description
 ------- | -----------
 `Promise<boolean>` | Returns `true` if the node is mining, otherwise `false`.
 
-# getHashrate
+Example
+
+```javascript
+    meterify.eth.isMining().then(console.log);
+    > true
+```
+
+## getHashrate
 
 ```javascript
     meterify.eth.getHashrate([callback])
@@ -220,37 +215,28 @@ Type | Description
 
 Returns the number of hashes per second that the node is mining with.
 
-> Example
-
-```javascript
-    meterify.eth.getHashrate().then(console.log);
-    > 493736
-```
-
-
 Returns
 
 Type | Description
 ------- | -----------
 `Promise<number>` | The Number of hashes per second.
 
+Example
 
-# getGasPrice
+```javascript
+    meterify.eth.getHashrate().then(console.log);
+    > 493736
+```
+
+## getGasPrice
 
 ```javascript
     meterify.eth.getGasPrice([callback])
 ```
 
-Returns the current gas price.
-
-> Example
-
-```javascript
-    meterify.eth.getGasPrice().then(console.log);
-    > "20000000000"
-```
-
-The gas price is determined by the last few blocks median gas price. GasPrice is the wei per unit of gas,.
+Returns the current gas price oracle.
+The gas price is determined by the last few blocks median gas price.
+GasPrice is the wei per unit of gas,.
 
 Returns
 
@@ -260,21 +246,20 @@ Type | Description
 
 See the :ref:`A note on dealing with big numbers in JavaScript <utils-bn>`.
 
+Example
 
-# getAccounts
+```javascript
+    meterify.eth.getGasPrice().then(console.log);
+    > "20000000000"
+```
+
+## getAccounts
 
 ```javascript
     meterify.eth.getAccounts([callback])
 ```
 
 Will return a list of the unlocked accounts in the Web3 wallet or it will return the accounts from the currently connected node.
-
-> Example
-
-```javascript
-    meterify.eth.getAccounts().then(console.log);
-    > ["0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe", "0xDCc6960376d6C6dEa93647383FfB245CfCed97Cf"]
-```
 
 This means you can add accounts with :ref:`meterify.eth.accounts.create() <accounts-create>` and you will get them returned here.
 
@@ -284,7 +269,14 @@ Type | Description
 ------- | -----------
 `Promise<Array>` | An array of addresses controlled by node.
 
-# getBlockNumber
+Example
+
+```javascript
+    meterify.eth.getAccounts().then(console.log);
+    > ["0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe", "0xDCc6960376d6C6dEa93647383FfB245CfCed97Cf"]
+```
+
+## getBlockNumber
 
 ```javascript
     meterify.eth.getBlockNumber([callback])
@@ -292,33 +284,26 @@ Type | Description
 
 Returns the current block number.
 
-> Example
-
-```javascript
-    meterify.eth.getBlockNumber().then(console.log);
-    > 2744
-```
-
 Returns
 
 Type | Description
 ------- | -----------
 `Promise<number>` | The number of the most recent block.
 
-# getBalance
+Example
+
+```javascript
+    meterify.eth.getBlockNumber().then(console.log);
+    > 2744
+```
+
+## getBalance
 
 ```javascript
     meterify.eth.getBalance(address [, defaultBlock] [, callback])
 ```
 
 Get the Meter MTRG balance of an address at a given block.
-
-> Example
-
-```javascript
-    meterify.eth.getBalance("0x407d73d8a49eeb85d32cf465507dd71d507100c1").then(console.log);
-    > "1000000000000"
-```
 
 Property | Type | Description
 --------- | ------- | -----------
@@ -334,20 +319,20 @@ Type | Description
 
 See the :ref:`A note on dealing with big numbers in JavaScript <big-numbers-in-javascript>`.
 
-# getEnergy
+Example
+
+```javascript
+    meterify.eth.getBalance("0x407d73d8a49eeb85d32cf465507dd71d507100c1").then(console.log);
+    > "1000000000000"
+```
+
+## getEnergy
 
 ```javascript
     meterify.eth.getEnergy(address [, defaultBlock] [, callback])
 ```
 
 Get the Meter MTR (energy) balance of an address at a given block.
-
-> Example
-
-```javascript
-    meterify.eth.getEnergy("0x407d73d8a49eeb85d32cf465507dd71d507100c1").then(console.log);
-    > "1000000000000"
-```
 
 Property | Type | Description
 --------- | ------- | -----------
@@ -363,20 +348,20 @@ Type | Description
 
 See the :ref:`A note on dealing with big numbers in JavaScript <big-numbers-in-javascript>`.
 
-# getStorageAt
+Example
+
+```javascript
+    meterify.eth.getEnergy("0x407d73d8a49eeb85d32cf465507dd71d507100c1").then(console.log);
+    > "1000000000000"
+```
+
+## getStorageAt
 
 ```javascript
     meterify.eth.getStorageAt(address, position [, defaultBlock] [, callback])
 ```
 
 Get the storage at a specific position of an address.
-
-> Example
-
-```javascript
-    meterify.eth.getStorageAt("0x407d73d8a49eeb85d32cf465507dd71d507100c1", 0).then(console.log);
-    > "0x033456732123ffff2342342dd12342434324234234fd234fd23fd4f23d4234"
-```
 
 Parameters
 
@@ -393,20 +378,20 @@ Type | Description
 ------- | -----------
 `Promise<string>` | The value in storage at the given position.
 
-# getCode
+Example
+
+```javascript
+    meterify.eth.getStorageAt("0x407d73d8a49eeb85d32cf465507dd71d507100c1", 0).then(console.log);
+    > "0x033456732123ffff2342342dd12342434324234234fd234fd23fd4f23d4234"
+```
+
+## getCode
 
 ```javascript
     meterify.eth.getCode(address [, defaultBlock] [, callback])
 ```
 
 Get the code at a specific address.
-
-> Example
-
-```javascript
-    meterify.eth.getCode("0xd5677cf67b5aa051bb40496e68ad359eb97cfbf8").then(console.log);
-    > "0x600160008035811a818181146012578301005b601b6001356025565b8060005260206000f25b600060078202905091905056"
-```
 
 Parameters
 
@@ -422,43 +407,20 @@ Type | Description
 ------- | -----------
 `Promise<string>` | The data at given address `address`.
 
+Example
 
-# getBlock
+```javascript
+    meterify.eth.getCode("0xd5677cf67b5aa051bb40496e68ad359eb97cfbf8").then(console.log);
+    > "0x600160008035811a818181146012578301005b601b6001356025565b8060005260206000f25b600060078202905091905056"
+```
+
+## getBlock
 
 ```javascript
      meterify.eth.getBlock(blockHashOrBlockNumber [, returnTransactionObjects] [, callback])
 ```
 
 Returns a block matching the block number or block hash.
-
-> Example
-
-```javascript
-    meterify.eth.getBlock(3150).then(console.log);
-    > {
-        "number": 3,
-        "hash": "0xef95f2f1ed3ca60b048b4bf67cde2195961e0bba6f70bcbea9a2c4e133e34b46",
-        "parentHash": "0x2302e1c0b972d00932deb5dab9eb2982f570597d9d42504c05d9c2147eaf9c88",
-        "nonce": "0xfb6e1a62d119228b",
-        "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
-        "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        "transactionsRoot": "0x3a1b03875115b79539e5bd33fb00d8f7b7cd61929d5a3c574f507b8acf415bee",
-        "stateRoot": "0xf1133199d44695dfa8fd1bcfe424d82854b5cebef75bddd7e40ea94cda515bcb",
-        "receiptsRoot": '0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421',
-        "miner": "0x8888f1f195afa192cfee860698584c030f4c9db1",
-        "difficulty": '21345678965432',
-        "totalDifficulty": '324567845321',
-        "size": 616,
-        "extraData": "0x",
-        "gasLimit": 3141592,
-        "gasUsed": 21662,
-        "timestamp": 1429287689,
-        "transactions": [
-            "0x9fc76417374aa880d4449a1f7f31ec597f00b1f6f3dd2d66f4c9c6c445836d8b"
-        ],
-        "uncles": []
-    }
-```
 
 Parameters
 
@@ -498,21 +460,42 @@ Property | Type | Description
 `transactions` | `Array` | Array of transaction objects, or 32 Bytes transaction hashes depending on the `returnTransactionObjects` parameter.
 `uncles` | `Array` | Array of uncle hashes.
 
+Example
 
-# getBlockTransactionCount
+```javascript
+    meterify.eth.getBlock(3150).then(console.log);
+    > {
+        "number": 3,
+        "hash": "0xef95f2f1ed3ca60b048b4bf67cde2195961e0bba6f70bcbea9a2c4e133e34b46",
+        "parentHash": "0x2302e1c0b972d00932deb5dab9eb2982f570597d9d42504c05d9c2147eaf9c88",
+        "nonce": "0xfb6e1a62d119228b",
+        "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+        "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "transactionsRoot": "0x3a1b03875115b79539e5bd33fb00d8f7b7cd61929d5a3c574f507b8acf415bee",
+        "stateRoot": "0xf1133199d44695dfa8fd1bcfe424d82854b5cebef75bddd7e40ea94cda515bcb",
+        "receiptsRoot": '0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421',
+        "miner": "0x8888f1f195afa192cfee860698584c030f4c9db1",
+        "difficulty": '21345678965432',
+        "totalDifficulty": '324567845321',
+        "size": 616,
+        "extraData": "0x",
+        "gasLimit": 3141592,
+        "gasUsed": 21662,
+        "timestamp": 1429287689,
+        "transactions": [
+            "0x9fc76417374aa880d4449a1f7f31ec597f00b1f6f3dd2d66f4c9c6c445836d8b"
+        ],
+        "uncles": []
+    }
+```
+
+## getBlockTransactionCount
 
 ```javascript
     meterify.eth.getBlockTransactionCount(blockHashOrBlockNumber [, callback])
 ```
 
 Returns the number of transaction in a given block.
-
-> Example
-
-```javascript
-    meterify.eth.getBlockTransactionCount("0x407d73d8a49eeb85d32cf465507dd71d507100c1").then(console.log);
-    > 1
-```
 
 Parameters
 
@@ -527,20 +510,20 @@ Type | Description
 ------- | -----------
 `Promise<number>` | The number of transactions in the given block.
 
-# getUncle
+Example
+
+```javascript
+    meterify.eth.getBlockTransactionCount("0x407d73d8a49eeb85d32cf465507dd71d507100c1").then(console.log);
+    > 1
+```
+
+## getUncle
 
 ```javascript
     meterify.eth.getUncle(blockHashOrBlockNumber, uncleIndex [, callback])
 ```
 
 Returns a blocks uncle by a given uncle index position.
-
-> Example
-
-```javascript
-    meterify.eth.getUncle(500, 0).then(console.log);
-    > // see meterify.eth.getBlock
-```
 
 Parameters
 
@@ -558,7 +541,14 @@ Type | Description
 
 Note: An uncle doesn't contain individual transactions.
 
-# getTransaction
+Example
+
+```javascript
+    meterify.eth.getUncle(500, 0).then(console.log);
+    > // see meterify.eth.getBlock
+```
+
+## getTransaction
 
 ```javascript
     meterify.eth.getTransaction(transactionHash [, callback])
@@ -566,31 +556,13 @@ Note: An uncle doesn't contain individual transactions.
 
 Returns a transaction matching the given transaction hash.
 
-> Example
-
-```javascript
-    meterify.eth.getTransaction('0x9fc76417374aa880d4449a1f7f31ec597f00b1f6f3dd2d66f4c9c6c445836d8b§234').then(console.log);
-    > {
-        "hash": "0x9fc76417374aa880d4449a1f7f31ec597f00b1f6f3dd2d66f4c9c6c445836d8b",
-        "nonce": 2,
-        "blockHash": "0xef95f2f1ed3ca60b048b4bf67cde2195961e0bba6f70bcbea9a2c4e133e34b46",
-        "blockNumber": 3,
-        "transactionIndex": 0,
-        "from": "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b",
-        "to": "0x6295ee1b4f6dd65047762f924ecd367c17eabf8f",
-        "value": '123450000000000000',
-        "gas": 314159,
-        "gasPrice": '2000000000000',
-        "input": "0x57cb2fc4"
-    }
-```
-
 Parameters
 
 Property | Type | Description
 --------- | ------- | -----------
 transactionHash | `String` | The transaction hash.
 callback | `Function` | (optional) Optional callback, returns an error object as first parameter and the result as second.
+
 
 Returns
 
@@ -614,8 +586,26 @@ Property | Type | Description
 `gas` | `Number` | Gas provided by the sender.
 `input` | `String` | The data sent along with the transaction.
 
+Example
 
-# getPendingTransactions
+```javascript
+    meterify.eth.getTransaction('0x9fc76417374aa880d4449a1f7f31ec597f00b1f6f3dd2d66f4c9c6c445836d8b§234').then(console.log);
+    > {
+        "hash": "0x9fc76417374aa880d4449a1f7f31ec597f00b1f6f3dd2d66f4c9c6c445836d8b",
+        "nonce": 2,
+        "blockHash": "0xef95f2f1ed3ca60b048b4bf67cde2195961e0bba6f70bcbea9a2c4e133e34b46",
+        "blockNumber": 3,
+        "transactionIndex": 0,
+        "from": "0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b",
+        "to": "0x6295ee1b4f6dd65047762f924ecd367c17eabf8f",
+        "value": '123450000000000000',
+        "gas": 314159,
+        "gasPrice": '2000000000000',
+        "input": "0x57cb2fc4"
+    }
+```
+
+## getPendingTransactions
 
 ```javascript
     meterify.eth.getPendingTransactions([, callback])
@@ -623,7 +613,35 @@ Property | Type | Description
 
 Returns a list of pending transactions.
 
-> Example
+Parameters
+
+Property | Type | Description
+--------- | ------- | -----------
+callback | `Function` | (optional) Optional callback, returns an error object as first parameter and the result as second.
+
+Returns
+
+Type | Description
+------- | -----------
+`Promise<object[]>` | Array of pending transactions:
+
+The object
+
+Property | Type | Description
+--------- | ------- | -----------
+`hash` 32 Bytes | `String` | Hash of the transaction.
+`nonce` | `Number` | The number of transactions made by the sender prior to this one.
+`blockHash` 32 Bytes | `String` | Hash of the block where this transaction was in. `null` when its pending.
+`blockNumber` | `Number` | Block number where this transaction was in. `null` when its pending.
+`transactionIndex` | `Number` | Integer of the transactions index position in the block. `null` when its pending.
+`from` | `String` | Address of the sender.
+`to` | `String` | Address of the receiver. `null` when its a contract creation transaction.
+`value` | `String` | Value transferred in :ref:`wei <what-is-wei>`.
+`gasPrice` | `String` | The wei per unit of gas provided by the sender in :ref:`wei <what-is-wei>`.
+`gas` | `Number` | Gas provided by the sender.
+`input` | `String` | The data sent along with the transaction.
+
+Example
 
 ```javascript
     meterify.eth.getPendingTransactions().then(console.log);
@@ -662,49 +680,13 @@ Returns a list of pending transactions.
    ]
 ```
 
-Parameters
-
-Property | Type | Description
---------- | ------- | -----------
-callback | `Function` | (optional) Optional callback, returns an error object as first parameter and the result as second.
-
-Returns
-
-Type | Description
-------- | -----------
-`Promise<object[]>` | Array of pending transactions:
-
-The object
-
-Property | Type | Description
---------- | ------- | -----------
-`hash` 32 Bytes | `String` | Hash of the transaction.
-`nonce` | `Number` | The number of transactions made by the sender prior to this one.
-`blockHash` 32 Bytes | `String` | Hash of the block where this transaction was in. `null` when its pending.
-`blockNumber` | `Number` | Block number where this transaction was in. `null` when its pending.
-`transactionIndex` | `Number` | Integer of the transactions index position in the block. `null` when its pending.
-`from` | `String` | Address of the sender.
-`to` | `String` | Address of the receiver. `null` when its a contract creation transaction.
-`value` | `String` | Value transferred in :ref:`wei <what-is-wei>`.
-`gasPrice` | `String` | The wei per unit of gas provided by the sender in :ref:`wei <what-is-wei>`.
-`gas` | `Number` | Gas provided by the sender.
-`input` | `String` | The data sent along with the transaction.
-
-
-# getTransactionFromBlock
+## getTransactionFromBlock
 
 ```javascript
     getTransactionFromBlock(hashStringOrNumber, indexNumber [, callback])
 ```
 
 Returns a transaction based on a block hash or number and the transactions index position.
-
-> Example
-
-```javascript
-    const transaction = meterify.eth.getTransactionFromBlock('0x4534534534', 2).then(console.log);
-    > // see meterify.eth.getTransaction
-```
 
 Parameters
 
@@ -720,33 +702,20 @@ Type | Description
 ------- | -----------
 `Promise<object>` | A transaction object, see :ref:`meterify.eth.getTransaction <eth-gettransaction-return>`:
 
-# getTransactionReceipt
+Example
+
+```javascript
+    const transaction = meterify.eth.getTransactionFromBlock('0x4534534534', 2).then(console.log);
+    > // see meterify.eth.getTransaction
+```
+
+## getTransactionReceipt
 
 ```javascript
     meterify.eth.getTransactionReceipt(hash [, callback])
 ```
 
 Returns the receipt of a transaction by transaction hash.
-
-> Example
-
-```javascript
-    const receipt = meterify.eth.getTransactionReceipt('0x9fc76417374aa880d4449a1f7f31ec597f00b1f6f3dd2d66f4c9c6c445836d8b')
-                            .then(console.log);
-    > {
-      "status": true,
-      "transactionHash": "0x9fc76417374aa880d4449a1f7f31ec597f00b1f6f3dd2d66f4c9c6c445836d8b",
-      "transactionIndex": 0,
-      "blockHash": "0xef95f2f1ed3ca60b048b4bf67cde2195961e0bba6f70bcbea9a2c4e133e34b46",
-      "blockNumber": 3,
-      "contractAddress": "0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe",
-      "cumulativeGasUsed": 314159,
-      "gasUsed": 30234,
-      "logs": [{
-             // logs as returned by getPastLogs, etc.
-         }, ...]
-    }
-```
 
 Note: The receipt is not available for pending transactions and returns `null`.
 
@@ -756,6 +725,7 @@ Property | Type | Description
 --------- | ------- | -----------
 hash | `String` | The transaction hash.
 callback | `Function` | (optional) Optional callback, returns an error object as first parameter and the result as second.
+
 
 Returns
 
@@ -779,21 +749,33 @@ Property | Type | Description
 `gasUsed` | `Number` |  The amount of gas used by this specific transaction alone.
 `logs` | `Array` | Array of log objects, which this transaction generated.
 
+Example
 
-# getTransactionCount
+```javascript
+    const receipt = meterify.eth.getTransactionReceipt('0x9fc76417374aa880d4449a1f7f31ec597f00b1f6f3dd2d66f4c9c6c445836d8b')
+                            .then(console.log);
+    > {
+      "status": true,
+      "transactionHash": "0x9fc76417374aa880d4449a1f7f31ec597f00b1f6f3dd2d66f4c9c6c445836d8b",
+      "transactionIndex": 0,
+      "blockHash": "0xef95f2f1ed3ca60b048b4bf67cde2195961e0bba6f70bcbea9a2c4e133e34b46",
+      "blockNumber": 3,
+      "contractAddress": "0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe",
+      "cumulativeGasUsed": 314159,
+      "gasUsed": 30234,
+      "logs": [{
+             // logs as returned by getPastLogs, etc.
+         }, ...]
+    }
+```
+
+## getTransactionCount
 
 ```javascript
     meterify.eth.getTransactionCount(address [, defaultBlock] [, callback])
 ```
 
 Get the numbers of transactions sent from this address.
-
-> Example
-
-```javascript
-    meterify.eth.getTransactionCount("0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe").then(console.log);
-    > 1
-```
 
 Parameters
 
@@ -809,54 +791,20 @@ Type | Description
 ------- | -----------
 `Promise<number>` | The number of transactions sent from the given address.
 
+Example
 
-# sendTransaction
+```javascript
+    meterify.eth.getTransactionCount("0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe").then(console.log);
+    > 1
+```
+
+## sendTransaction
 
 ```javascript
     meterify.eth.sendTransaction(transactionObject [, callback])
 ```
 
 Sends a transaction to the network.
-
-> Example
-
-```javascript
-    // compiled solidity source code using https://remix.ethereum.org
-    const code = "603d80600c6000396000f3007c01000000000000000000000000000000000000000000000000000000006000350463c6888fa18114602d57005b6007600435028060005260206000f3";
-
-    // using the callback
-    meterify.eth.sendTransaction({
-        from: '0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe',
-        data: code // deploying a contract
-    }, function(error, hash){
-        ...
-    });
-
-    // using the promise
-    meterify.eth.sendTransaction({
-        from: '0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe',
-        to: '0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe',
-        value: '1000000000000000'
-    })
-    .then(function(receipt){
-        ...
-    });
-
-    // using the event emitter
-    meterify.eth.sendTransaction({
-        from: '0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe',
-        to: '0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe',
-        value: '1000000000000000'
-    })
-    .on('transactionHash', function(hash){
-        ...
-    })
-    .on('receipt', function(receipt){
-        ...
-    })
-    .on('confirmation', function(confirmationNumber, receipt){ ... })
-    .on('error', console.error); // If a out of gas error, the second parameter is the receipt.
-```
 
 Parameters
 
@@ -896,8 +844,47 @@ Event | Returns | Description
 `"confirmation"` | `Number`, `Object` | Is fired for every confirmation up to the 12th confirmation. Receives the confirmation number as the first and the :ref:`receipt <eth-gettransactionreceipt-return>` as the second argument. Fired from confirmation 0 on, which is the block where its minded.
 `"error"` | `Error` | Is fired if an error occurs during sending. If a out of gas error, the second parameter is the receipt.
 
+Example
 
-# sendSignedTransaction
+```javascript
+    // compiled solidity source code using https://remix.ethereum.org
+    const code = "603d80600c6000396000f3007c01000000000000000000000000000000000000000000000000000000006000350463c6888fa18114602d57005b6007600435028060005260206000f3";
+
+    // using the callback
+    meterify.eth.sendTransaction({
+        from: '0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe',
+        data: code // deploying a contract
+    }, function(error, hash){
+        ...
+    });
+
+    // using the promise
+    meterify.eth.sendTransaction({
+        from: '0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe',
+        to: '0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe',
+        value: '1000000000000000'
+    })
+    .then(function(receipt){
+        ...
+    });
+
+    // using the event emitter
+    meterify.eth.sendTransaction({
+        from: '0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe',
+        to: '0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe',
+        value: '1000000000000000'
+    })
+    .on('transactionHash', function(hash){
+        ...
+    })
+    .on('receipt', function(receipt){
+        ...
+    })
+    .on('confirmation', function(confirmationNumber, receipt){ ... })
+    .on('error', console.error); // If a out of gas error, the second parameter is the receipt.
+```
+
+## sendSignedTransaction
 
 ```javascript
     meterify.eth.sendSignedTransaction(signedTransactionData [, callback])
@@ -905,7 +892,22 @@ Event | Returns | Description
 
 Sends an already signed transaction, generated for example using :ref:`meterify.eth.accounts.signTransaction <eth-accounts-signtransaction>`.
 
-> Example
+Parameters
+
+Property | Type | Description
+--------- | ------- | ----------
+signedTransactionData | `String` | Signed transaction data in HEX format
+callback | `Function` | (optional) Optional callback, returns an error object as first parameter and the result as second.
+
+Returns
+
+Name | Returns | Description
+--------- | ------- | -----------
+`PromiEvent` | A :ref:`promise combined event emitter <promiEvent>` | Will be resolved when the transaction :ref:`receipt <eth-gettransactionreceipt-return>` is available.
+
+Please see the return values for :ref:`meterify.eth.sendTransaction <eth-sendtransaction-return>` for details.
+
+Example
 
 ```javascript
     const Tx = require('ethereumjs-tx');
@@ -934,42 +936,13 @@ Sends an already signed transaction, generated for example using :ref:`meterify.
     > // see eth.getTransactionReceipt() for details
 ```
 
-Parameters
-
-Property | Type | Description
---------- | ------- | ----------
-signedTransactionData | `String` | Signed transaction data in HEX format
-callback | `Function` | (optional) Optional callback, returns an error object as first parameter and the result as second.
-
-Returns
-
-Name | Returns | Description
---------- | ------- | -----------
-`PromiEvent` | A :ref:`promise combined event emitter <promiEvent>` | Will be resolved when the transaction :ref:`receipt <eth-gettransactionreceipt-return>` is available.
-
-Please see the return values for :ref:`meterify.eth.sendTransaction <eth-sendtransaction-return>` for details.
-
-
-# sign
+## sign
 
 ```javascript
     meterify.eth.sign(dataToSign, address [, callback])
 ```
 
 Signs data using a specific account. This account needs to be unlocked.
-
-> Example
-
-```javascript
-    meterify.eth.sign("Hello world", "0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe")
-    .then(console.log);
-    > "0x30755ed65396facf86c53e6217c52b4daebe72aa4941d89635409de4c9c7f9466d4e9aaec7977f05e923889b33c0d0dd27d7226b6e6f56ce737465c5cfd04be400"
-
-    // the below is the same
-    meterify.eth.sign(web3.utils.utf8ToHex("Hello world"), "0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe")
-    .then(console.log);
-    > "0x30755ed65396facf86c53e6217c52b4daebe72aa4941d89635409de4c9c7f9466d4e9aaec7977f05e923889b33c0d0dd27d7226b6e6f56ce737465c5cfd04be400"
-```
 
 Parameters
 
@@ -987,8 +960,20 @@ Type | Description
 ------- | -----------
 `Promise<string>` | The signature.
 
+Example
 
-# signTransaction
+```javascript
+    meterify.eth.sign("Hello world", "0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe")
+    .then(console.log);
+    > "0x30755ed65396facf86c53e6217c52b4daebe72aa4941d89635409de4c9c7f9466d4e9aaec7977f05e923889b33c0d0dd27d7226b6e6f56ce737465c5cfd04be400"
+
+    // the below is the same
+    meterify.eth.sign(web3.utils.utf8ToHex("Hello world"), "0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe")
+    .then(console.log);
+    > "0x30755ed65396facf86c53e6217c52b4daebe72aa4941d89635409de4c9c7f9466d4e9aaec7977f05e923889b33c0d0dd27d7226b6e6f56ce737465c5cfd04be400"
+```
+
+## signTransaction
 
 ```javascript
     meterify.eth.signTransaction(transactionObject [, address,] [, callback])
@@ -997,7 +982,21 @@ Type | Description
 Signs a transaction with the private key of the given address.
 If the given address is a local unlocked account, the transaction will be signed locally.
 
-> Example
+Parameters
+
+Property | Type | Description
+--------- | ------- | ----------
+transactionObject | `Object` | The transaction data to sign :ref:`meterify.eth.sendTransaction() <eth-sendtransaction>` for more.
+address | `string` | The address of the account.
+callback | `Function` | (optional) Optional callback, returns an error object as first parameter and the result as second.
+
+Returns
+
+Type | Description
+------- | -----------
+`Promise<object>` | The RLP encoded transaction. The `raw` property can be used to send the transaction using :ref:`meterify.eth.sendSignedTransaction <eth-sendsignedtransaction>`.
+
+Example
 
 ```javascript
     meterify.eth.signTransaction({
@@ -1025,40 +1024,13 @@ If the given address is a local unlocked account, the transaction will be signed
     }
 ```
 
-
-Parameters
-
-Property | Type | Description
---------- | ------- | ----------
-transactionObject | `Object` | The transaction data to sign :ref:`meterify.eth.sendTransaction() <eth-sendtransaction>` for more.
-address | `string` | The address of the account.
-callback | `Function` | (optional) Optional callback, returns an error object as first parameter and the result as second.
-
-Returns
-
-Type | Description
-------- | -----------
-`Promise<object>` | The RLP encoded transaction. The `raw` property can be used to send the transaction using :ref:`meterify.eth.sendSignedTransaction <eth-sendsignedtransaction>`.
-
-
-# call
+## call
 
 ```javascript
     meterify.eth.call(callObject [, defaultBlock] [, callback])
 ```
 
 Executes a message call transaction, which is directly executed in the VM of the node, but never mined into the blockchain.
-
-> Example
-
-```javascript
-    meterify.eth.call({
-        to: "0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe", // contract address
-        data: "0xc6888fa10000000000000000000000000000000000000000000000000000000000000003"
-    }).then(console.log);
-    > "0x000000000000000000000000000000000000000000000000000000000000000a"
-```
-
 
 Parameters
 
@@ -1074,24 +1046,23 @@ Type | Description
 ------- | -----------
 `Promise<string>` | The returned data of the call, e.g. a smart contract functions return value.
 
+Example
 
-# estimateGas
+```javascript
+    meterify.eth.call({
+        to: "0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe", // contract address
+        data: "0xc6888fa10000000000000000000000000000000000000000000000000000000000000003"
+    }).then(console.log);
+    > "0x000000000000000000000000000000000000000000000000000000000000000a"
+```
+
+## estimateGas
 
 ```javascript
     meterify.eth.estimateGas(callObject [, callback])
 ```
 
 Executes a message call or transaction and returns the amount of the gas used.
-
-> Example
-
-```javascript
-    meterify.eth.estimateGas({
-        to: "0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe",
-        data: "0xc6888fa10000000000000000000000000000000000000000000000000000000000000003"
-    }).then(console.log);
-    > "0x0000000000000000000000000000000000000000000000000000000000000015"
-```
 
 Parameters
 
@@ -1106,33 +1077,23 @@ Type | Description
 --------- | ------- | -----------
 `Promise<number>` | The used gas for the simulated call/transaction.
 
+Example
 
-# getPastLogs
+```javascript
+    meterify.eth.estimateGas({
+        to: "0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe",
+        data: "0xc6888fa10000000000000000000000000000000000000000000000000000000000000003"
+    }).then(console.log);
+    > "0x0000000000000000000000000000000000000000000000000000000000000015"
+```
+
+## getPastLogs
 
 ```javascript
     meterify.eth.getPastLogs(options [, callback])
 ```
 
 Gets past logs, matching the given options.
-
-> Example
-
-```javascript
-    meterify.eth.getPastLogs({
-        address: "0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe",
-        topics: ["0x033456732123ffff2342342dd12342434324234234fd234fd23fd4f23d4234"]
-    }).then(console.log);
-    > [{
-        data: '0x7f9fade1c0d57a7af66ab4ead79fade1c0d57a7af66ab4ead7c2c2eb7b11a91385',
-        topics: ['0xfd43ade1c09fade1c0d57a7af66ab4ead7c2c2eb7b11a91ffdd57a7af66ab4ead7', '0x7f9fade1c0d57a7af66ab4ead79fade1c0d57a7af66ab4ead7c2c2eb7b11a91385']
-        logIndex: 0,
-        transactionIndex: 0,
-        transactionHash: '0x7f9fade1c0d57a7af66ab4ead79fade1c0d57a7af66ab4ead7c2c2eb7b11a91385',
-        blockHash: '0xfd43ade1c09fade1c0d57a7af66ab4ead7c2c2eb7b11a91ffdd57a7af66ab4ead7',
-        blockNumber: 1234,
-        address: '0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe'
-    },{...}]
-```
 
 Parameters
 
@@ -1169,25 +1130,32 @@ Name | Type | Description
 `blockHash` 32 Bytes | `String` | Hash of the block where this event was created in. `null` when its still pending.
 `blockNumber` | `Number` | The block number where this log was created in. `null` when still pending.
 
+Example
 
-# getWork
+```javascript
+    meterify.eth.getPastLogs({
+        address: "0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe",
+        topics: ["0x033456732123ffff2342342dd12342434324234234fd234fd23fd4f23d4234"]
+    }).then(console.log);
+    > [{
+        data: '0x7f9fade1c0d57a7af66ab4ead79fade1c0d57a7af66ab4ead7c2c2eb7b11a91385',
+        topics: ['0xfd43ade1c09fade1c0d57a7af66ab4ead7c2c2eb7b11a91ffdd57a7af66ab4ead7', '0x7f9fade1c0d57a7af66ab4ead79fade1c0d57a7af66ab4ead7c2c2eb7b11a91385']
+        logIndex: 0,
+        transactionIndex: 0,
+        transactionHash: '0x7f9fade1c0d57a7af66ab4ead79fade1c0d57a7af66ab4ead7c2c2eb7b11a91385',
+        blockHash: '0xfd43ade1c09fade1c0d57a7af66ab4ead7c2c2eb7b11a91ffdd57a7af66ab4ead7',
+        blockNumber: 1234,
+        address: '0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe'
+    },{...}]
+```
+
+## getWork
 
 ```javascript
     meterify.eth.getWork([callback])
 ```
 
 Gets work for miners to mine on. Returns the hash of the current block, the seedHash, and the boundary condition to be met ("target").
-
-> Example
-
-```javascript
-    meterify.eth.getWork().then(console.log);
-    > [
-      "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
-      "0x5EED00000000000000000000000000005EED0000000000000000000000000000",
-      "0xd1ff1c01710000000000000000000000d1ff1c01710000000000000000000000"
-    ]
-```
 
 Parameters
 
@@ -1207,26 +1175,24 @@ Type | Description
 `String` 32 Bytes - at **index 1** | the seed hash used for the DAG.
 `String` 32 Bytes - at **index 2** | the boundary condition ("target"), 2^256 / difficulty.
 
+Example
 
-# submitWork
+```javascript
+    meterify.eth.getWork().then(console.log);
+    > [
+      "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+      "0x5EED00000000000000000000000000005EED0000000000000000000000000000",
+      "0xd1ff1c01710000000000000000000000d1ff1c01710000000000000000000000"
+    ]
+```
+
+## submitWork
 
 ```javascript
     meterify.eth.submitWork(nonce, powHash, digest, [callback])
 ```
 
 Used for submitting a proof-of-work solution.
-
-> Example
-
-```javascript
-    meterify.eth.submitWork([
-        "0x0000000000000001",
-        "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
-        "0xD1FE5700000000000000000000000000D1FE5700000000000000000000000000"
-    ])
-    .then(console.log);
-    > true
-```
 
 Parameters
 
@@ -1243,25 +1209,29 @@ Type | Description
 ------- | -----------
 `Promise<boolean>` | Returns `true` if the provided solution is valid, otherwise false.
 
+Example
 
-# requestAccounts
+```javascript
+    meterify.eth.submitWork([
+        "0x0000000000000001",
+        "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+        "0xD1FE5700000000000000000000000000D1FE5700000000000000000000000000"
+    ])
+    .then(console.log);
+    > true
+```
+
+## requestAccounts
 
 ```javascript
     meterify.eth.requestAccounts([callback])
 ```
 
 This method will request/enable the accounts from the current environment it is running (Metamask, Status or Mist).
+It doesn't work if you're connected to a node with a default Web3.js provider. (WebsocketProvider, HttpProvidder and IpcProvider)
+This method will only work if you're using the injected provider from a application like Status, Mist or Metamask.
 
-> Example
-
-```javascript
-    meterify.eth.requestAccounts().then(console.log);
-    > ['0aae0B295369a9FD31d5F28D9Ec85E40f4cb692BAf', 0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe]
-```
-
-It doesn't work if you're connected to a node with a default Web3.js provider (WebsocketProvider, HttpProvidder and IpcProvider). This method will only work if you're using the injected provider from a application like Status, Mist or Metamask.
-
-For further information about the behavior of this method please read [EIP-1102] (https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1102.md).
+For further information about the behavior of this method please read the EIP of it: `EIP-1102 <https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1102.md>`_
 
 Parameters
 
@@ -1275,22 +1245,21 @@ Type | Description
 ------- | -----------
 `Promise<Array>` | Returns an array of enabled accounts.
 
+Example
+
+```javascript
+    meterify.eth.requestAccounts().then(console.log);
+    > ['0aae0B295369a9FD31d5F28D9Ec85E40f4cb692BAf', 0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe]
+```
 
 
-# getChainId
+## getChainId
 
 ```javascript
     meterify.eth.getChainId([callback])
 ```
 
-Returns the chain ID of the current connected node as described in the [EIP-695] (https://github.com/ethereum/EIPs/blob/master/EIPS/eip-695.md).
-
-> Example
-
-```javascript
-    meterify.eth.getChainId().then(console.log);
-    > 61
-```
+Returns the chain ID of the current connected node as described in the `EIP-695 <https://github.com/ethereum/EIPs/blob/master/EIPS/eip-695.md>`.
 
 Returns
 
@@ -1298,18 +1267,17 @@ Type | Description
 ------- | -----------
 `Promise<Number>` | Returns chain ID.
 
+Example
 
-# getNodeInfo
+```javascript
+    meterify.eth.getChainId().then(console.log);
+    > 61
+```
+
+## getNodeInfo
 
 ```javascript
     meterify.eth.getNodeInfo([callback])
-```
-
-> Example
-
-```javascript
-    meterify.eth.getNodeInfo().then(console.log);
-    > "Mist/v0.9.3/darwin/go1.4.1"
 ```
 
 Returns
@@ -1318,15 +1286,51 @@ Type | Description
 ------- | -----------
 `Promise<String>` | The current client version.
 
-# getProof
+Example
+
+```javascript
+    meterify.eth.getNodeInfo().then(console.log);
+    > "Mist/v0.9.3/darwin/go1.4.1"
+```
+
+
+## getProof
 
 ```javascript
     meterify.eth.getProof(address, storageKey, blockNumber, [callback])
 ```
 
-Returns the account and storage-values of the specified account including the Merkle-proof as described in [EIP-1186](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1186.md).
+Returns the account and storage-values of the specified account including the Merkle-proof as described in `EIP-1186 <https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1186.md>`.
 
-> Example
+Parameters
+
+Property | Type | Description
+--------- | ------- | ----------
+address | `String` 20 Bytes |  The Address of the account or contract.
+storageKey | `Array` 32 Bytes | Array of storage-keys which should be proofed and included. See :ref:`meterify.eth.getStorageAt <eth-getStorageAt>`.
+blockNumber | `Number` or `String` or `"latest"` or `"earliest"` | Integer block number, or the string "latest" or "earliest".
+callback | `Function` | (optional) Optional callback, returns an error object as first parameter and the result as second.
+
+Returns
+
+Type | Description
+------- | -----------
+`Promise<Object>` | A account object.
+
+The account object
+
+Property | Description
+--------- | -----------
+`balance` | The balance of the account. See :ref:`meterify.eth.getBalance <eth-getBalance>`.
+`codeHash` |  hash of the code of the account. For a simple Account without code it will return "0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470"
+`nonce` |  Nonce of the account.
+`storageHash` | SHA3 of the StorageRoot. All storage will deliver a MerkleProof starting with this rootHash.
+`accountProof` | Array of rlp-serialized MerkleTree-Nodes, starting with the stateRoot-Node, following the path of the SHA3 (address) as key.
+`storageProof` | Array of storage-entries as requested.
+`key` |  The requested storage key.
+`value` |  The storage value.
+
+Example
 
 ```javascript
     meterify.eth.getProof(
@@ -1360,32 +1364,3 @@ Returns the account and storage-values of the specified account including the Me
         ]
     }
 ```
-
-
-Parameters
-
-Property | Type | Description
---------- | ------- | ----------
-address | `String` 20 Bytes |  The Address of the account or contract.
-storageKey | `Array` 32 Bytes | Array of storage-keys which should be proofed and included. See :ref:`meterify.eth.getStorageAt <eth-getStorageAt>`.
-blockNumber | `Number` or `String` or `"latest"` or `"earliest"` | Integer block number, or the string "latest" or "earliest".
-callback | `Function` | (optional) Optional callback, returns an error object as first parameter and the result as second.
-
-Returns
-
-Type | Description
-------- | -----------
-`Promise<Object>` | A account object.
-
-The account object
-
-Property | Description
---------- | -----------
-`balance` | The balance of the account. See :ref:`meterify.eth.getBalance <eth-getBalance>`.
-`codeHash` |  hash of the code of the account. For a simple Account without code it will return "0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470"
-`nonce` |  Nonce of the account.
-`storageHash` | SHA3 of the StorageRoot. All storage will deliver a MerkleProof starting with this rootHash.
-`accountProof` | Array of rlp-serialized MerkleTree-Nodes, starting with the stateRoot-Node, following the path of the SHA3 (address) as key.
-`storageProof` | Array of storage-entries as requested.
-`key` |  The requested storage key.
-`value` |  The storage value.

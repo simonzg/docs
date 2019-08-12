@@ -6,6 +6,9 @@ language_tabs: # must be one of https://git.io/vQNgJ
 
 toc_footers:
 - <a href='./index.html'>Documentation Home</a>
+- <a href='./meterify.dapps.html'>DApp Tutorials</a>
+- <a href='./meterify.examples.html'>Examples</a>
+- <a href='./mining.html'>Mining Guide</a>
 - <hr>
 - API Documentation
 - <a href='./meterify.html'>meterify</a>
@@ -21,11 +24,6 @@ toc_footers:
 - <a href='./meterify.eth.net.html'>meterify.eth.net</a>
 - <a href='./meterify.shh.html'>meterify.shh</a>
 - <a href='./meterify.utils.html'>meterify.utils</a>
-- <hr>
-- <a href='./meterify.dapps.html'>DApp Tutorial</a>
-- <a href='./meterify.examples.html'>Examples</a>
-- <a href='./mining.html'>Mining Guide</a>
-- <a href='./contributing/index.html'>Contributing</a>
 - <hr>  
 - <a href='https://www.meter.io/claim-your-meter/'>Request Test Tokens</a>
 - <a href='https://www.meter.io'>Meter.io</a>
@@ -35,17 +33,15 @@ search: true
 
 # meterify
 
-The `meterify` package is a wrapper to house all Meter related modules.
-
-`meterify` depends on the `web3.js` library. Developers will work primarily with the `meterify.eth` module in the vast majority of cases.
-
 > Example
 
 ```javascript
-const meterify = require("meterify").meterify;
+const meter = require("meterify").meterify;
 const Web3 = require("web3");
-const web3 = meterify(new Web3(), "http://test.meter.io:8669");
+const meterify = meter(new Web3(), "http://test.meter.io:8669");
 ```
+
+The `meterify` package is a wrapper to house all Meter related modules, and depends on the `web3.js` library. If you are writing applications or scripts executing in Node.js or a browser environment, you should use Meterify.
 
 Property | Type | Description
 --------- | ------- | -----------
@@ -53,17 +49,10 @@ web3Instance | `Object` | A `web3` instance.
 host | `String` | The Meter host url (and port if applicable).
 timeout | `Number` | Request timeout value.
 
-> Returns an `Object`
+> Returns an Object
 
 ```javascript
 {
-  bzz: {
-    givenProvider: null,
-    pick: {…},
-    currentProvider: null,
-    isAvailable: ƒ,
-    upload: ƒ, …
-  },
   eth: {
     _requestManager: RequestManager,
     givenProvider: MetamaskInpageProvider,
@@ -81,13 +70,6 @@ timeout | `Number` | Request timeout value.
     WebsocketProvider: ƒ,
     HttpProvider: ƒ,
     IpcProvider: ƒ
-  },
-  shh: {
-    _requestManager: RequestManager,
-    givenProvider: MetamaskInpageProvider,
-    providers: {…},
-    _provider: MeterProvider, 
-    …
   },
   utils: {
     _fireError: ƒ,
@@ -111,6 +93,7 @@ timeout | `Number` | Request timeout value.
     providers: {…},
     subscriptions: {…}
   }
+  ...
 }
 ```
 
@@ -119,16 +102,57 @@ Parameters of the `meterify` return object
 Property | Type | Description
 --------- | ------- | -----------
 BatchRequest | `function` |  Sets a `RequestManager` object and initiates batch requests (see: ).
-bzz | `Object` | A `Bzz` object (see: ).
 currentProvider | `function` | Get or set the current provider.
-eth | `Object` | An `Eth` object (see: ).
+eth | `Object` | An `Eth` object (see: [`eth`](meterify.eth.html)).
+extension | `extension` |
 givenProvider | `Object` | Return the given provider object.
 providers | `Object` | A list of providers.
 provider | `Object` | The current provider object.
 \_requestManager | `Object` | A RequestManager object.
 setProvider | `function` | Set the current provider.
-shh | `Object` |  An `Shh` object (see: )
 utils | `Object` |  A `utils` object (see: )
+
+## Notes on `meterify` and `web3`
+
+The RESTful API of Meter differs from Ethereum's JSON-RPC, and there are some methods in `web3` are not supported by `meterify`.
+
+_Supported Web3 Methods_
+
+web3 instance
+├── eth
+│   ├── getBlockNumber
+│   ├── getBalance
+│   ├── getStorageAt
+│   ├── getCode
+│   ├── getBlock
+│   ├── getTransaction
+│   ├── getTransactionReceipt
+│   ├── sendTransaction
+│   ├── sendSignedTransaction
+│   ├── call
+│   ├── estimateGas
+│   ├── getPastLogs
+│   ├── subscribe
+│   ├── clearSubscriptions
+│   ├── getEnergy
+│   ├── getChainTag
+│   ├── getBlockRef
+│   ├── accounts
+│   └── Contract
+│       ├── Constructor(new Contract())
+│       ├── clone
+│       ├── deploy
+│       ├── methods
+│       ├── methods.myMethod.call
+│       ├── methods.myMethod.send
+│       ├── methods.myMethod.estimateGas
+│       ├── methods.myMethod.encodeABI
+│       ├── events
+│       ├── once
+│       ├── events.myEvent
+│       ├── events.allEvents
+│       └── getPastEvents
+└── utils
 
 # MODULES
 
