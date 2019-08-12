@@ -6,7 +6,7 @@ toc_footers:
 - <a href='./index.html'>Documentation Home</a>
 - <a href='./meterify.html'>API Documentation</a>
 - <a href='./meterify.dapps.html'>DApp Tutorial</a>
-- <a href='./meterify.examples.html'>Examples</a>
+- <a href='./examples/index.html'>Examples</a>
 - <a href='./mining.html'>Mining Guide</a>
 - <a href='./contributing/index.html'>Contributing</a>
 - <hr>  
