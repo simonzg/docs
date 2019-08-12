@@ -1,5 +1,5 @@
 ---
-title: Meter Documentation
+title: Contributing Guide
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - javascript

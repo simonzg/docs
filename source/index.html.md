@@ -1,29 +1,14 @@
 ---
 title: Meter Documentation
 
-language_tabs: # must be one of https://git.io/vQNgJ
-  - bash
 
 toc_footers:
 - <a href='./index.html'>Documentation Home</a>
-- <a href='./meterify.dapps.html'>DApp Tutorials</a>
+- <a href='./meterify.html'>API Documentation</a>
+- <a href='./meterify.dapps.html'>DApp Tutorial</a>
 - <a href='./meterify.examples.html'>Examples</a>
 - <a href='./mining.html'>Mining Guide</a>
-- <hr>
-- API Documentation
-- <a href='./meterify.html'>meterify</a>
-- <a href='./meterify.module.options.html'>meterify.module.options</a>
-- <a href='./meterify.eth.html'>meterify.eth</a>
-- <a href='./meterify.eth.subscribe.html'>meterify.eth.subscribe</a>
-- <a href='./meterify.eth.Contract.html'>meterify.eth.Contract</a>
-- <a href='./meterify.eth.Iban.html'>meterify.eth.Iban</a>
-- <a href='./meterify.eth.personal.html'>meterify.eth.personal</a>
-- <a href='./meterify.eth.accounts.html'>meterify.eth.accounts</a>
-- <a href='./meterify.eth.ens.html'>meterify.eth.ens</a>
-- <a href='./meterify.eth.abi.html'>meterify.eth.abi</a>
-- <a href='./meterify.eth.net.html'>meterify.eth.net</a>
-- <a href='./meterify.shh.html'>meterify.shh</a>
-- <a href='./meterify.utils.html'>meterify.utils</a>
+- <a href='./contributing/index.html'>Contributing</a>
 - <hr>  
 - <a href='https://www.meter.io/claim-your-meter/'>Request Test Tokens</a>
 - <a href='https://www.meter.io'>Meter.io</a>
@@ -48,3 +33,7 @@ Several guides and tutorials have been written to explain how to work with the M
 You can find a set of [writing guidelines](contributing/index.html) to follow if you wish to add new content, or modify any existing documentation. When you are finished your contribution, submit a merge request and one of the Meter term will review the content and provide any feedback.
 
 ## Other Resources
+
+* [Request Test Tokens](https://www.meter.io/claim-your-meter)
+* [Read the Whitepaper](https://docsend.com/view/6gebiph)
+* [web3](https://github.com/ethereum/web3.js)

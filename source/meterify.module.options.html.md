@@ -6,9 +6,6 @@ language_tabs: # must be one of https://git.io/vQNgJ
 
 toc_footers:
 - <a href='./index.html'>Documentation Home</a>
-- <a href='./meterify.dapps.html'>DApp Tutorials</a>
-- <a href='./meterify.examples.html'>Examples</a>
-- <a href='./mining.html'>Mining Guide</a>
 - <hr>
 - API Documentation
 - <a href='./meterify.html'>meterify</a>
@@ -24,6 +21,11 @@ toc_footers:
 - <a href='./meterify.eth.net.html'>meterify.eth.net</a>
 - <a href='./meterify.shh.html'>meterify.shh</a>
 - <a href='./meterify.utils.html'>meterify.utils</a>
+- <hr>
+- <a href='./meterify.dapps.html'>DApp Tutorial</a>
+- <a href='./meterify.examples.html'>Examples</a>
+- <a href='./mining.html'>Mining Guide</a>
+- <a href='./contributing/index.html'>Contributing</a>
 - <hr>  
 - <a href='https://www.meter.io/claim-your-meter/'>Request Test Tokens</a>
 - <a href='https://www.meter.io'>Meter.io</a>
@@ -94,7 +96,7 @@ The `defaultBlock` property can return the following values:
 
 Value | Type | Description
 --------- | ------- | -----------
-a number | 'Number' | A block number
+a number | `Number` | A block number
 `genesis` | `String` | The genesis block
 `latest` | `String` | The latest block (current head of the blockchain)
 `pending` | `String` | The currently mined block (including pending transactions)

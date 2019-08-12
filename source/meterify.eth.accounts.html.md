@@ -6,9 +6,6 @@ language_tabs: # must be one of https://git.io/vQNgJ
 
 toc_footers:
 - <a href='./index.html'>Documentation Home</a>
-- <a href='./meterify.dapps.html'>DApp Tutorials</a>
-- <a href='./meterify.examples.html'>Examples</a>
-- <a href='./meterify.mining.html'>Mining Guide</a>
 - <hr>
 - API Documentation
 - <a href='./meterify.html'>meterify</a>
@@ -24,6 +21,11 @@ toc_footers:
 - <a href='./meterify.eth.net.html'>meterify.eth.net</a>
 - <a href='./meterify.shh.html'>meterify.shh</a>
 - <a href='./meterify.utils.html'>meterify.utils</a>
+- <hr>
+- <a href='./meterify.dapps.html'>DApp Tutorial</a>
+- <a href='./meterify.examples.html'>Examples</a>
+- <a href='./mining.html'>Mining Guide</a>
+- <a href='./contributing/index.html'>Contributing</a>
 - <hr>  
 - <a href='https://www.meter.io/claim-your-meter/'>Request Test Tokens</a>
 - <a href='https://www.meter.io'>Meter.io</a>
@@ -93,9 +95,7 @@ over the network on the node via an RPC call.
     }
 ```
 
-
 Parameters
-
 
 1. ``entropy`` - `String`(optional): A random string to increase entropy. If given it should be at least 32 characters. If none is given a random string will be generated using :ref:`randomhex <randomhex>`.
 
@@ -124,7 +124,6 @@ Creates an account object from a private key.
 
 > Example
 
-
 ```javascript
 
     meterify.eth.accounts.privateKeyToAccount('0x348ce564d427a3311b6536bbcff9390d69395b06ed6c486954e971d960fe8709');
@@ -137,18 +136,13 @@ Creates an account object from a private key.
     }
 ```
 
-
 Parameters
-
 
 1. `privateKey` - `String`: The private key hex string beginning with ``0x``.
 
-
 Returns
 
-
 `Object` - The account object with the :ref:`structure seen here <eth-accounts-create-return>`.
-
 
 <a name="eth-accounts-signtransaction"/>
 
@@ -229,10 +223,7 @@ Parameters
 2. `privateKey` - `String`: The private key to sign with.
 3. ``callback`` - ``Function``: (optional) Optional callback, returns an error object as first parameter and the result as second.
 
-
-
 Returns
-
 
 `Promise` returning `Object`: The signed data RLP encoded transaction, or if `returnSignature` is `true` the signature values as follows:
     - `messageHash` - `String`: The hash of the given message.
@@ -242,39 +233,29 @@ Returns
     - `rawTransaction` - `String`: The RLP encoded transaction, ready to be send using :ref:`web3.eth.sendSignedTransaction <eth-sendsignedtransaction>`.
     - `transactionHash` - `String`: The transaction hash for the RLP encoded transaction.
 
-
-
 # recoverTransaction
 
 ```javascript
-
     meterify.eth.accounts.recoverTransaction(rawTransaction);
 ```
 
 Recovers the Meter address which was used to sign the given RLP encoded transaction.
 
-
-Parameters
-
-
-1. `signature` - `String`: The RLP encoded transaction.
-
-
-
-Returns
-
-
-`String`: The Meter address used to sign this transaction.
-
-
-Example
-
+> Example
 
 ```javascript
-
     meterify.eth.accounts.recoverTransaction('0xf86180808401ef364594f0109fc8df283027b6285cc889f5aa624eac1f5580801ca031573280d608f75137e33fc14655f097867d691d5c4c44ebe5ae186070ac3d5ea0524410802cdc025034daefcdfa08e7d2ee3f0b9d9ae184b2001fe0aff07603d9');
     > "0xF0109fC8DF283027b6285cc889F5aA624EaC1F55"
 ```
+
+Parameters
+
+1. `signature` - `String`: The RLP encoded transaction.
+
+Returns
+
+`String`: The Meter address used to sign this transaction.
+
 
 # hashMessage
 
@@ -285,22 +266,7 @@ Example
 
 Hashes the given message to be passed :ref:`meterify.eth.accounts.recover() <accounts-recover>` function. The data  will be UTF-8 HEX decoded and enveloped as follows: `"\x19Ethereum Signed Message:\n" + message.length + message` and hashed using keccak256.
 
-
-Parameters
-
-
-1. `message` - `String`: A message to hash, if its HEX it will be UTF8 decoded before.
-
-
-
-Returns
-
-
-`String`: The hashed message
-
-
-Example
-
+> Example
 
 ```javascript
 
@@ -311,6 +277,14 @@ Example
     meterify.eth.accounts.hashMessage(web3.utils.utf8ToHex("Hello World"))
     > "0xa1de988600a42c4b4ab089b619297c17d53cffae5d5120d82d8a92d0bb3b78f2"
 ```
+
+Parameters
+
+1. `message` - `String`: A message to hash, if its HEX it will be UTF8 decoded before.
+
+Returns
+
+`String`: The hashed message
 
 <a name="eth-accounts-sign"/>
 
@@ -323,28 +297,7 @@ Example
 
 Signs arbitrary data. This data is before UTF-8 HEX decoded and enveloped as follows: `"\x19Ethereum Signed Message:\n" + message.length + message`.
 
-
-Parameters
-
-
-1. `data` - `String`: The data to sign. If its a string it will be
-2. `privateKey` - `String`: The private key to sign with.
-
-
-
-Returns
-
-
-`Object`: The signed data RLP encoded signature, or if `returnSignature` is `true` the signature values as follows:
-    - `message` - `String`: The the given message.
-    - `messageHash` - `String`: The hash of the given message.
-    - `r` - `String`: First 32 bytes of the signature
-    - `s` - `String`: Next 32 bytes of the signature
-    - `v` - `String`: Recovery value + 27
-
-
-Example
-
+> Example
 
 ```javascript
 
@@ -359,6 +312,20 @@ Example
     }
 ```
 
+Parameters
+
+1. `data` - `String`: The data to sign. If its a string it will be
+2. `privateKey` - `String`: The private key to sign with.
+
+Returns
+
+`Object`: The signed data RLP encoded signature, or if `returnSignature` is `true` the signature values as follows:
+    - `message` - `String`: The the given message.
+    - `messageHash` - `String`: The hash of the given message.
+    - `r` - `String`: First 32 bytes of the signature
+    - `s` - `String`: Next 32 bytes of the signature
+    - `v` - `String`: Recovery value + 27
+
 <a name="accounts-recover"/>
 
 # recover
@@ -372,28 +339,7 @@ Example
 
 Recovers the Meter address which was used to sign the given data.
 
-
-Parameters
-
-
-1. `message` or `signatureObject` - `String` or `Object`: Either signed message or hash, or the signature object as following values:
-    - `messageHash` - `String`: The hash of the given message already prefixed with `"\x19Ethereum Signed Message:\n" + message.length + message`.
-    - `r` - `String`: First 32 bytes of the signature
-    - `s` - `String`: Next 32 bytes of the signature
-    - `v` - `String`: Recovery value + 27
-2. `signature` - `String`: The raw RLP encoded signature, OR parameter 2-4 as v, r, s values.
-3. `preFixed` - `Boolean` (optional, default: ``false``): If the last parameter is `true`, the given message will NOT automatically be prefixed with `"\x19Ethereum Signed Message:\n" + message.length + message`, and assumed to be already prefixed.
-
-
-
-Returns
-
-
-`String`: The Meter address used to sign this data.
-
-
-Example
-
+> Example
 
 ```javascript
 
@@ -414,6 +360,20 @@ Example
     > "0x2c7536E3605D9C16a7a3D7b1898e529396a65c23"
 ```
 
+Parameters
+
+1. `message` or `signatureObject` - `String` or `Object`: Either signed message or hash, or the signature object as following values:
+    - `messageHash` - `String`: The hash of the given message already prefixed with `"\x19Ethereum Signed Message:\n" + message.length + message`.
+    - `r` - `String`: First 32 bytes of the signature
+    - `s` - `String`: Next 32 bytes of the signature
+    - `v` - `String`: Recovery value + 27
+2. `signature` - `String`: The raw RLP encoded signature, OR parameter 2-4 as v, r, s values.
+3. `preFixed` - `Boolean` (optional, default: ``false``): If the last parameter is `true`, the given message will NOT automatically be prefixed with `"\x19Ethereum Signed Message:\n" + message.length + message`, and assumed to be already prefixed.
+
+Returns
+
+`String`: The Meter address used to sign this data.
+
 # encrypt
 
 ```javascript
@@ -423,23 +383,7 @@ Example
 
 Encrypts a private key to the web3 keystore v3 standard.
 
-
-Parameters
-
-
-1. `privateKey` - `String`: The private key to encrypt.
-2. `password` - `String`: The password used for encryption.
-
-
-
-Returns
-
-
-`Object`: The encrypted keystore v3 JSON.
-
-
-Example
-
+> Example
 
 ```javascript
 
@@ -465,6 +409,15 @@ Example
     }
 ```
 
+Parameters
+
+1. `privateKey` - `String`: The private key to encrypt.
+2. `password` - `String`: The password used for encryption.
+
+Returns
+
+`Object`: The encrypted keystore v3 JSON.
+
 # decrypt
 
 ```javascript
@@ -474,23 +427,7 @@ Example
 
 Decrypts a keystore v3 JSON, and creates the account.
 
-
-Parameters
-
-
-1. `keystoreJsonV3` - `String`: The encrypted keystore v3 JSON.
-2. `password` - `String`: The password used for encryption.
-
-
-
-Returns
-
-
-`Object`: The decrypted account.
-
-
-Example
-
+> Example
 
 ```javascript
 
@@ -522,6 +459,15 @@ Example
     }
 ```
 
+Parameters
+
+1. `keystoreJsonV3` - `String`: The encrypted keystore v3 JSON.
+2. `password` - `String`: The password used for encryption.
+
+Returns
+
+`Object`: The decrypted account.
+
 <a name="eth_accounts_wallet"/>
 
 # wallet
@@ -533,9 +479,7 @@ Example
 
 Contains an in memory wallet with multiple accounts. These accounts can be used when using :ref:`web3.eth.sendTransaction() <eth-sendtransaction>`.
 
-
 Example
-
 
 ```javascript
 
@@ -567,23 +511,7 @@ Example
 
 Generates one or more accounts in the wallet. If wallets already exist they will not be overridden.
 
-
-Parameters
-
-
-1. ``numberOfAccounts`` - ``Number``: Number of accounts to create. Leave empty to create an empty wallet.
-2. ``entropy`` - `String`(optional): A string with random characters as additional entropy when generating accounts. If given it should be at least 32 characters.
-
-
-
-Returns
-
-
-`Object`: The wallet object.
-
-
-Example
-
+> Example
 
 ```javascript
 
@@ -596,6 +524,15 @@ Example
     }
 ```
 
+Parameters
+
+1. ``numberOfAccounts`` - ``Number``: Number of accounts to create. Leave empty to create an empty wallet.
+2. ``entropy`` - `String`(optional): A string with random characters as additional entropy when generating accounts. If given it should be at least 32 characters.
+
+Returns
+
+`Object`: The wallet object.
+
 ## wallet.add
 
 ```javascript
@@ -605,22 +542,7 @@ Example
 
 Adds an account using a private key or account object to the wallet.
 
-
-Parameters
-
-
-1. `account` - `String` or `Object`: A private key or account object created with :ref:`meterify.eth.accounts.create() <accounts-create>`.
-
-
-
-Returns
-
-
-`Object`: The added account.
-
-
-Example
-
+> Example
 
 ```javascript
 
@@ -648,6 +570,14 @@ Example
     }
 ```
 
+Parameters
+
+1. `account` - `String` or `Object`: A private key or account object created with :ref:`meterify.eth.accounts.create() <accounts-create>`.
+
+Returns
+
+`Object`: The added account.
+
 ## wallet.remove
 
 ```javascript
@@ -657,21 +587,7 @@ Example
 
 Removes an account from the wallet.
 
-
-Parameters
-
-
-1. `account` - `String` or `Number`: The account address, or index in the wallet.
-
-
-Returns
-
-
-`Boolean`: `true` if the wallet was removed. ``false`` if it couldn't be found.
-
-
-Example
-
+> Example
 
 ```javascript
 
@@ -691,6 +607,17 @@ Example
     > false
 ```
 
+Parameters
+
+
+1. `account` - `String` or `Number`: The account address, or index in the wallet.
+
+
+Returns
+
+
+`Boolean`: `true` if the wallet was removed. ``false`` if it couldn't be found.
+
 ## wallet.clear
 
 ```javascript
@@ -700,21 +627,7 @@ Example
 
 Securely empties the wallet and removes all its accounts.
 
-
-Parameters
-
-
-none
-
-
-Returns
-
-
-`Object`: The wallet object.
-
-
-Example
-
+> Example
 
 ```javascript
 
@@ -730,6 +643,15 @@ Example
     }
 ```
 
+Parameters
+
+none
+
+
+Returns
+
+`Object`: The wallet object.
+
 ## wallet.encrypt
 
 ```javascript
@@ -739,22 +661,7 @@ Example
 
 Encrypts all wallet accounts to an array of encrypted keystore v3 objects.
 
-
-Parameters
-
-
-1. `password` - `String`: The password which will be used for encryption.
-
-
-
-Returns
-
-
-``Array``: The encrypted keystore v3.
-
-
-Example
-
+> Example
 
 ```javascript
 
@@ -782,6 +689,14 @@ Example
     ]
 ```
 
+Parameters
+
+1. `password` - `String`: The password which will be used for encryption.
+
+Returns
+
+``Array``: The encrypted keystore v3.
+
 ## wallet.decrypt
 
 ```javascript
@@ -791,23 +706,7 @@ Example
 
 Decrypts keystore v3 objects.
 
-
-Parameters
-
-
-1. `keystoreArray` - ``Array``: The encrypted keystore v3 objects to decrypt.
-2. `password` - `String`: The password which will be used for encryption.
-
-
-
-Returns
-
-
-`Object`: The wallet object.
-
-
-Example
-
+> Example
 
 ```javascript
 
@@ -852,6 +751,16 @@ Example
     }
 ```
 
+Parameters
+
+1. `keystoreArray` - ``Array``: The encrypted keystore v3 objects to decrypt.
+2. `password` - `String`: The password which will be used for encryption.
+
+Returns
+
+`Object`: The wallet object.
+
+
 ## wallet.save
 
 ```javascript
@@ -861,24 +770,7 @@ Example
 
 Stores the wallet encrypted and as string in local storage.
 
-Note:  Browser only.
-
-
-Parameters
-
-
-1. `password` - `String`: The password to encrypt the wallet.
-2. `keyName` - `String`: (optional) The key used for the local storage position, defaults to `"web3js_wallet"`.
-
-
-
-Returns
-
-
-`Boolean`
-
-
-Example
+> Example
 
 
 ```javascript
@@ -886,6 +778,19 @@ Example
     meterify.eth.accounts.wallet.save('test#!$');
     > true
 ```
+
+
+Note:  Browser only.
+
+Parameters
+
+1. `password` - `String`: The password to encrypt the wallet.
+2. `keyName` - `String`: (optional) The key used for the local storage position, defaults to `"web3js_wallet"`.
+
+Returns
+
+
+`Boolean`
 
 ## wallet.load
 
@@ -896,25 +801,7 @@ Example
 
 Loads a wallet from local storage and decrypts it.
 
-Note:  Browser only.
-
-
-Parameters
-
-
-1. `password` - `String`: The password to decrypt the wallet.
-2. `keyName` - `String`: (optional) The key used for the localstorage position, defaults to `"web3js_wallet"`.
-
-
-
-Returns
-
-
-`Object`: The wallet object.
-
-
-Example
-
+> Example
 
 ```javascript
 
@@ -927,3 +814,14 @@ Example
         ...
     }
 ```
+
+Note:  Browser only.
+
+Parameters
+
+1. `password` - `String`: The password to decrypt the wallet.
+2. `keyName` - `String`: (optional) The key used for the localstorage position, defaults to `"web3js_wallet"`.
+
+Returns
+
+`Object`: The wallet object.
