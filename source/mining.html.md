@@ -1,3 +1,21 @@
+---
+title: Meter Mining Guide
+
+
+toc_footers:
+- <a href='./index.html'>Documentation Home</a>
+- <a href='./meterify.html'>API Documentation</a>
+- <a href='./meterify.dapps.html'>DApp Tutorial</a>
+- <a href='./examples/index.html'>Examples</a>
+- <a href='./mining.html'>Mining Guide</a>
+- <a href='./contributing/index.html'>Contributing</a>
+- <hr>  
+- <a href='https://www.meter.io/claim-your-meter/'>Request Test Tokens</a>
+- <a href='https://www.meter.io'>Meter.io</a>
+
+search: true
+---
+
 # Meter Mining Guide
 
 Mining is how cryptocurrency is created and one way to acquire coins. It is an intensive computing activity, and involves the use of specialized hardware to get rewarded for processing transaction blocks on a blockchain. Meter (MTR) itself is no exception to this.
