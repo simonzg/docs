@@ -17,7 +17,7 @@ toc_footers:
 - <hr>
 - <a href='../meterify.html'>API Documentation</a>
 - <a href='../meterify.dapps.html'>DApp Tutorial</a>
-- <a href='../examples/index.htmll'>Examples</a>
+- <a href='../examples/index.html'>Examples</a>
 - <a href='../mining.html'>Mining Guide</a>
 - <hr>  
 - <a href='https://www.meter.io/claim-your-meter/'>Request Test Tokens</a>
