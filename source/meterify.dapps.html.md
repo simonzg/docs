@@ -191,7 +191,7 @@ Next, follow each step to add function and other code snippets `index.js`. The f
 
 * [examples/meter-dapp/index.js](https://github.com/xiaohanzhu/docs/blob/master/examples/meter-daap/index.js)
 * [examples/meter-dapp/sample_token.sol](https://github.com/xiaohanzhu/docs/blob/master/examples/meter-daap/sample_token.sol)
-* [examples/meter-dapp/docker-compose.yml](https://github.com/xiaohanzhu/docs/blob/master/examples/meter-daap/docker-compose.yml)
+* [examples/includes/docker-compose.yml](examples/includes/docker-compose.yml)
 
 ### Step 1:" Create two accounts, one for Alice and one for Bob.
 
