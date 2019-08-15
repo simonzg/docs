@@ -1,8 +1,19 @@
-# Web3 API reference
+---
+title: Meterify API Reference
 
-------
+language_tabs: # must be one of https://git.io/vQNgJ
+  - shell
+  - javascript
 
-### Get MTRG balance
+toc_footers:
+
+includes:
+  - errors
+
+search: true
+---
+
+# Get MTRG balance
 ```js
 web3.eth.getBalance(address[,blockNumberOrHash])
 ```
@@ -14,7 +25,7 @@ Queries the MTRG balance of an address.
 - _optional_ `blockNumberOrHash` _Type_ `number | string` Block number or block hash
 
     If you pass this parameter it will not use the default block set with `"latest"`
-    - `0`: The genesis block 
+    - `0`: The genesis block
     - `"earliest"`: The genesis block
     - `"latest"`: The latest block
 
@@ -28,7 +39,7 @@ web3Instance.eth.getBalance(address[,blockNumberOrHash]).then(result => {
 > "100000000000000000"
 ```
 
-### Get MTR balance
+# Get MTR balance
 ```js
 web3.eth.getEnergy(address[,blockNumberOrHash])
 ```
@@ -40,7 +51,7 @@ Queries the MTR balance of an address
 - _optional_ `blockNumberOrHash` _Type_ `number | string` Block number or block hash
 
     If you pass this parameter it will not use the default block set with `"latest"`
-    - `0`: The genesis block 
+    - `0`: The genesis block
     - `"earliest"`: The genesis block
     - `"latest"`: The latest block
 
@@ -54,7 +65,7 @@ web3Instance.eth.getEnergy(address[,blockNumberOrHash]).then(result => {
 > "1000000000000000000"
 ```
 
-### Get genesis block information
+# Get genesis block information
 ```js
 web3.eth.getChainTag()
 ```
@@ -70,7 +81,7 @@ web3Instance.eth.getChainTag().then(result => {
 > "0x27"
 ```
 
-### Query current best block number
+# Query current best block number
 ```js
 web3.eth.getBlockNumber()
 ```
@@ -86,8 +97,8 @@ web3Instance.eth.getBlockNumber().then(result => {
 > 100
 ```
 
-### Get block by number or hash
-```js 
+# Get block by number or hash
+```js
 web3.eth.getBlock(blockNumberOrHash)
 ```
 Gets a block matching the block number or block hash.
@@ -96,7 +107,7 @@ Gets a block matching the block number or block hash.
 - _optional_ `blockNumberOrHash` _Type_ `number | string` Block number or block hash
 
     If you pass this parameter it will not use the default block set with `"latest"`
-    - `0`: The genesis block 
+    - `0`: The genesis block
     - `"earliest"`: The genesis block
     - `"latest"`:The latest block
 
@@ -135,11 +146,11 @@ web3Instance.eth.getBlock(blockNumberOrHash).then(result => {
     receiptsRoot: "0x45b0cfc220ceec5b7c1c62c4d4193d38e4eba48e8815729ce75f9c0ab0e4c1c0",
     signer: "0x25ae0ef84da4a76d5a1dfe80d3789c2c46fee30a",
     isTrunk: true,
-    transactions: [] 
+    transactions: []
 }
 ```
 
-### Get transaction according to transaction hash
+# Get transaction according to transaction hash
 ```js
 web3.eth.getTransaction(transactionID)
 ```
@@ -155,7 +166,7 @@ Get a transaction matching transaction Hash.
 - `chainTag` _Type_ `uint8` Last byte of genesis block ID  
 - `expiration` _Type_ `uint32` Expiration relative to blockRef(in unit block)
 - `clauses` _Type_ `Array` Array of Clause Objects:
-    - `to` _Type_ `string | Null` Recipient of clause, `Null` for contract deployment 
+    - `to` _Type_ `string | Null` Recipient of clause, `Null` for contract deployment
     - `value` _Type_ `string` Hex form of wei to be transferred
     - `data` _Type_ `string` Input data (bytes)
 - `gasPriceCoef` _Type_ `uint8` Coefficient used to calculate the final gas price
@@ -164,7 +175,7 @@ Get a transaction matching transaction Hash.
 - `nonce` _Type_ `string` Transaction nonce
 - `meta` _Type_ `Object` Meta object:
     - `blockID` _Type_ `string` Identifier of the block(bytes32)
-    - `blockNumber` _Type_ `uint32` number of block 
+    - `blockNumber` _Type_ `uint32` number of block
     - `blockTimestamp` _Type_ `uint64` Unix timestamp of block
 - `blockNumber` _Type_ `uint32` Same as `meta.blockNumer`
 
@@ -174,7 +185,7 @@ Get a transaction matching transaction Hash.
 web3Instance.eth.getTransaction(transactionID).then(result => {
 	console.log(result)
 })
-> { 
+> {
     id: "0xb4601cc338aad0ff2d32565fcb9ed06e5a556da8cffe03866e73ba06c4812cf0",
     size: 132,
     chainTag: "0x9a",
@@ -193,11 +204,11 @@ web3Instance.eth.getTransaction(transactionID).then(result => {
      { blockID: "0x000008b91fe9e0654c4fdd7eee4ed8b6e3e09b953993f2e2d91092e086b70423",
        blockNumber: 2233,
        blockTimestamp: 1528451080 },
-    blockNumber: 2233 
+    blockNumber: 2233
 }
 ```
 
-### Get transaction receipt by transaction hash
+# Get transaction receipt by transaction hash
 ```js
 web3.eth.getTransactionReceipt(transactionHash)
 ```
@@ -215,7 +226,7 @@ Get a transaction receipt matching transaction Hash.
 - `reverted`  _Type_ `boolean` true means the transaction was reverted
 - `meta` - `Meta` _Type_ `Object`
     - `blockID`  _Type_ `string` Identifier of the block(bytes32)
-    - `blockNumber` _Type_ `uint32` number of block 
+    - `blockNumber` _Type_ `uint32` number of block
     - `blockTimestamp`  _Type_ `uint64` Unix timestamp of block
     - `txID`  _Type_ `string` Identifier of the transaction
     - `txOrigin`  _Type_ `string` The one who signed the transaction
@@ -239,7 +250,7 @@ Get a transaction receipt matching transaction Hash.
 web3Instance.eth.getTransactionReceipt(transactionHash).then(result => {
 	console.log(result)
 })
-> { 
+> {
     gasUsed: 66846,
     gasPayer: "0x4f6FC409e152D33843Cf4982d414C1Dd0879277e",
     paid: "0x39facb2d5afc30000",
@@ -268,12 +279,12 @@ web3Instance.eth.getTransactionReceipt(transactionHash).then(result => {
     blockNumber: 2257,
     blockHash: "0x000008d168c7d5ca180a0f5cf0aba148982b9d5bed263ee8bdc94e6863962a86",
     transactionHash: "0x0d79ef6830ee3a8ad55d31b4c30e53ebf2252da90db6074f9304889c682f0490",
-    status: "0x1" 
+    status: "0x1"
 }
 ```
 
 
-### Send a signed transaction
+# Send a signed transaction
 ```js
 web3.eth.sendSignedTransaction(signedTransaction)
 ```
@@ -296,7 +307,7 @@ web3Instance.eth.sendSignedTransaction(signedTransaction).then(result => {
 > "TransactionID will be displayed if sent successfully"
 ```
 
-### Send transaction
+# Send transaction
 ```js
 web3.eth.sendTransaction(Transaction)
 ```
@@ -308,7 +319,7 @@ web3.eth.sendTransaction(Transaction)
     - _optional_ `value` _Type_ `string | number | BN | BigNumber` The value, with an unit of *wei*, transferred through the transaction. Specifically, it plays the role of endowment when the transaction is contract-creation type.
     - _optional_ `gas`  _Type_ `number` The maximum amount of gas that can be used by the transaction (unused gas is going to be refunded right after the transaction execution).
     - _optional_ `data`  _Type_ `string` Either the [ABI byte string](http://solidity.readthedocs.io/en/latest/abi-spec.html) containing the data of the function call on a contract, or the initialization code of a contract-creation transaction.
-    - _optional_ `nonce`  _Type_ `number` A random 64-bit scalar value that is different from ethereum"s nonce which is a transaction count. 
+    - _optional_ `nonce`  _Type_ `number` A random 64-bit scalar value that is different from ethereum"s nonce which is a transaction count.
     - _optional_ `chainTag`  _Type_ `number` **The last byte** of the genesis block ID representing the identity of a chain.
     - _optional_ `blockRef`  _Type_ `string`, by default, the first 8 bytes of **best block** ID). The BlockRef (an eight-byte array) includes two parts: the first four bytes contains the block height (number) and the rest four bytes is part of the referred block’s ID. If the referred block is future block, blockNumber - "00000000" should be added.
     - _optional_ `expiration`  _Type_ `number`, Default 0, Suggested 720 - number of  blocks that can be used to specify when the transaction expires. Specifically, expiration-blockRef defines the height of the latest block that the transaction can be packed into.
@@ -321,7 +332,7 @@ web3.eth.sendTransaction(Transaction)
 - `confirmation` returns `number`, `TransactionReceipt Object` Is fired for every confirmation up to the 12th confirmation. Receives the confirmation number as the first and the receipt as the second argument. Fired from confirmation 0 on, which is the block where its minded.
 - `error` returns `Error` Is fired if an error occurs during sending. If a out of gas error, the second parameter is the receipt.
 
-?> In meter official implementation , the client **DOES NOT** neither manage user's private-key/keyStore nor use private key to sign a Transaction. Unfortunately, meterify can not directly perform `web3Instance.eth.sendTransaction` but there is another way to sign a transaction. 
+?> In meter official implementation , the client **DOES NOT** neither manage user's private-key/keyStore nor use private key to sign a Transaction. Unfortunately, meterify can not directly perform `web3Instance.eth.sendTransaction` but there is another way to sign a transaction.
 
 ?> In [web3.js accounts](https://web3js.readthedocs.io/en/1.0/web3-eth-accounts.html#eth-accounts), it gives the opportunity to add your private-key, stored in your runtime context (In Node.js context, it's stored in memory while in Browser context, it's stored in memory/local storage), to accounts module. When you are trying to send a transaction, the module will check the private key associated with from field. Once the private key and from have been matched, the module will sign the transaction.
 
@@ -354,7 +365,7 @@ ERC20ContractInstance.methods.transfer("0x7567d83b7b8d80remrj281a71d54fc7b9944ff
 !> **This is not the only way for developers signing a transaction! <br>
 We encourage developers find a proper way to manage private key and sign a transaction.**
 
-### Execute a non-commited message call 
+# Execute a non-commited message call
 ```js
 web3.eth.call(callObject[, blockNumberOrHash])
 ```
@@ -371,7 +382,7 @@ Executes a message call, which is directly executed in the VM based on the speci
 - _optional_ `blockNumberOrHash` _Type_ `number | string` block number or hash
 
     If you pass this parameter it will not use the default block set with `"latest"`
-    - `0`: The genesis block 
+    - `0`: The genesis block
     - `"earliest"`: The genesis block
     - `"latest"`:The latest block
 
@@ -385,7 +396,7 @@ web3Instance.eth.call(callObject[, blockNumberOrHash]).then(result => {
 > "0x00000000000000000000000000000000000000000000000000000000000000"
 ```
 
-### Execute a message call or transaction
+# Execute a message call or transaction
 ```js
 web3.eth.estimateGas(callObject)
 ```
@@ -398,7 +409,7 @@ Executes a message call or transaction and returns the amount of the gas used.
     - _optional_ `value` _Type_ `string | number | BN | BigNumber` The value, with an unit of *wei*, transferred through the transaction. Specifically, it plays the role of endowment when the transaction is contract-creation type.
     - _optional_ `gas`   _Type_ `number` The maximum amount of gas that can be used by the transaction (unused gas is going to be refunded right after the transaction execution).
     - _optional_ `data`  _Type_ `string` Either the [ABI byte string](http://solidity.readthedocs.io/en/latest/abi-spec.html) containing the data of the function call on a contract, or the initialization code of a contract-creation transaction.
-    - _optional_ `nonce`  _Type_ `number` A random 64-bit scalar value that is different from ethereum"s nonce which is a transaction count. 
+    - _optional_ `nonce`  _Type_ `number` A random 64-bit scalar value that is different from ethereum"s nonce which is a transaction count.
     - _optional_ `chainTag`  _Type_ `number` **The last byte** of the genesis block ID representing the identity of a chain.
     - _optional_ `blockRef`  _Type_ `string`, by default, the first 8 bytes of **best block** ID). The BlockRef (an eight-byte array) includes two parts: the first four bytes contains the block height (number) and the rest four bytes is part of the referred block’s ID. If the referred block is future block, blockNumber - "00000000" should be added.
     - _optional_ `expiration`  _Type_ `number`, Default 0, Suggested 720) number of  blocks that can be used to specify when the transaction expires. Specifically, expiration-blockRef defines the height of the latest block that the transaction can be packed into.
@@ -415,7 +426,7 @@ web3Instance.eth.estimateGas(callObject).then(result => {
 > 1000
 ```
 
-### Get past logs
+# Get past logs
 ```js
 web3.eth.getPastLogs(options)
 ```
@@ -428,12 +439,12 @@ Gets past logs, matching the given options.
     - `address`  _Type_ `string` An address to only get logs from particular account.
     - `topics` _Type_ `Array` An array of values which must each appear in the log entries. The order is important, if you want to leave topics out use {null}, e.g. `[null, '0x12...']`. You can also pass an array for each topic with options for that topic e.g. `[null, ['option1', 'option2']]`
     - `options` _Type_ `Object` Result pagination option, introduced by meter's API:
-        - `offset`  _Type_ `number` Start cursor in result 
+        - `offset`  _Type_ `number` Start cursor in result
         - `limit`  _Type_ `number` Constrain the number of result returned
     - `range` _Type_ `Object` Range options for filter, introduced by meter's API, `fromBlock` and `toBlock` will be ignored if `Range Object` is valid:
         - `unit`  _Type_ `string` `block`(block number) or `time`(timestamp)
         - `from` - `number`
-        - `to` - `number` 
+        - `to` - `number`
     - `order` _Type_ `string` Order option, `DESC` or `ASC`, `ASC` by default
 
 **Returns** `Promise` resolving to `Array` of Log Objects:
@@ -473,7 +484,7 @@ web3Instance.eth.getPastLogs(options).then(result => {
   },{...}]
 ```
 
-### Subscribe to specific events
+# Subscribe to specific events
 ```js
 web3.eth.subscribe(type [, options] [, callback])
 ```
@@ -497,13 +508,13 @@ The `web3Instance.eth.subscribe` function lets you subscribe to specific events 
 web3Instance.eth.subscribe('logs', {} ,function(){ ... });
 ```
 
-### Reset subscriptions
+# Reset subscriptions
 ```js
 web3.eth.clearSubscriptions()
 ```
 Resets subscriptions.
 
-**Example** 
+**Example**
 ```js
 web3Instance.eth.subscribe('logs', {} ,function(){ ... })
 
@@ -512,7 +523,7 @@ web3Instance.eth.subscribe('logs', {} ,function(){ ... })
 web3Instance.eth.clearSubscriptions()
 ```
 
-### Subscribe to new block headers
+# Subscribe to new block headers
 ```js
 web3.eth.subscribe('newBlockHeaders')
 ```
@@ -578,7 +589,7 @@ subscription.unsubscribe(function(error, success){
 })
 
 >
-{ 
+{
   number: 4579,
   id: "0x000011e3a0c28cf93a531c92afc55b7f7dd8a44f055e9bef83acbacd26e1beb2",
   size: 238,
@@ -593,11 +604,11 @@ subscription.unsubscribe(function(error, success){
   receiptsRoot: "0x45b0cfc220ceec5b7c1c62c4d4193d38e4eba48e8815729ce75f9c0ab0e4c1c0",
   signer: "0x7567d83b7b8d80addcb281a71d54fc7b3364ffed",
   transactions: [],
-  removed: false 
+  removed: false
 }
 ```
 
-### Subscribe to incoming transfers 
+# Subscribe to incoming transfers
 ```js
 web3.eth.subscribe('transfers')
 ```
@@ -611,7 +622,7 @@ Subscribes to incoming wei transfers. This can be used to watch an address's wei
 `TransferFilterOption Object`:
 
 - _optional_ `pos` _Type_ `string` A saved block ID for resuming the subscription, best block ID is assumed if omitted.
-- _optional_ `txOrigin` - `string` Signer address of tx 
+- _optional_ `txOrigin` - `string` Signer address of tx
 - _optional_ `sender` - `string` Wei sender address
 - _optional_ `recipient` - `string` Wei recipient address
 
@@ -670,23 +681,23 @@ subscription.unsubscribe(function(error, success){
 })
 
 >
-{ 
+{
     sender: "0x7567d83b7b8d80addcb281a71d54fc7b3364ffed",
     recipient: "0xd3ae78222beadb038203be21ed5ce7c9b1bff602",
     amount: "0x64",
     meta:
-    { 
+    {
         blockID: "0x000014c682b47a840c3defd340513768de25f0e232613cf06ad4437548008c66",
         blockNumber: 5318,
         blockTimestamp: 1536895430,
         txID: "0x3fef2cdeb70ee2412b4059317794557f182764af098461f1badadd827f25dd5a",
-        txOrigin: "0x7567d83b7b8d80addcb281a71d54fc7b3364ffed" 
+        txOrigin: "0x7567d83b7b8d80addcb281a71d54fc7b3364ffed"
     },
-    removed: false 
+    removed: false
 }
 ```
 
-### Subscribe to logs
+# Subscribe to logs
 ```js
 web3.eth.subscribe('logs')
 ```
@@ -762,7 +773,7 @@ subscription.unsubscribe(function(error, success){
 })
 
 >
-{ 
+{
     address: "0x0000000000000000000000000000456e65726779",
     topics:
     [   "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
@@ -775,17 +786,17 @@ subscription.unsubscribe(function(error, success){
         blockTimestamp: 1536906231,
         txID: "0xaa669ab466f6e62740d87ecbdd517adae34339352e0d368a49bd45fefa881aa1",
         txOrigin: "0x7567d83b7b8d80addcb281a71d54fc7b3364ffed" },
-    removed: false 
+    removed: false
 }
 ```
 
-### web3 Contract instance
+# web3 Contract instance
 
 The `web3Instance.eth.Contract` object makes it easy to interact with smart contracts on the blockchain. When you create a new contract object you give it the json interface of the respective smart contract and web3 will auto convert all calls into low level ABI calls over RESTful HTTP API for you.
 
 This allows you to interact with smart contracts as if they were JavaScript objects.
 
-#### New contract
+## New contract
 
 Creates a new contract instance with all its methods and events defined in its [json interface](https://web3js.readthedocs.io/en/1.0/glossary.html#glossary-json-interface) object.
 
@@ -818,7 +829,7 @@ const contractInstance = new web3Instance.eth.Contract(jsonInterface[, address][
 
 ```
 
-#### Clone contract
+## Clone contract
 
 Clones the current contract instance.
 
@@ -839,9 +850,9 @@ console.log(contract2.options.address === contractInstance.options.address)
 > false
 ```
 
-#### Deploy contract
+## Deploy contract
 
-Call of this function will create a `Transaction Object` for deploying the contract to the blockchain. 
+Call of this function will create a `Transaction Object` for deploying the contract to the blockchain.
 
 **Parameters**
 - `options` _Type_ `Object` The options used for deployment
@@ -882,7 +893,7 @@ contractInstance.deploy({
 }) // .send .call .encodeABI .estimateGas
 ```
 
-#### Contract methods
+## Contract methods
 
 Creates a `Transaction Object` for that method, which then can execute [call](#call), [send](#send), [estimateGas](#estimategas), [encodeABI](#encodeabi).
 
@@ -912,7 +923,7 @@ This allows calling functions with same name but different parameters from the J
 
 For details to the methods see the documentation below.
 
-##### Call
+### Call
 **Parameters**
 
 - `callObject` _Type_ `Object` `Transaction Object`:
@@ -926,7 +937,7 @@ For details to the methods see the documentation below.
 
     _Type_ `number` Block number
     _Type_ `string` Block hash
-    - `0`: The genesis block 
+    - `0`: The genesis block
     - `"earliest"`: The genesis block
     - `"latest"`:The latest block
 
@@ -938,7 +949,7 @@ Call the “constant” method and execute its smart contract method in the VM w
 contractInstance.methods.myMethod([param1[, param2[, ...]]]).call(callObject[, blockNumberOrHash])
 ```
 
-##### Send
+### Send
 
 !>Send needs an account, please read [Send Transaction](#send-transaction-1) part first!
 
@@ -950,7 +961,7 @@ Send a transaction to the smart contract and execute its method. Note this can a
     - `from`  _Type_ `string | number` Either The address of transaction sender"s account or the address/index of a local wallet in `web3Instance.eth.accounts.wallet `.
     - _optional_ `value` _Type_ `number | string | BN | BigNumber`:  The value, with an unit of *wei*, transferred through the transaction. Specifically, it plays the role of endowment when the transaction is contract-creation type.
     - _optional_ `gas` _Type_ `number` The maximum amount of gas that can be used by the transaction (unused gas is going to be refunded right after the transaction execution).
-    - _optional_ `nonce`  _Type_ `number` A random 64-bit scalar value that is different from ethereum"s nonce which is a transaction count. 
+    - _optional_ `nonce`  _Type_ `number` A random 64-bit scalar value that is different from ethereum"s nonce which is a transaction count.
     - _optional_ `chainTag`  _Type_ `number` **The last byte** of the genesis block ID representing the identity of a chain.
     - _optional_ `blockRef` _Type_ `string`, by default, the first 8 bytes of **best block** ID). The BlockRef (an eight-byte array) includes two parts: the first four bytes contains the block height (number) and the rest four bytes is part of the referred block’s ID. If the referred block is future block, blockNumber - "00000000" should be added.
     - _optional_ `expiration` _Type_ `number`, Default 0, Suggested 720) number of  blocks that can be used to specify when the transaction expires. Specifically, expiration-blockRef defines the height of the latest block that the transaction can be packed into.
@@ -969,7 +980,7 @@ Send a transaction to the smart contract and execute its method. Note this can a
 contractInstance.methods.myMethod([param1[, param2[, ...]]]).send(transactionObject[, blockNumberOrHash])
 ```
 
-##### EstimateGas
+### EstimateGas
 **Parameters**
 - `callObject` _Type_ `Transaction` `Object`: same as [Call](#call)
 
@@ -980,7 +991,7 @@ Estimate the gas a method execution will take when executed in the VM. The estim
 contractInstance.methods.myMethod([param1[, param2[, ...]]]).estimateGas(callObject)
 ```
 
-##### EncodeABI
+### EncodeABI
 
 Encodes the ABI for this method. This can be send using a transaction, call the method or passing into another smart contracts method as argument
 
@@ -997,9 +1008,9 @@ console.log(data)
 > "0xa9059cbb000000000000000000000000e59d475abe695c7f67a8a2321f33a856b0b4c71d0000000000000000000000000000000000000000000000000000000000000064"
 ```
 
-#### Contract events
+## Contract events
 
-##### once
+### once
 ```js
 contractInstance.once(event[, options], callback)
 ```
@@ -1029,7 +1040,7 @@ contractInstance.once('Transfer', {
     }
 })
 
-> { 
+> {
     address: '0x0000000000000000000000000000456e65726779',
     meta:
     {   blockID: '0x0000000bb5ece55e16c426157c2bd14e49f5de58b1d56b11db4beec9578715c8',
@@ -1049,12 +1060,12 @@ contractInstance.once('Transfer', {
         topics:
           [   '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
               '0x0000000000000000000000007567d83b7b8d80addcb281a71d54fc7b3364ffed',
-              '0x000000000000000000000000d3ae78222beadb038203be21ed5ce7c9b1bff602' ] 
-    } 
+              '0x000000000000000000000000d3ae78222beadb038203be21ed5ce7c9b1bff602' ]
+    }
 }
 ```
 
-##### myEvent
+### myEvent
 ```js
 contractInstance.events.myEvent( [options][, callback])
 ```
@@ -1085,7 +1096,7 @@ contractInstance.events.myEvent({
     }
 })
 
-> { 
+> {
     address: '0x0000000000000000000000000000456e65726779',
     meta:
     {   blockID: '0x0000000bb5ece55e16c426157c2bd14e49f5de58b1d56b11db4beec9578715c8',
@@ -1105,16 +1116,16 @@ contractInstance.events.myEvent({
         topics:
           [   '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
               '0x0000000000000000000000007567d83b7b8d80addcb281a71d54fc7b3364ffed',
-              '0x000000000000000000000000d3ae78222beadb038203be21ed5ce7c9b1bff602' ] 
-    } 
+              '0x000000000000000000000000d3ae78222beadb038203be21ed5ce7c9b1bff602' ]
+    }
 }
 ```
 
-##### allEvents
+### allEvents
 
 Same as [myEvent](#myevent) but receives all events from this smart contract. Optionally the filter property can filter those events.
 
-##### GetPastEvents
+### GetPastEvents
 ```js
 contractInstance.getPastEvents(event[, options])
 ```
@@ -1128,7 +1139,7 @@ Gets past events for this contract
     - `toBlock` _Type_ `number | string` The number of the latest block .If not set "latest" will be set by default.
     - `topics` _Type_ `Array` This allows manually setting the topics for the event filter. If given the filter property and event signature, (topic[0]) will not be set automatically
     - `options` _Type_ `Option Object` Result pagination option, introduced by meter's API:
-        - `offset` _Type_ `number` Start cursor in result 
+        - `offset` _Type_ `number` Start cursor in result
         - `limit` _Type_ `number` Constrain the number of result returned
     - `range` _Type_ `Range Object` Range options for filter, introduced by meter's API, `fromBlock` and `toBlock` will be ignored if `Range Object` is valid
         - `unit` _Type_ `string`, `block`(block number) or `time`(timestamp)
@@ -1184,7 +1195,7 @@ contractInstance.getPastEvents(event[, options]).then(logs =>{
      topics:
       [ '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
         '0x000000000000000000000000e59d475abe695c7f67a8a2321f33a856b0b4c71d',
-        '0x0000000000000000000000007567d83b7b8d80addcb281a71d54fc7b3364ffed' ] 
-    } 
+        '0x0000000000000000000000007567d83b7b8d80addcb281a71d54fc7b3364ffed' ]
+    }
   },{...}]
 ```
