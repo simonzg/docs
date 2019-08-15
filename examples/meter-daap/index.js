@@ -56,7 +56,7 @@ function send_MTR(fromAddress,toAddress){
       from: fromAddress,
       to: toAddress,
       value: '1000000000000000000',
-      data: '00'
+      data: '0000000000'
     }
   ).then(
     receipt => {}
@@ -83,7 +83,7 @@ function send_MTRG(fromAddress,toAddress){
       from: fromAddress,
       to: toAddress,
       value: '1000000000000000000',
-      data: '01'
+      data: '0000000001'
     }
   ).then(
     receipt => {}
