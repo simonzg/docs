@@ -80,7 +80,7 @@ $ npm init
 
 ### Step 5: Create a `docker-compose.yml` file.
 
-A copy of this file can be found here: [examples/includes/meter-dapp/docker-compose.yml](examples/includes/meter-dapp/docker-compose.yml)
+A copy of this file can be found here: [docker-compose.yml](https://github.com/meter-io-docs/meter-io-docs.github.io/blob/master/examples/includes/meter-dapp/docker-compose.yml)
 
 
 
@@ -187,9 +187,9 @@ If the code above runs without any errors the connection was successful.
 
 Next, follow each step to add function and other code snippets `index.js`. The full file project files can also be found here:
 
-* [examples/includes/meter-daap/index.js](examples/includes/meter-daap/meter-daap/index.js)
-* [examples/includes/meter-daap/sample_token.sol](examples/includes/meter-daap/sample_token.sol)
-* [examples/includes/meter-daap/docker-compose.yml](examples/includes/meter-daap/docker-compose.yml)
+* [index.js](https://github.com/meter-io-docs/meter-io-docs.github.io/blob/master/examples/includes/meter-dapp/index.js)
+* [sample_token.sol](https://github.com/meter-io-docs/meter-io-docs.github.io/blob/master/examples/includes/meter-dapp/sample_token.sol)
+* [docker-compose.yml](https://github.com/meter-io-docs/meter-io-docs.github.io/blob/master/examples/includes/meter-dapp/docker-compose.yml)
 
 ### Step 1:" Create two accounts, one for Alice and one for Bob.
 
@@ -342,7 +342,7 @@ The following modifications to the example demonstrate the use of a sample smart
 
 ### Step 1: Load the sample smart contract.
 
-The file can be found here: [examples/meter-dapp/sample_token.sol](examples/includes/meter-dapp/sample_token.sol)
+The file can be found here: [sample_token.sol](https://github.com/meter-io-docs/meter-io-docs.github.io/blob/master/examples/includes/meter-dapp/sample_token.sol)
 
 ```js
 function loadContract(file){
