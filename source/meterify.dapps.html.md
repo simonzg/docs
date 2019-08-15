@@ -80,7 +80,7 @@ $ npm init
 
 ### Step 5: Create a `docker-compose.yml` file.
 
-A copy of this file can be found here: [examples/includes/docker-compose.yml](examples/includes/docker-compose.yml)
+A copy of this file can be found here: [examples/meter-daap/includes/docker-compose.yml](examples/meter-daap/includes/docker-compose.yml)
 
 ```
 version: '3.5'
@@ -183,15 +183,11 @@ If the code above runs without any errors the connection was successful.
 
 ## Create the Application Functions
 
-<!--For the example please refer to this asciinema:
-
-![](./_media/meterify.svg "web3 meterify example") -->
-
 Next, follow each step to add function and other code snippets `index.js`. The full file project files can also be found here:
 
-* [examples/meter-dapp/index.js](https://github.com/xiaohanzhu/docs/blob/master/examples/meter-daap/index.js)
-* [examples/meter-dapp/sample_token.sol](https://github.com/xiaohanzhu/docs/blob/master/examples/meter-daap/sample_token.sol)
-* [examples/includes/docker-compose.yml](examples/includes/docker-compose.yml)
+* [examples/meter-daap/includes/index.js](examples/meter-daap/includes/meter-daap/index.js)
+* [examples/meter-daap/includes/sample_token.sol](examples/meter-daap/includes/sample_token.sol)
+* [examples/meter-daap/includes/docker-compose.yml](examples/meter-daap/includes/docker-compose.yml)
 
 ### Step 1:" Create two accounts, one for Alice and one for Bob.
 
