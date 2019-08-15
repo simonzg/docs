@@ -80,7 +80,9 @@ $ npm init
 
 ### Step 5: Create a `docker-compose.yml` file.
 
-A copy of this file can be found here: [examples/includes/meter-daap/docker-compose.yml](examples/includes/meter-daap/docker-compose.yml)
+A copy of this file can be found here: [examples/includes/meter-dapp/docker-compose.yml](examples/includes/meter-dapp/docker-compose.yml)
+
+
 
 ```
 version: '3.5'
