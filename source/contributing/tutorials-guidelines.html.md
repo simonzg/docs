@@ -34,9 +34,9 @@ Writing attention grabbing tutorials that provide a solution to a clearly identi
 
 This guide is provided to ensure writers are equipped to create clear and interesting Meter specific tutorials, for both [development](../meterify.dapps.html) and [non-development](../mining.html) purposes. It will outline some important features of tutorials, and include best practices, but is a work in progress. There is a lot that goes into tutorial writing, and as this guide further develops will become a more robust tutorial in itself.
 
-[Audience](#audience)
-[Structure](#structure)
-[Use of Examples](#use-of-examples)
+* [Audience](#audience)
+* [Structure](#structure)
+* [Use of Examples](#use-of-examples)
 
 <a name="audience">
 
