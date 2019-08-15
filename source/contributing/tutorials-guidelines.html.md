@@ -32,7 +32,7 @@ The value of tutorials as an instructional tool cannot be underestimated. Tutori
 
 Writing attention grabbing tutorials that provide a solution to a clearly identified problem or challenge is important for the Meter technical documentation. The objective is to explain how to accomplish a set of tasks that work towards developing the solution, and also why each step or instruction is important. Explanations should be brief, informative, and focused on the main topic.
 
-This guide is provided to ensure writers are equipped to create clear and interesting Meter specific tutorials, for both [development](../meterify.daaps.html) and [non-development](../mining.html) purposes. It will outline some important features of tutorials, and include best practices, but is a work in progress. There is a lot that goes into tutorial writing, and as this guide further develops will become a more robust tutorial in itself.
+This guide is provided to ensure writers are equipped to create clear and interesting Meter specific tutorials, for both [development](../meterify.dapps.html) and [non-development](../mining.html) purposes. It will outline some important features of tutorials, and include best practices, but is a work in progress. There is a lot that goes into tutorial writing, and as this guide further develops will become a more robust tutorial in itself.
 
 [Audience](#audience)
 [Structure](#structure)
