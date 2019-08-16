@@ -14,16 +14,16 @@ toc_footers:
 - <a href='./meterify.html'>meterify</a>
 - <a href='./meterify.module.options.html'>meterify.module.options</a>
 - <a href='./meterify.eth.html'>meterify.eth</a>
-- <a href='./meterify.eth.subscribe.html'>meterify.eth.subscribe</a>
 - <a href='./meterify.eth.Contract.html'>meterify.eth.Contract</a>
+- <a href='./meterify.eth.accounts.html'>meterify.eth.accounts</a>
+- <a href='./meterify.utils.html'>meterify.utils</a>
+- <!--<a href='./meterify.eth.subscribe.html'>meterify.eth.subscribe</a>
 - <a href='./meterify.eth.Iban.html'>meterify.eth.Iban</a>
 - <a href='./meterify.eth.personal.html'>meterify.eth.personal</a>
-- <a href='./meterify.eth.accounts.html'>meterify.eth.accounts</a>
 - <a href='./meterify.eth.ens.html'>meterify.eth.ens</a>
 - <a href='./meterify.eth.abi.html'>meterify.eth.abi</a>
 - <a href='./meterify.eth.net.html'>meterify.eth.net</a>
-- <a href='./meterify.shh.html'>meterify.shh</a>
-- <a href='./meterify.utils.html'>meterify.utils</a>
+- <a href='./meterify.shh.html'>meterify.shh</a>-->
 - <hr>  
 - <a href='https://www.meter.io/claim-your-meter/'>Request Test Tokens</a>
 - <a href='https://www.meter.io'>Meter.io</a>
@@ -67,27 +67,27 @@ If you want to circumvent the checksum check you can make an address all lower- 
     > ["0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe" ,"0x85F43D8a49eeB85d32Cf465507DD71d507100C1d"]
 ```
 
-## subscribe
+<!--## subscribe
 
-For `meterify.eth.subscribe` see the [`subscribe`](meterify.eth.subscribe.html) reference documentation.
+For `meterify.eth.subscribe` see the [`subscribe`](meterify.eth.subscribe.html) reference documentation.-->
 
 ## Contract
 
 For `meterify.eth.Contract` see the [`Contract`](meterify.eth.Contract.html) reference documentation.
 
-## Iban
+<!--## Iban
 
-For `meterify.eth.Iban` see the [`Iban`](meterify.eth.Iban.html) reference documentation.
+For `meterify.eth.Iban` see the [`Iban`](meterify.eth.Iban.html) reference documentation.-->
 
-## personal
+<!--## personal
 
-For `meterify.eth.personal` see the [`personal`](meterify.eth.personal.html) reference documentation.
+For `meterify.eth.personal` see the [`personal`](meterify.eth.personal.html) reference documentation.-->
 
 ## accounts
 
 For `meterify.eth.accounts` see the [`accounts`](meterify.eth.accounts.html) reference documentation.
 
-## ens
+<!--## ens
 
 For `meterify.eth.ens` see the [`ens`](meterify.eth.ens.html) reference documentation.
 
@@ -97,7 +97,7 @@ For `meterify.eth.abi` see the [`abi`](meterify.eth.abi.html) reference document
 
 ## net
 
-For `meterify.eth.net` see the [`net`](meterify.eth.net.html) reference documentation.
+For `meterify.eth.net` see the [`net`](meterify.eth.net.html) reference documentation.-->
 
 ## options
 

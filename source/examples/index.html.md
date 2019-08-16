@@ -7,12 +7,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
 toc_footers:
 - <a href='./index.html'>Meter Documentation</a>
 - <hr>
-- Examples
-- <a href='./index.html'>Examples Home</a>
-- <a href='./includes/create-account'>Create an Account</a>
-- <a href='./includes/send-transaction'>Send a Transaction</a>
-- <a href='./includes/deploy-contract'>Deploy a Contract</a>
-- <a href='./includes/call-contract'>Call a Contract</a>
+- <a href='./index.html'>Examples</a>
 - <hr>
 - <a href='../meterify.html'>API Documentation</a>
 - <a href='../meterify.dapps.html'>DApp Tutorial</a>

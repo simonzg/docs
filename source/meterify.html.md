@@ -14,16 +14,16 @@ toc_footers:
 - <a href='./meterify.html'>meterify</a>
 - <a href='./meterify.module.options.html'>meterify.module.options</a>
 - <a href='./meterify.eth.html'>meterify.eth</a>
-- <a href='./meterify.eth.subscribe.html'>meterify.eth.subscribe</a>
 - <a href='./meterify.eth.Contract.html'>meterify.eth.Contract</a>
+- <a href='./meterify.eth.accounts.html'>meterify.eth.accounts</a>
+- <a href='./meterify.utils.html'>meterify.utils</a>
+- <!--<a href='./meterify.eth.subscribe.html'>meterify.eth.subscribe</a>
 - <a href='./meterify.eth.Iban.html'>meterify.eth.Iban</a>
 - <a href='./meterify.eth.personal.html'>meterify.eth.personal</a>
-- <a href='./meterify.eth.accounts.html'>meterify.eth.accounts</a>
 - <a href='./meterify.eth.ens.html'>meterify.eth.ens</a>
 - <a href='./meterify.eth.abi.html'>meterify.eth.abi</a>
 - <a href='./meterify.eth.net.html'>meterify.eth.net</a>
-- <a href='./meterify.shh.html'>meterify.shh</a>
-- <a href='./meterify.utils.html'>meterify.utils</a>
+- <a href='./meterify.shh.html'>meterify.shh</a>-->
 - <hr>  
 - <a href='https://www.meter.io/claim-your-meter/'>Request Test Tokens</a>
 - <a href='https://www.meter.io'>Meter.io</a>
@@ -118,41 +118,41 @@ The RESTful API of Meter differs from Ethereum's JSON-RPC, and there are some me
 
 _Supported Web3 Methods_
 
-web3 instance
-├── eth
-│   ├── getBlockNumber
-│   ├── getBalance
-│   ├── getStorageAt
-│   ├── getCode
-│   ├── getBlock
-│   ├── getTransaction
-│   ├── getTransactionReceipt
-│   ├── sendTransaction
-│   ├── sendSignedTransaction
-│   ├── call
-│   ├── estimateGas
-│   ├── getPastLogs
-│   ├── subscribe
-│   ├── clearSubscriptions
-│   ├── getEnergy
-│   ├── getChainTag
-│   ├── getBlockRef
-│   ├── accounts
-│   └── Contract
-│       ├── Constructor(new Contract())
-│       ├── clone
-│       ├── deploy
-│       ├── methods
-│       ├── methods.myMethod.call
-│       ├── methods.myMethod.send
-│       ├── methods.myMethod.estimateGas
-│       ├── methods.myMethod.encodeABI
-│       ├── events
-│       ├── once
-│       ├── events.myEvent
-│       ├── events.allEvents
-│       └── getPastEvents
-└── utils
+web3 instance<br/>
+├── eth<br/>
+│   ├── getBlockNumber<br/>
+│   ├── getBalance<br/>
+│   ├── getStorageAt<br/>
+│   ├── getCode<br/>
+│   ├── getBlock<br/>
+│   ├── getTransaction<br/>
+│   ├── getTransactionReceipt<br/>
+│   ├── sendTransaction<br/>
+│   ├── sendSignedTransaction<br/>
+│   ├── call<br/>
+│   ├── estimateGas<br/>
+│   ├── getPastLogs<br/>
+│   ├── subscribe<br/>
+│   ├── clearSubscriptions<br/>
+│   ├── getEnergy<br/>
+│   ├── getChainTag<br/>
+│   ├── getBlockRef<br/>
+│   ├── accounts<br/>
+│   └── Contract<br/>
+│       ├── Constructor(new Contract())<br/>
+│       ├── clone<br/>
+│       ├── deploy<br/>
+│       ├── methods<br/>
+│       ├── methods.myMethod.call<br/>
+│       ├── methods.myMethod.send<br/>
+│       ├── methods.myMethod.estimateGas<br/>
+│       ├── methods.myMethod.encodeABI<br/>
+│       ├── events<br/>
+│       ├── once<br/>
+│       ├── events.myEvent<br/>
+│       ├── events.allEvents<br/>
+│       └── getPastEvents<br/>
+└── utils<br/>
 
 # MODULES
 
@@ -160,9 +160,9 @@ web3 instance
 
 For `meterify.eth` see the [`eth`](meterify.eth.html) reference documentation.
 
-## shh
+<!--## shh
 
-For `meterify.shh` see the [`shh`](meterify.shh.html) reference documentation.
+For `meterify.shh` see the [`shh`](meterify.shh.html) reference documentation.-->
 
 ## utils
 

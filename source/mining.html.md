@@ -155,7 +155,7 @@ Inside the `coins` directory, ensure that a json file exists for Meter coin, and
 }
 ```
 
-For additional documentation on how to configure coins and their different algorithms see [these instructions](github.com/meterio/meter-stratum-pool#module-usage).
+For additional documentation on how to configure coins and their different algorithms see [these instructions](https://github.com/meterio/meter-stratum-pool/blob/master/README.md#module-usage).
 
 ### Pool Configuration
 
@@ -175,7 +175,7 @@ In the following example, the pool owner's Meter address is `0a05c2d862ca0510106
 ```
 There are many other fields in `meter.json`.  We could ignore them for now as  only limited functions was ported in the current Nomp implementation for Meter.
 
-For more information on these configuration options see the [pool module documentation](https://github.com/meterio/meter-stratum-pool#module-usage).
+For more information on these configuration options see the [pool module documentation](https://github.com/meterio/meter-stratum-pool/blob/master/README.md#module-usage).
 
 ### Start the Portal
 

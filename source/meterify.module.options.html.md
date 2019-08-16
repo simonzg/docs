@@ -11,16 +11,16 @@ toc_footers:
 - <a href='./meterify.html'>meterify</a>
 - <a href='./meterify.module.options.html'>meterify.module.options</a>
 - <a href='./meterify.eth.html'>meterify.eth</a>
-- <a href='./meterify.eth.subscribe.html'>meterify.eth.subscribe</a>
 - <a href='./meterify.eth.Contract.html'>meterify.eth.Contract</a>
+- <a href='./meterify.eth.accounts.html'>meterify.eth.accounts</a>
+- <a href='./meterify.utils.html'>meterify.utils</a>
+- <!--<a href='./meterify.eth.subscribe.html'>meterify.eth.subscribe</a>
 - <a href='./meterify.eth.Iban.html'>meterify.eth.Iban</a>
 - <a href='./meterify.eth.personal.html'>meterify.eth.personal</a>
-- <a href='./meterify.eth.accounts.html'>meterify.eth.accounts</a>
 - <a href='./meterify.eth.ens.html'>meterify.eth.ens</a>
 - <a href='./meterify.eth.abi.html'>meterify.eth.abi</a>
 - <a href='./meterify.eth.net.html'>meterify.eth.net</a>
-- <a href='./meterify.shh.html'>meterify.shh</a>
-- <a href='./meterify.utils.html'>meterify.utils</a>
+- <a href='./meterify.shh.html'>meterify.shh</a>-->
 - <hr>
 - <a href='./meterify.dapps.html'>DApp Tutorial</a>
 - <a href='./examples/index.html'>Examples</a>
