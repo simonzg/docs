@@ -56,4 +56,5 @@ set :port, 4567
 
 helpers do
   require './lib/toc_data.rb'
+  #exec("node_modules/broken-link-checker/bin/blc","-r","http://localhost:4567")
 end
