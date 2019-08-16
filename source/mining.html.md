@@ -113,10 +113,11 @@ The following are the minimal version requirements for Node.js and Redis. If old
 * [Redis](http://redis.io/) v2.6+ ([follow these instructions](http://redis.io/topics/quickstart))
 
 In Ubuntu, you could use the following command to install nodejs and Redis:
+
 ```bash
-sudo apt install npm
-sudo apt install nodejs
-sudo apt install redis
+$ sudo apt install npm
+$ sudo apt install nodejs
+$ sudo apt install redis
 ```
 
 
