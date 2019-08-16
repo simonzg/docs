@@ -1,7 +1,6 @@
 ---
 title: Meter Documentation
 
-
 toc_footers:
 - <a href='./index.html'>Documentation Home</a>
 - <a href='./meterify.html'>API Documentation</a>
