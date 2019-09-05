@@ -60,9 +60,7 @@ Note: This package got NOT audited until now. Take precautions to clear memory p
     meterify.eth.accounts.create([entropy]);
 ```
 
-Generates an account object with private key and public key. <!--It is different from
-[`meterify.eth.personal.newAccount()`](meterify.eth.personal.html#personal-newaccount) which creates an account
-over the network on the node via an RPC call.-->
+Generates an account object with private key and public key. 
 
 > Examples
 
