@@ -17,6 +17,7 @@ toc_footers:
 - <a href='./meterify.eth.Contract.html'>meterify.eth.Contract</a>
 - <a href='./meterify.eth.accounts.html'>meterify.eth.accounts</a>
 - <a href='./meterify.utils.html'>meterify.utils</a>
+- <a href='./callbacks-promises-events.html'>Callbacks Promises Events</a>
 - <!--<a href='./meterify.eth.subscribe.html'>meterify.eth.subscribe</a>
 - <a href='./meterify.eth.Iban.html'>meterify.eth.Iban</a>
 - <a href='./meterify.eth.personal.html'>meterify.eth.personal</a>
@@ -242,9 +243,9 @@ Returns
 
 Type | Description
 ------- | -----------
-`Promise<string>` | Number string of the current gas price in :ref:`wei <what-is-wei>`.
+`Promise<string>` | Number string of the current gas price in `wei `.
 
-See the :ref:`A note on dealing with big numbers in JavaScript <utils-bn>`.
+See the [A note on dealing with big numbers in JavaScript](meterify.utils.html#utils-bn).
 
 Example
 
@@ -261,7 +262,7 @@ Example
 
 Will return a list of the unlocked accounts in the Web3 wallet or it will return the accounts from the currently connected node.
 
-This means you can add accounts with :ref:`meterify.eth.accounts.create() <accounts-create>` and you will get them returned here.
+This means you can add accounts with [`meterify.eth.accounts.create()`](meterify.eth.accounts.html#accounts-create) and you will get them returned here.
 
 Returns
 
@@ -308,16 +309,16 @@ Get the Meter MTRG balance of an address at a given block.
 Property | Type | Description
 --------- | ------- | -----------
 address | `String` | The address to get the balance of.
-defaultBlock | `Number` or `String` | (optional) If you pass this parameter it will not use the default block set with :ref:`meterify.eth.defaultBlock <eth-defaultblock>`.
+defaultBlock | `Number` or `String` | (optional) If you pass this parameter it will not use the default block set with [`meterify.eth.defaultBlock`](#eth-defaultblock).
 callback | `Function` | (optional) Optional callback, returns an error object as first parameter and the result as second.
 
 Returns
 
 Type | Description
 ------- | -----------
-`Promise<string>` | The current Meter balance for the given address in :ref:`wei <what-is-wei>`.
+`Promise<string>` | The current Meter balance for the given address in `wei`.
 
-See the :ref:`A note on dealing with big numbers in JavaScript <big-numbers-in-javascript>`.
+See the [`A note on dealing with big numbers in JavaScript'](meterify.utils.html#utils-bn).
 
 Example
 
@@ -337,7 +338,7 @@ Get the Meter MTR (energy) balance of an address at a given block.
 Property | Type | Description
 --------- | ------- | -----------
 address | `String` | The address to get the balance of.
-defaultBlock | `Number` or `String` | (optional) If you pass this parameter it will not use the default block set with :ref:`meterify.eth.defaultBlock <eth-defaultblock>`.
+defaultBlock | `Number` or `String` | (optional) If you pass this parameter it will not use the default block set with [`meterify.eth.defaultBlock`](#eth-defaultblock).
 callback | `Function` | (optional) Optional callback, returns an error object as first parameter and the result as second.
 
 Returns
@@ -346,7 +347,7 @@ Type | Description
 ------- | -----------
 `Promise<string>` | The current Meter MTR balance for the given address in `wei <what-is-wei>`.
 
-See the :ref:`A note on dealing with big numbers in JavaScript <big-numbers-in-javascript>`.
+See the [A note on dealing with big numbers in JavaScript](meterify.utils.html#utils-bn).
 
 Example
 
@@ -369,7 +370,7 @@ Property | Type | Description
 --------- | ------- | -----------
 address | `String` | The address to get the storage from.
 position | `Number` | The index position of the storage.
-defaultBlock | `Number` or `String` | (optional) If you pass this parameter it will not use the default block set with :ref:`meterify.eth.defaultBlock <eth-defaultblock>`.
+defaultBlock | `Number` or `String` | (optional) If you pass this parameter it will not use the default block set with [`meterify.eth.defaultBlock`](#eth-defaultblock).
 callback | `Function` | (optional) Optional callback, returns an error object as first parameter and the result as second.
 
 Returns
@@ -398,7 +399,7 @@ Parameters
 Property | Type | Description
 --------- | ------- | -----------
 address | `String` | The address to get the code from.
-defaultBlock | `Number` or `String` | (optional) If you pass this parameter it will not use the default block set with :ref:`meterify.eth.defaultBlock <eth-defaultblock>`.
+defaultBlock | `Number` or `String` | (optional) If you pass this parameter it will not use the default block set with [`meterify.eth.defaultBlock`](#eth-defaultblock).
 callback | `Function` | (optional) Optional callback, returns an error object as first parameter and the result as second.
 
 Returns
@@ -426,7 +427,7 @@ Parameters
 
 Property | Type | Description
 --------- | ------- | -----------
-blockHashOrBlockNumber | `String` or `Number` | The block number or block hash. Or the string `"genesis"`, `"latest"` or `"pending"` as in the :ref:`default block parameter <eth-defaultblock>`.
+blockHashOrBlockNumber | `String` or `Number` | The block number or block hash. Or the string `"genesis"`, `"latest"` or `"pending"` as in the [`default block parameter`] (#eth-defaultblock).
 returnTransactionObjects | `Boolean` | (optional, default `false`) If `true`, the returned block will contain all transactions as objects, if `false` it will only contains the transaction hashes.
 callback | `Function` | (optional) Optional callback, returns an error object as first parameter and the result as second.
 
@@ -501,7 +502,7 @@ Parameters
 
 Property | Type | Description
 --------- | ------- | -----------
-blockHashOrBlockNumber | `String` or `Number` | The block number or hash. Or the string `"genesis"`, `"latest"` or `"pending"` as in the :ref:`default block parameter <eth-defaultblock>`.
+blockHashOrBlockNumber | `String` or `Number` | The block number or hash. Or the string `"genesis"`, `"latest"` or `"pending"` as in the [`default block parameter`] (#eth-defaultblock).
 callback | `Function` | (optional) Optional callback, returns an error object as first parameter and the result as second.
 
 Returns
@@ -529,7 +530,7 @@ Parameters
 
 Property | Type | Description
 --------- | ------- | -----------
-blockHashOrBlockNumber | `String` or `Number` | The block number or hash. Or the string `"genesis"`, `"latest"` or `"pending"` as in the :ref:`default block parameter <eth-defaultblock>`.
+blockHashOrBlockNumber | `String` or `Number` | The block number or hash. Or the string `"genesis"`, `"latest"` or `"pending"` as in the [`default block parameter`] (#eth-defaultblock).
 uncleIndex | `Number` | The index position of the uncle.
 callback | `Function` | (optional) Optional callback, returns an error object as first parameter and the result as second.
 
@@ -537,7 +538,7 @@ Returns
 
 Type | Description
 ------- | -----------
-`Promise<object>` | The returned uncle. For a return value see :ref:`meterify.eth.getBlock() <eth-getblock>`.
+`Promise<object>` | The returned uncle. For a return value see [`meterify.eth.getBlock()`] (#eth-getblock).
 
 Note: An uncle doesn't contain individual transactions.
 
@@ -581,8 +582,8 @@ Property | Type | Description
 `transactionIndex` | `Number` | Integer of the transactions index position in the block. `null` when its pending.
 `from` | `String` | Address of the sender.
 `to` | `String` | Address of the receiver. `null` when its a contract creation transaction.
-`value` | `String` | Value transferred in :ref:`wei <what-is-wei>`.
-`gasPrice` | `String` | The wei per unit of gas provided by the sender in :ref:`wei <what-is-wei>`.
+`value` | `String` | Value transferred in `wei`.
+`gasPrice` | `String` | The wei per unit of gas provided by the sender in `wei`.
 `gas` | `Number` | Gas provided by the sender.
 `input` | `String` | The data sent along with the transaction.
 
@@ -636,8 +637,8 @@ Property | Type | Description
 `transactionIndex` | `Number` | Integer of the transactions index position in the block. `null` when its pending.
 `from` | `String` | Address of the sender.
 `to` | `String` | Address of the receiver. `null` when its a contract creation transaction.
-`value` | `String` | Value transferred in :ref:`wei <what-is-wei>`.
-`gasPrice` | `String` | The wei per unit of gas provided by the sender in :ref:`wei <what-is-wei>`.
+`value` | `String` | Value transferred in `wei`.
+`gasPrice` | `String` | The wei per unit of gas provided by the sender in `wei`.
 `gas` | `Number` | Gas provided by the sender.
 `input` | `String` | The data sent along with the transaction.
 
@@ -692,7 +693,7 @@ Parameters
 
 Property | Type | Description
 --------- | ------- | -----------
-hashStringOrNumber | `String` | A block number or hash. Or the string `"genesis"`, `"latest"` or `"pending"` as in the :ref:`default block parameter <eth-defaultblock>`.
+hashStringOrNumber | `String` | A block number or hash. Or the string `"genesis"`, `"latest"` or `"pending"` as in the [`default block parameter`] (#eth-defaultblock).
 indexNumber | `Number` | The transactions index position.
 callback | `Function` | (optional) Optional callback, returns an error object as first parameter and the result as second.
 
@@ -700,7 +701,7 @@ Returns
 
 Type | Description
 ------- | -----------
-`Promise<object>` | A transaction object, see :ref:`meterify.eth.getTransaction <eth-gettransaction-return>`:
+`Promise<object>` | A transaction object, see[`meterify.eth.getTransaction`]( #eth-gettransaction-return)
 
 Example
 
@@ -782,7 +783,7 @@ Parameters
 Property | Type | Description
 --------- | ------- | ----------
 address | `String` | The address to get the numbers of transactions from.
-defaultBlock | `Number` or `String` | (optional) If you pass this parameter it will not use the default block set with :ref:`meterify.eth.defaultBlock <eth-defaultblock>`.
+defaultBlock | `Number` or `String` | (optional) If you pass this parameter it will not use the default block set with [`meterify.eth.defaultBlock`](#eth-defaultblock).
 callback | `Function` | (optional) Optional callback, returns an error object as first parameter and the result as second.
 
 Returns
@@ -797,6 +798,8 @@ Example
     meterify.eth.getTransactionCount("0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe").then(console.log);
     > 1
 ```
+
+<a name="eth-sendtransaction">
 
 ## sendTransaction
 
@@ -818,16 +821,17 @@ The `transactionObject`
 
 Property | Type | Description
 --------- | ------- | ----------
-`from` | `String` or `Number` | The address for the sending account. Uses the :ref:`meterify.eth.defaultAccount <eth-defaultaccount>` property, if not specified. Or an address or index of a local wallet in :ref:`meterify.eth.accounts.wallet <eth_accounts_wallet>`.
+`from` | `String` or `Number` | The address for the sending account. Uses the [`meterify.eth.defaultAccount`](#eth-defaultaccount) property, if not specified. Or an address or index of a local wallet in [`meterify.eth.accounts.wallet`](meterify.eth.accounts.html#eth_accounts_wallet).
 `to` | `String` | (optional) The destination address of the message, left undefined for a contract-creation transaction.
-`value` | `Number`, `String`, `BN`, or `BigNumber` | (optional) The value transferred for the transaction in :ref:`wei <what-is-wei>`, also the endowment if it's a contract-creation transaction.
+`value` | `Number`, `String`, `BN`, or `BigNumber` | (optional) The value transferred for the transaction in `wei`, also the endowment if it's a contract-creation transaction.
 `gas` | `Number` | (optional, default: To-Be-Determined) The amount of gas to use for the transaction (unused gas is refunded).
-`gasPrice` | `Number`, `String`, `BN`, or `BigNumber` | (optional) The price of gas for this transaction in :ref:`wei <what-is-wei>`, defaults to :ref:`meterify.eth.gasPrice <eth-gasprice>`.
+`gasPrice` | `Number`, `String`, `BN`, or `BigNumber` | (optional) The price of gas for this transaction in `wei`, defaults to [`meterify.eth.gasPrice`](#eth-gasprice).
 `data` | `String` | (optional) Either a `ABI byte string <http://solidity.readthedocs.io/en/latest/abi-spec.html>`_ containing the data of the function call on a contract, or in the case of a contract-creation transaction the initialisation code.
 `nonce` | `Number` | (optional) Integer of a nonce. This allows to overwrite your own pending transactions that use the same nonce.
 
-Note: The `from` property can also be an address or index from the :ref:`meterify.eth.accounts.wallet <eth_accounts_wallet>`. It will then sign locally using the private key of that account, and send the transaction via :ref:`meterify.eth.sendSignedTransaction() <eth-sendsignedtransaction>`.
+Note: The `from` property can also be an address or index from the [`meterify.eth.accounts.wallet`](meterify.eth.accounts.html#eth_accounts_wallet). It will then sign locally using the private key of that account, and send the transaction via [`meterify.eth.sendSignedTransaction()`](#eth-sendsignedtransaction).
 
+<a name="eth-sendtransaction-return">
 
 Returns
 
@@ -835,13 +839,13 @@ The **callback** will return the 32 bytes transaction hash.
 
 Name | Description
 ------- | -----------
-`PromiEvent` | A :ref:`promise combined event emitter <promiEvent>`. Will be resolved when the transaction :ref:`receipt <eth-gettransactionreceipt-return>` is available. Additionally the following events are available:
+`PromiEvent` | A [promise combined event emitter](#callbacks-promises-events.html#PromiEvent). Will be resolved when the transaction [`receipt`](#eth-gettransactionreceipt-return) is available. Additionally the following events are available:
 
 Event | Returns | Description
 --------- | ------- | -----------
 `"transactionHash"` | `String` | Is fired right after the transaction is sent and a transaction hash is available.
 `"receipt"` | `Object` | Is fired when the transaction receipt is available.
-`"confirmation"` | `Number`, `Object` | Is fired for every confirmation up to the 12th confirmation. Receives the confirmation number as the first and the :ref:`receipt <eth-gettransactionreceipt-return>` as the second argument. Fired from confirmation 0 on, which is the block where its minded.
+`"confirmation"` | `Number`, `Object` | Is fired for every confirmation up to the 12th confirmation. Receives the confirmation number as the first and the [`receipt`](#eth-gettransactionreceipt-return) as the second argument. Fired from confirmation 0 on, which is the block where its minded.
 `"error"` | `Error` | Is fired if an error occurs during sending. If a out of gas error, the second parameter is the receipt.
 
 Example
@@ -890,7 +894,7 @@ Example
     meterify.eth.sendSignedTransaction(signedTransactionData [, callback])
 ```
 
-Sends an already signed transaction, generated for example using :ref:`meterify.eth.accounts.signTransaction <eth-accounts-signtransaction>`.
+Sends an already signed transaction, generated for example using [`meterify.eth.accounts.signTransaction`](#eth-accounts-signtransaction).
 
 Parameters
 
@@ -903,9 +907,9 @@ Returns
 
 Name | Returns | Description
 --------- | ------- | -----------
-`PromiEvent` | A :ref:`promise combined event emitter <promiEvent>` | Will be resolved when the transaction :ref:`receipt <eth-gettransactionreceipt-return>` is available.
+`PromiEvent` | A [promise combined event emitter](#callbacks-promises-events.html#PromiEvent) | Will be resolved when the transaction [`receipt`](#eth-gettransactionreceipt-return) is available.
 
-Please see the return values for :ref:`meterify.eth.sendTransaction <eth-sendtransaction-return>` for details.
+Please see the return values for [`meterify.eth.sendTransaction`](#eth-sendtransaction-return) for details.
 
 Example
 
@@ -948,11 +952,11 @@ Parameters
 
 Property | Type | Description
 --------- | ------- | ----------
-dataToSign | `String` | Data to sign. If String it will be converted using :ref:`web3.utils.utf8ToHex <utils-utf8tohex>`.
-address | `String` or `Number` | Address to sign data with. Or an address or index of a local wallet in :ref:`meterify.eth.accounts.wallet <eth_accounts_wallet>`.
+dataToSign | `String` | Data to sign. If String it will be converted using [`meterify.utilsutf8ToHex`](meterify.utils.html#utils-utf8tohex).
+address | `String` or `Number` | Address to sign data with. Or an address or index of a local wallet in [`meterify.eth.accounts.wallet`](meterify.eth.accounts.html#eth_accounts_wallet).
 callback | `Function` | (optional) Optional callback, returns an error object as first parameter and the result as second.
 
-Note: The 2. `address` parameter can also be an address or index from the :ref:`meterify.eth.accounts.wallet <eth_accounts_wallet>`. It will then sign locally using the private key of this account.
+Note: The 2. `address` parameter can also be an address or index from the [`meterify.eth.accounts.wallet`](meterify.eth.accounts.html#eth_accounts_wallet). It will then sign locally using the private key of this account.
 
 Returns
 
@@ -968,7 +972,7 @@ Example
     > "0x30755ed65396facf86c53e6217c52b4daebe72aa4941d89635409de4c9c7f9466d4e9aaec7977f05e923889b33c0d0dd27d7226b6e6f56ce737465c5cfd04be400"
 
     // the below is the same
-    meterify.eth.sign(web3.utils.utf8ToHex("Hello world"), "0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe")
+    meterify.eth.sign(meterify.utilsutf8ToHex("Hello world"), "0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe")
     .then(console.log);
     > "0x30755ed65396facf86c53e6217c52b4daebe72aa4941d89635409de4c9c7f9466d4e9aaec7977f05e923889b33c0d0dd27d7226b6e6f56ce737465c5cfd04be400"
 ```
@@ -986,7 +990,7 @@ Parameters
 
 Property | Type | Description
 --------- | ------- | ----------
-transactionObject | `Object` | The transaction data to sign :ref:`meterify.eth.sendTransaction() <eth-sendtransaction>` for more.
+transactionObject | `Object` | The transaction data to sign [`meterify.eth.sendTransaction()`](#eth-sendtransaction) for more.
 address | `string` | The address of the account.
 callback | `Function` | (optional) Optional callback, returns an error object as first parameter and the result as second.
 
@@ -994,7 +998,7 @@ Returns
 
 Type | Description
 ------- | -----------
-`Promise<object>` | The RLP encoded transaction. The `raw` property can be used to send the transaction using :ref:`meterify.eth.sendSignedTransaction <eth-sendsignedtransaction>`.
+`Promise<object>` | The RLP encoded transaction. The `raw` property can be used to send the transaction using [`meterify.eth.sendSignedTransaction`](#eth-sendsignedtransaction).
 
 Example
 
@@ -1036,8 +1040,8 @@ Parameters
 
 Property | Type | Description
 --------- | ------- | ----------
-callObject | `Object` | A transaction object see :ref:`meterify.eth.sendTransaction <eth-sendtransaction-return>`, with the difference that for calls the `from` property is optional as well.
-defaultBlock | `Number` or `String` | (optional) If you pass this parameter it will not use the default block set with :ref:`meterify.eth.defaultBlock <eth-defaultblock>`.
+callObject | `Object` | A transaction object see [`meterify.eth.sendTransaction`](#eth-sendtransaction-return), with the difference that for calls the `from` property is optional as well.
+defaultBlock | `Number` or `String` | (optional) If you pass this parameter it will not use the default block set with [`meterify.eth.defaultBlock`](#eth-defaultblock).
 callback | `Function` | (optional) Optional callback, returns an error object as first parameter and the result as second.
 
 Returns
@@ -1068,7 +1072,7 @@ Parameters
 
 Property | Type | Description
 --------- | ------- | ----------
-callObject  `Object` | A transaction object see :ref:`meterify.eth.sendTransaction <eth-sendtransaction-return>`, with the difference that for calls the `from` property is optional as well.
+callObject  `Object` | A transaction object see [`meterify.eth.sendTransaction`](#eth-sendtransaction-return), with the difference that for calls the `from` property is optional as well.
 callback | `Function` | (optional) Optional callback, returns an error object as first parameter and the result as second.
 
 Returns
@@ -1307,7 +1311,7 @@ Parameters
 Property | Type | Description
 --------- | ------- | ----------
 address | `String` 20 Bytes |  The Address of the account or contract.
-storageKey | `Array` 32 Bytes | Array of storage-keys which should be proofed and included. See :ref:`meterify.eth.getStorageAt <eth-getStorageAt>`.
+storageKey | `Array` 32 Bytes | Array of storage-keys which should be proofed and included. See [`meterify.eth.getStorageAt`](#eth-getStorageAt).
 blockNumber | `Number` or `String` or `"latest"` or `"earliest"` | Integer block number, or the string "latest" or "earliest".
 callback | `Function` | (optional) Optional callback, returns an error object as first parameter and the result as second.
 
@@ -1321,7 +1325,7 @@ The account object
 
 Property | Description
 --------- | -----------
-`balance` | The balance of the account. See :ref:`meterify.eth.getBalance <eth-getBalance>`.
+`balance` | The balance of the account. See [`meterify.eth.getBalance`](#eth-getBalance).
 `codeHash` |  hash of the code of the account. For a simple Account without code it will return "0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470"
 `nonce` |  Nonce of the account.
 `storageHash` | SHA3 of the StorageRoot. All storage will deliver a MerkleProof starting with this rootHash.

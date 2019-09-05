@@ -14,6 +14,7 @@ toc_footers:
 - <a href='./meterify.eth.Contract.html'>meterify.eth.Contract</a>
 - <a href='./meterify.eth.accounts.html'>meterify.eth.accounts</a>
 - <a href='./meterify.utils.html'>meterify.utils</a>
+- <a href='./callbacks-promises-events.html'>Callbacks Promises Events</a>
 - <!--<a href='./meterify.eth.subscribe.html'>meterify.eth.subscribe</a>
 - <a href='./meterify.eth.Iban.html'>meterify.eth.Iban</a>
 - <a href='./meterify.eth.personal.html'>meterify.eth.personal</a>
@@ -59,9 +60,9 @@ Note: This package got NOT audited until now. Take precautions to clear memory p
     meterify.eth.accounts.create([entropy]);
 ```
 
-Generates an account object with private key and public key. It is different from
-:ref:`web3.eth.personal.newAccount() <personal-newaccount>` which creates an account
-over the network on the node via an RPC call.
+Generates an account object with private key and public key. <!--It is different from
+[`meterify.eth.personal.newAccount()`](meterify.eth.personal.html#personal-newaccount) which creates an account
+over the network on the node via an RPC call.-->
 
 > Examples
 
@@ -97,7 +98,7 @@ over the network on the node via an RPC call.
 
 Parameters
 
-1. ``entropy`` - `String`(optional): A random string to increase entropy. If given it should be at least 32 characters. If none is given a random string will be generated using :ref:`randomhex <randomhex>`.
+1. ``entropy`` - `String`(optional): A random string to increase entropy. If given it should be at least 32 characters. If none is given a random string will be generated using [`randomhex`](#randomhex).
 
 <a name="eth-accounts-create-return"/>
 
@@ -109,8 +110,8 @@ Returns
 
     - ``address`` - `String`: The account address.
     - `privateKey` - `String`: The accounts private key. This should never be shared or stored unencrypted in localstorage! Also make sure to ``null`` the memory after usage.
-    - ``signTransaction(tx [, callback])`` - ``Function``: The function to sign transactions. See :ref:`meterify.eth.accounts.signTransaction() <eth-accounts-signtransaction>` for more.
-    - ``sign(data)`` - ``Function``: The function to sign transactions. See :ref:`meterify.eth.accounts.sign() <eth-accounts-sign>` for more.
+    - ``signTransaction(tx [, callback])`` - ``Function``: The function to sign transactions. See [`meterify.eth.accounts.signTransaction()`](meterify.eth.accounts.html#eth-accounts-signtransaction) for more.
+    - ``sign(data)`` - ``Function``: The function to sign transactions. See [`meterify.eth.accounts.sign()`](meterify.eth.accounts.html#eth-accounts-sign)` for more.
 
 
 # privateKeyToAccount
@@ -142,7 +143,7 @@ Parameters
 
 Returns
 
-`Object` - The account object with the :ref:`structure seen here <eth-accounts-create-return>`.
+`Object` - The account object with the [`structure seen here`](#eth-accounts-create-return).
 
 <a name="eth-accounts-signtransaction"/>
 
@@ -213,12 +214,12 @@ Parameters
 
 
 1. ``tx`` - `Object`: The transaction's properties object as follows:
-    - ``nonce`` - `String`: (optional) The nonce to use when signing this transaction. Default will use :ref:`web3.eth.getTransactionCount() <eth-gettransactioncount>`.
-    - ``chainId`` - `String`: (optional) The chain id to use when signing this transaction. Default will use :ref:`web3.eth.net.getId() <net-getid>`.
+    - ``nonce`` - `String`: (optional) The nonce to use when signing this transaction. Default will use [`meterify.eth.getTransactionCount()`](meterify.eth.html#eth-gettransactioncount).
+    - ``chainId`` - `String`: (optional) The chain id to use when signing this transaction. Default will use [`meterify.eth.net.getId()`](meterify.eth.html#net-getid).
     - ``to`` - `String`: (optional) The receiver of the transaction, can be empty when deploying a contract.
     - `data` - `String`: (optional) The call data of the transaction, can be empty for simple value transfers.
     - ``value`` - `String`: (optional) The value of the transaction in wei.
-    - ``gasPrice`` - `String`: (optional) The gas price set by this transaction, if empty, it will use :ref:`web3.eth.gasPrice() <eth-gasprice>`
+    - ``gasPrice`` - `String`: (optional) The gas price set by this transaction, if empty, it will use [`meterify.eth.gasPrice()`](meterify.eth.html#eth-gasprice)
     - ``gas`` - `String`: The gas provided by the transaction.
 2. `privateKey` - `String`: The private key to sign with.
 3. ``callback`` - ``Function``: (optional) Optional callback, returns an error object as first parameter and the result as second.
@@ -230,7 +231,7 @@ Returns
     - `r` - `String`: First 32 bytes of the signature
     - `s` - `String`: Next 32 bytes of the signature
     - `v` - `String`: Recovery value + 27
-    - `rawTransaction` - `String`: The RLP encoded transaction, ready to be send using :ref:`web3.eth.sendSignedTransaction <eth-sendsignedtransaction>`.
+    - `rawTransaction` - `String`: The RLP encoded transaction, ready to be send using [`meterify.eth.sendSignedTransaction`](meterify.eth.html#eth-sendsignedtransaction).
     - `transactionHash` - `String`: The transaction hash for the RLP encoded transaction.
 
 # recoverTransaction
@@ -264,7 +265,7 @@ Returns
     meterify.eth.accounts.hashMessage(message);
 ```
 
-Hashes the given message to be passed :ref:`meterify.eth.accounts.recover() <accounts-recover>` function. The data  will be UTF-8 HEX decoded and enveloped as follows: `"\x19Ethereum Signed Message:\n" + message.length + message` and hashed using keccak256.
+Hashes the given message to be passed [`meterify.eth.accounts.recover()`] (meterify.eth.html#accounts-recover) function. The data  will be UTF-8 HEX decoded and enveloped as follows: `"\x19Ethereum Signed Message:\n" + message.length + message` and hashed using keccak256.
 
 > Example
 
@@ -477,7 +478,7 @@ Returns
     meterify.eth.accounts.wallet;
 ```
 
-Contains an in memory wallet with multiple accounts. These accounts can be used when using :ref:`web3.eth.sendTransaction() <eth-sendtransaction>`.
+Contains an in memory wallet with multiple accounts. These accounts can be used when using [`meterify.eth.sendTransaction()`](meterify.eth.html#eth-sendtransaction).
 
 Example
 
@@ -572,7 +573,7 @@ Adds an account using a private key or account object to the wallet.
 
 Parameters
 
-1. `account` - `String` or `Object`: A private key or account object created with :ref:`meterify.eth.accounts.create() <accounts-create>`.
+1. `account` - `String` or `Object`: A private key or account object created with [`meterify.eth.accounts.create()`](meterify.eth.html#accounts-create).
 
 Returns
 
