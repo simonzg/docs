@@ -14,6 +14,7 @@ toc_footers:
 - <a href='./meterify.eth.Contract.html'>meterify.eth.Contract</a>
 - <a href='./meterify.eth.accounts.html'>meterify.eth.accounts</a>
 - <a href='./meterify.utils.html'>meterify.utils</a>
+- <a href='./callbacks-promises-events.html'>Callbacks Promises Events</a>
 - <!--<a href='./meterify.eth.subscribe.html'>meterify.eth.subscribe</a>
 - <a href='./meterify.eth.Iban.html'>meterify.eth.Iban</a>
 - <a href='./meterify.eth.personal.html'>meterify.eth.personal</a>

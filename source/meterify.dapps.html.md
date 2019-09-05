@@ -17,6 +17,7 @@ toc_footers:
 - <a href='./meterify.eth.Contract.html'>meterify.eth.Contract</a>
 - <a href='./meterify.eth.accounts.html'>meterify.eth.accounts</a>
 - <a href='./meterify.utils.html'>meterify.utils</a>
+- <a href='./callbacks-promises-events.html'>Callbacks Promises Events</a>
 - <!--<a href='./meterify.eth.subscribe.html'>meterify.eth.subscribe</a>
 - <a href='./meterify.eth.Iban.html'>meterify.eth.Iban</a>
 - <a href='./meterify.eth.personal.html'>meterify.eth.personal</a>
@@ -33,210 +34,138 @@ search: true
 
 # DApps Using Meter
 
-DApps are decentralized applications that utilize blockchains to store their history of operation (e.g. transactions). They can also consist of functional code, called smart contracts, that is published to the blockchain. The same as any kind of application, a DApp will have some kind of an interface, which might be a graphical client, a command line client or an API.
+DApps are decentralized applications that utilize blockchains to store a history of operations (e.g. transactions). They can also consist of functional code, called smart contracts, that are published to the blockchain. DApps interfaces can be graphical, console-based, or APIs.
 
-At this time, DApps are generally related to categories such as finance, exchanges, and gambling, but social applications and games also exist. At the same time, there are numerous untapped opportunities to develop DApps for other categories that don't yet exist, or for which there are few DApps for at this time.
+Popular categories for DApps include finance, exchanges, and gambling, but social applications and games also exist.
 
-<a name="example-dapp"/>
+One of the primary use cases for a DApp is sending cryptocurrency between two accounts. For example, when Alice wishes to send some MTR and MTRG to Bob's account. Application developers can create methods for this on the Meter blockchain using `meterify`, an extended version of `Web3` (AKA the Ethereum JavaScript API library).
 
-## Developing an Example DApp
-
-The Meter blockchain provides a great foundation for creating DApps, using common development tools that are also used for other blockchains. One prime example is that it is possible to utilize `Web3` with Meter using the `Meterify` library.
-
-As with any app, a DApp needs an identified use case. In the blockchain world the most common use case is a transaction, where cryptocurrency is sent between two accounts. It is very easy to create an example of this kind of transaction using Web3 and the Meter blockchain, where Alice wishes to send some MTR and MTRG to Bob's account.  
-
-There are two approaches below for building the example app on Linux, one with Docker and one without.
-
-<a name="example-with-docker"/>
-
-## Building the Example on Linux Using Docker
-
-### Step 1: Ensure the latest version of `docker-compose` is installed.
-
-```bash
-$ sudo curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-$ sudo chmod +x /usr/local/bin/docker-compose
-```
-
-### Step 2: Check that docker-compose was installed correctly.
-
-```bash
-$ docker-compose --version
-docker-compose version 1.24.1, build 4667896b
-```
-
-### Step 3: Create a project directory (e.g. `meter-dapp`).
-
-```bash
-$ mkdir meter-dapp
-$ cd meter-dapp
-```
-
-### Step 4: Initialize the app directory.
-
-```bash
-$ npm init
-```
-
-### Step 5: Create a `docker-compose.yml` file.
-
-A copy of this file can be found here: [docker-compose.yml](https://github.com/meter-io-docs/meter-io-docs.github.io/blob/master/examples/includes/meter-dapp/docker-compose.yml)
-
-
-
-```
-version: '3.5'
-services:
-  node:
-    image: "node:10"
-    user: "node"
-    working_dir: /home/node/meter-daap
-    volumes:
-      - ./:/home/node/meter-daap
-    command: >
-      sh -c "rm -rf node_modules
-            npm init -y &&
-            npm install meterify --save &&
-            rm -rf node_modules/*/.git/
-            npm install web3@1.0.0-beta.37 --save &&
-            npm install solc@0.4.24 --save &&
-            node index.js"
-```
-
-### Step 6: Create a file called `index.js`.
-
-This will initially test the connection to the testnet.
-
-```js
-const meterify = require("meterify").meterify;
-const Web3 = require("web3");
-const web3 = meterify(new Web3(), "http://test.meter.io:8669");
-```
-
-### Step 7: Run `docker-compose` to use the test application.
-
-```bash
-$ docker-compose up
-```
-
-If there are no errors the connection was successful.
-
-### Step 8: Stop Docker using `Ctrl+C`.
-
-```bash
-Ctrl+C
-```
-
-Continue to *Building the Main App* below the next section.
-
-<a name="example-no-docker"/>
-
-## Building the Example on Linux Without Docker
-
-### Step 1: Ensure Node.js version 10.15.1 or above is installed.
-
-[Here is a guide](https://tecadmin.net/install-nodejs-with-nvm/#) on how to install Node.js and manage different versions.
-
-### Step 2: Create a project directory (e.g. `meter-dapp`).
-
-```bash
-$ mkdir meter-dapp
-$ cd meter-dapp
-```
-
-### Step 3: Initialize the app directory.
-
-```bash
-$ npm init
-```
-
-### Step 4: Install the app prerequisites.
-
-- [meterify](https://www.npmjs.com/package/meterify)
-- [web3](https://www.npmjs.com/package/web3/v/1.0.0-beta.37) version 1.0.0-beta.37
-- [solc](https://www.npmjs.com/package/solc/v/0.4.24) version 0.4.24
-
-```bash
-npm install meterify --save
-npm install web3@1.0.0-beta.37 --save
-npm install solc@0.4.24 --save
-```
-
-### Step 5: Create a file called `index.js`.
-
-This will initially test the connection to the testnet.
-
-```js
-const fs = require("fs");
-const meterify = require("meterify").meterify;
-const Web3 = require("web3");
-const web3 = meterify(new Web3(), "http://test.meter.io:8669");
-```
-
-### Step 6: Run the test connection app.
-
-```bash
-$ node index.js
-```
-
-If the code above runs without any errors the connection was successful.
-
-<a name="create-application-functions"/>
-
-## Create the Application Functions
-
-Next, follow each step to add function and other code snippets `index.js`. The full file project files can also be found here:
+The final project files can be found here:
 
 * [index.js](https://github.com/meter-io-docs/meter-io-docs.github.io/blob/master/examples/includes/meter-dapp/index.js)
 * [sample_token.sol](https://github.com/meter-io-docs/meter-io-docs.github.io/blob/master/examples/includes/meter-dapp/sample_token.sol)
 * [docker-compose.yml](https://github.com/meter-io-docs/meter-io-docs.github.io/blob/master/examples/includes/meter-dapp/docker-compose.yml)
 
-### Step 1:" Create two accounts, one for Alice and one for Bob.
+## Prerequisites
+
+Meterify requires that Node.js version 10.15.1 or above is  [installed](https://nodejs.org/en/download/package-manager/), as well as `npm`.
+
+```bash
+$ node --version
+
+v10.16.3
+
+$ npm --version
+
+6.9.0
+```
+
+## Step 1 - Project Setup
+
+Create a directory (e.g. meter-dapp) and initialize a new project using `npm`. Then install the app prerequisites `meterify` and `web3`, plus the JavaScript bindings for the Solidity compiler (`solc`).
+
+```bash
+$ mkdir meter-dapp
+
+$ cd meter-dapp
+
+$ npm init
+
+$ npm install meterify --save
+
+$ npm install web3@1.0.0-beta.37 --save
+
+$ npm install solc@0.4.24 --save
+```
+
+### Step 2 - Test the Connection
+
+Create a file called `index.js`, and include the `meterify` and `web3` requirements, then call the file with `node` to test the connection to the testnet.
+
+> index.js
 
 ```js
+const meterify = require("meterify").meterify;
+const Web3 = require("web3");
+const web3 = meterify(new Web3(), "http://test.meter.io:8669");
+```
+
+```bash
+$ node index.js
+```
+
+If the code runs without any errors the connection was successful.
+
+<a name="create-application-functions"/>
+
+## Create the Application Functions
+
+Next, follow each step to add function and other code snippets `index.js`.
+
+## Step 3 - Creating an Account Generating Function
+
+```javascript
+web3.eth.accounts.create()
+```
+
+The `web3.eth.accounts` package contains functions for generating accounts and signing transactions and data. Create an object, using Alice's and Bob's names as keys. Perform a loop on the object, calling the `create` function. This will generate new local accounts that contain both a private key and a public key. Add each account to the object as is created.
+
+```js
+var accounts = createAccounts({"alice":{},"bob":{}});
+
 function createAccounts(accounts){
-  console.log("Creating Accounts");
 
   for(key in accounts){
     accounts[key] = web3.eth.accounts.create();
-    console.log("Account "+accounts[key].address+" Created.");
   }
 
-  console.log("All Accounts Created");
   return accounts;
 }
+
 ```
 
-### Step 2: Add the account private keys for each account to the wallet.
+### Step 4 - Add Accounts to a Wallet.
+
+```js
+meterify.eth.accounts.wallet;
+```
+
+`web3.eth.accounts` also contains an in memory wallet to store multiple accounts. Loop through the object returned by the `createAccounts` function, and add Alice's and Bob's accounts to the wallet, using each account's private key.
 
 ```js
 function addAccountsToWallet(accounts){
-  console.log("Adding Accounts to Wallet");
 
   for(var key in accounts){
     web3.eth.accounts.wallet.add(accounts[key].privateKey);
-    console.log("Added Private Key "+accounts[key].privateKey+" to Wallet");
   }
 
-  console.log("Added All Accounts to Wallet");
-  return;
 }
 ```
 
-### Step 3: Send MTR from one account to another.
+## Step 5 - Send MTR to an Account
 
-*Note:* The unit in `meterify` is Wei, where 1 MTR = 10e18 Wei.
+Use the `eth` package's `sendTransaction` method to create a function for sending some MTR and MTRG from Alice to Bob.
+
+Units in `meterify` are Wei, where 1 MTR = 10e18 Wei. Note that the identifier code for MTR is `0000000000`, while MTRG is `0000000001`. `sendTransaction` returns a [`promiEvent`](callbacks-promises-events.html#promievent) that is considered resolved once the `receipt` becomes available
 
 ```js
-function send_MTR(fromAddress,toAddress){
-  console.log("Sending MTR");
+
+/* Note: Alice's account should already contain some MTR and MTRG
+ * for this example code to work.
+ */
+
+sendCrypto(accounts.alice.address, accounts.bob.address, '0000000000', '1000000000000000000');
+
+sendCrypto(accounts.alice.address, accounts.bob.address, '0000000001', '1000000000000000000');
+
+function sendCrypto(fromAddress, toAddress, code, amount){
 
   web3.eth.sendTransaction(
     {
       from: fromAddress,
       to: toAddress,
-      value: '1000000000000000000',
-      data: '00'
+      value: amount,
+      data: code
     }
   ).then(
     receipt => {}
@@ -251,96 +180,19 @@ function send_MTR(fromAddress,toAddress){
 }
 ```
 
-### Step 4: Send MTRG from one account to another.
-
-*Note:* The unit in meterify is Wei, where 1 MTRG = 10e18 WeiG.
-
-```js
-function send_MTRG(fromAddress,toAddress){
-  console.log("Sending MTRG");
-
-  web3.eth.sendTransaction(
-    {
-      from: fromAddress,
-      to: toAddress,
-      value: '1000000000000000000',
-      data: '01'
-    }
-  ).then(
-    receipt => {}
-  ).then(
-    data => {
-      console.log("MTRG sent: "+JSON.stringify(data));
-      next();
-    }
-  ).catch(function(error){
-    console.log("Error: "+error);
-  });
-}
-```
-
-### Step 10: Begin the function calling sequence.
-
-This code can go either before or after the functions.
-
-```js
-var accounts = createAccounts({"bob":{}});
-
-/* Alice should be a pre-existing account that already contains some MTR.
- * Add Alice's public and private keys to the following object.
- */
-accounts.alice = {"address":"0x...","privateKey":"0x..."};
-addAccountsToWallet(accounts);
-
-send_MTR(accounts.alice.address, accounts.bob.address);
-send_MTRG(accounts.alice.address, accounts.bob.address);
-
-```
-
-### Step 11: Run the application.
-
-_Using Docker:_
-
-```bash
-$ docker-compose up
-```
-
-_Without Docker:_
+### Step 6 - Run the application.
 
 ```bash
 $ node index.js
 ```
 
-### Step 12 (Docker Only): Comment out dependency installation.
-
-Do this after the first run in `docker-compose.yml` to stop repeated initialization and dependency installation on each Docker run.
-
-```
-version: '3.5'
-services:
-  node:
-    image: "node:10"
-    user: "node"
-    working_dir: /home/node/meter-daap
-    volumes:
-      - ./:/home/node/meter-daap
-    command: node index.js
-#    command: >
-#      sh -c "rm -rf node_modules
-#            npm init -y &&
-#            npm install meterify --save &&
-#            rm -rf node_modules/*/.git/
-#            npm install web3@1.0.0-beta.37 --save &&
-#            npm install solc@0.4.24 --save &&
-#            node index.js"
-```
 <a name="example-smart-contract"/>
 
 ## Load, Deploy, and Test a Smart Contract
 
 The following modifications to the example demonstrate the use of a sample smart contract on the Meter blockchain. Again, follow the steps to add code snippets to the existing `index.js` file.
 
-### Step 1: Load the sample smart contract.
+### Step 1 - Load a Smart Contract.
 
 The file can be found here: [sample_token.sol](https://github.com/meter-io-docs/meter-io-docs.github.io/blob/master/examples/includes/meter-dapp/sample_token.sol)
 
@@ -362,7 +214,7 @@ function loadContract(file){
 }
 ```
 
-### Step 2: Deploy the contract byte code to blockchain.
+### Step 2 - Deploy a Smart Contract
 
 ```js
 function deployContract(data,address){
@@ -397,7 +249,7 @@ function deployContract(data,address){
 }
 ```
 
-### Step 3: Register contract events.
+### Step 3 - Register Contract Events
 
 Additionally, call some example functions within `contractReady` when the contract is ready.
 
@@ -420,7 +272,7 @@ function contractReady(result,contractInstance){
 
 ```
 
-### Step 4: Transfer cryptocurrency between two accounts.
+### Step 4 - Transfer Between Accounts.
 
 ```js
 function transferFrom(contractInstance, fromAddress, toAddress){
@@ -442,7 +294,7 @@ function transferFrom(contractInstance, fromAddress, toAddress){
 }
 ```
 
-### Step 4: Get an account balance.
+### Step 4 - Get a Balance.
 
 ```js
 function getAccountBalanceOf(contractInstance,address){
@@ -463,7 +315,7 @@ function getAccountBalanceOf(contractInstance,address){
 }
 ```
 
-### Step 5: Minting some coins.
+### Step 5 - Mint Some Coins.
 
 ```js
 function mintToken(contractInstance,address){
@@ -488,37 +340,81 @@ function mintToken(contractInstance,address){
 
 ```
 
-### Step 6: Add the `loadContract` and `deployContract` function calls.
+<a name="example-with-docker"/>
 
-```js
-var accounts = createAccounts({"bob":{}});
+## Using Docker
 
-/* Alice should be a pre-existing account that already contains some MTR.
- * Add Alice's public and private keys to the following object.
- */
-accounts.alice = {"address":"0x...","privateKey":"0x..."};
-addAccountsToWallet(accounts);
+### Step 1 - Ensure `docker-compose` is Installed.
 
-send_MTR(accounts.alice.address, accounts.bob.address);
-send_MTRG(accounts.alice.address, accounts.bob.address);
+```bash
+$ sudo curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 
-var data = loadContract('sample_token.sol');
+$ sudo chmod +x /usr/local/bin/docker-compose
 
-/* The following function requires some energy first. Uncomment when the Alice account has some.*/
+$ docker-compose --version
 
-deployContract(data, accounts.alice.address);
+docker-compose version 1.24.1, build 4667896b
 ```
 
-### Step 7: Run the application.
+### Step 2 - Create `docker-compose.yml`
 
-_Using Docker:_
+A copy of this file can be found here: [docker-compose.yml](https://github.com/meter-io-docs/meter-io-docs.github.io/blob/master/examples/includes/meter-dapp/docker-compose.yml)
+
+```
+version: '3.5'
+services:
+  node:
+    image: "node:10"
+    user: "node"
+    working_dir: /home/node/meter-daap
+    volumes:
+      - ./:/home/node/meter-daap
+    command: >
+      sh -c "rm -rf node_modules
+            npm init -y &&
+            npm install meterify --save &&
+            rm -rf node_modules/*/.git/
+            npm install web3@1.0.0-beta.37 --save &&
+            npm install solc@0.4.24 --save &&
+            node index.js"
+```
+
+### Step 3 - Run `docker-compose`
+
+Initiate the test application with `docker-compose`.
 
 ```bash
 $ docker-compose up
 ```
 
-_Without Docker:_
+If there are no errors the connection was successful.
+
+> Stop Docker using `Ctrl+C`.
 
 ```bash
-$ node index.js
+Ctrl+C
+```
+
+### Step 4 - Comment out dependency installation.
+
+After the first run in `docker-compose.yml`, stop repeated initialization and dependency installation by commenting out the following lines.
+
+```
+version: '3.5'
+services:
+  node:
+    image: "node:10"
+    user: "node"
+    working_dir: /home/node/meter-daap
+    volumes:
+      - ./:/home/node/meter-daap
+    command: node index.js
+#    command: >
+#      sh -c "rm -rf node_modules
+#            npm init -y &&
+#            npm install meterify --save &&
+#            rm -rf node_modules/*/.git/
+#            npm install web3@1.0.0-beta.37 --save &&
+#            npm install solc@0.4.24 --save &&
+#            node index.js"
 ```

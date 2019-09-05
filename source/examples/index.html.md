@@ -22,6 +22,7 @@ includes:
   - send-transaction
   - deploy-contract
   - call-contract
+  - meterify-react
 
 search: true
 ---

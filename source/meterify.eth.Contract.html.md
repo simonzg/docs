@@ -14,9 +14,9 @@ toc_footers:
 - <a href='./meterify.eth.Contract.html'>meterify.eth.Contract</a>
 - <a href='./meterify.eth.accounts.html'>meterify.eth.accounts</a>
 - <a href='./meterify.utils.html'>meterify.utils</a>
+- <a href='./callbacks-promises-events.html'>Callbacks Promises Events</a>
 - <!--<a href='./meterify.eth.subscribe.html'>meterify.eth.subscribe</a>
 - <a href='./meterify.eth.Iban.html'>meterify.eth.Iban</a>
-- <a href='./meterify.eth.personal.html'>meterify.eth.personal</a>
 - <a href='./meterify.eth.ens.html'>meterify.eth.ens</a>
 - <a href='./meterify.eth.abi.html'>meterify.eth.abi</a>
 - <a href='./meterify.eth.net.html'>meterify.eth.net</a>
@@ -69,7 +69,7 @@ This allows you to interact with smart contracts as if they were JavaScript obje
     new meterify.eth.Contract(jsonInterface, address, options);
 ```
 
-Creates a new contract instance with all its methods and events defined in its :ref:`json interface <glossary-json-interface>` object.
+Creates a new contract instance with all its methods and events defined in its [`json interface`](glossary.html#json-interface) object.
 
 > Example
 
@@ -86,16 +86,16 @@ Parameters
 1. `jsonInterface` - `Array`: The json interface for the contract to instantiate
 2. `address` - `String` (optional): This address is necessary for transactions and call requests and can also be added later using `myContract.options.address = '0x1234..'.`
 3. `options` - `Object` (optional): The options of the contract. Some are used as fallbacks for calls and transactions:
-    * `data` - `String`: The byte code of the contract. Used when the contract gets :ref:`deployed <contract-deploy>`.
-    * `address` - `String`: The address where the contract is deployed. See :ref:`address <contract-address>`.
-    * :ref:`defaultAccount <web3-module-defaultaccount>`
-    * :ref:`defaultBlock <web3-module-defaultblock>`
-    * :ref:`defaultGas <web3-module-defaultgas>`
-    * :ref:`defaultGasPrice <web3-module-defaultaccount>`
-    * :ref:`transactionBlockTimeout <web3-module-transactionblocktimeout>`
-    * :ref:`transactionConfirmationBlocks <web3-module-transactionconfirmationblocks>`
-    * :ref:`transactionPollingTimeout <web3-module-transactionpollingtimeout>`
-    * :ref:`transactionSigner <web3-module-transactionSigner>`
+    * `data` - `String`: The byte code of the contract. Used when the contract gets [`deployed`](#contract-deploy).
+    * `address` - `String`: The address where the contract is deployed. See [`address`]( #contract-address).
+    * [`defaultAccount`](meterify.module.options.html#defaultaccount)
+    * [`defaultBlock`](meterify.module.options.html#defaultblock)
+    * [`defaultGas`](meterify.module.options.html#defaultgas)
+    * [`defaultGasPrice`](meterify.module.options.html#defaultaccount)
+    * [`transactionBlockTimeout`](meterify.module.options.html#transactionblocktimeout)
+    * [`transactionConfirmationBlocks`](meterify.module.options.html#transactionconfirmationblocks)
+    * [`transactionPollingTimeout`](meterify.module.options.html#transactionpollingtimeout)
+    * [`transactionSigner`](meterify.module.options.html#transactionSigner)
 
 
 Returns
@@ -154,12 +154,12 @@ Property
     myContract.jsonInterface
 ```
 
-The :ref:`json interface <glossary-json-interface>` object derived from the [ABI] (https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI) of this contract.
+The [`json interface`](glossary.html#json-interface) object derived from the [ABI] (https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI) of this contract.
 
 Property
 
 
-`jsonInterface` - `AbiModel`: The :ref:`json interface <glossary-json-interface>` for this contract. Re-setting this will regenerate the methods and events of the contract instance.
+`jsonInterface` - `AbiModel`: The [`json interface`](glossary.html#json-interface) for this contract. Re-setting this will regenerate the methods and events of the contract instance.
 
 
 # AbiModel
@@ -332,9 +332,9 @@ Returns
 `Object`: The transaction object:
 
 - `Array` - arguments: The arguments passed to the method before. They can be changed.
-- `Function` - :ref:`send <contract-send>`: Will deploy the contract. The promise will resolve with the new contract instance, instead of the receipt!
-- `Function` - :ref:`estimateGas <contract-estimateGas>`: Will estimate the gas used for deploying.
-- `Function` - :ref:`encodeABI <contract-encodeABI>`: Encodes the ABI of the deployment, which is contract data + constructor parameters
+- `Function` - `send`(#contract-send): Will deploy the contract. The promise will resolve with the new contract instance, instead of the receipt!
+- `Function` - [`estimateGas`](#contract-estimateGas): Will estimate the gas used for deploying.
+- `Function` - [`encodeABI`](#contract-encodeABI): Encodes the ABI of the deployment, which is contract data + constructor parameters
 
  For details to the methods see the documentation below.
 
@@ -345,7 +345,7 @@ Returns
     myContract.methods.myMethod([param1[, param2[, ...]]])
 ```
 
-Creates a transaction object for that method, which then can be :ref:`called <contract-call>`, :ref:`send <contract-send>`, :ref:`estimated  <contract-estimateGas>`or :ref:`ABI encoded <contract-encodeABI>`.
+Creates a transaction object for that method, which then can be [`called`](#contract-call), `send`(#contract-send), [`estimated`](#contract-estimateGas) or [ABI encoded](#contract-encodeABI).
 
 The methods of this smart contract are available through:
 
@@ -389,17 +389,17 @@ This allows calling functions with same name but different parameters from the J
     .on('error', console.error);
 ```
 
-Parameters of any method depend on the smart contracts methods, defined in the :ref:`JSON interface <glossary-json-interface>`.
+Parameters of any method depend on the smart contracts methods, defined in the [`json interface`](glossary.html#json-interface).
 
 Returns
 
 `Object`: The Transaction Object:
 
 - `Array` - arguments: The arguments passed to the method before. They can be changed.
-- `Function` - :ref:`call <contract-call>`: Will call the "constant" method and execute its smart contract method in the EVM without sending a transaction (Can't alter the smart contract state).
-- `Function` - :ref:`send <contract-send>`: Will send a transaction to the smart contract and execute its method (Can alter the smart contract state).
-- `Function` - :ref:`estimateGas <contract-estimateGas>`: Will estimate the gas used when the method would be executed on chain.
-- `Function` - :ref:`encodeABI <contract-encodeABI>`: Encodes the ABI for this method. This can be send using a transaction, call the method or passing into another smart contracts method as argument.
+- `Function` - [`call`](#contract-call): Will call the "constant" method and execute its smart contract method in the EVM without sending a transaction (Can't alter the smart contract state).
+- `Function` - `send`(#contract-send): Will send a transaction to the smart contract and execute its method (Can alter the smart contract state).
+- `Function` - [`estimateGas`](#contract-estimateGas): Will estimate the gas used when the method would be executed on chain.
+- `Function` - [`encodeABI`](#contract-encodeABI): Encodes the ABI for this method. This can be send using a transaction, call the method or passing into another smart contracts method as argument.
 
  For details to the methods see the documentation below.
 
@@ -479,7 +479,7 @@ Will call a "constant" method and execute its smart contract method in the EVM w
 
 Returns
 
-`Promise<any>` - The return value(s) of the smart contract method.
+`Promise<any) - The return value(s) of the smart contract method.
 If it returns a single value, it's returned as is. If it has multiple return values they are returned as an object with properties and indices.
 
 
@@ -572,10 +572,10 @@ Returns
 
 The **callback** will return the 32 bytes transaction hash.
 
-`PromiEvent`: A :ref:`promise combined event emitter <promiEvent>`. Will be resolved when the transaction *receipt* is available, OR if this `send()` is called from a `someContract.deploy()`, then the promise will resolve with the *new contract instance*. Additionally the following events are available:
+`PromiEvent`: A [`promise combined event emitter`](callbacks-promises-events.html#PromiEvent). Will be resolved when the transaction *receipt* is available, OR if this `send()` is called from a `someContract.deploy()`, then the promise will resolve with the *new contract instance*. Additionally the following events are available:
 
 - `"transactionHash"` returns `String`: is fired right after the transaction is sent and a transaction hash is available.
-- `"receipt"` returns `Object`: is fired when the transaction *receipt* is available. Receipts from contracts will have no `logs` property, but instead an `events` property with event names as keys and events as properties. See :ref:`getPastEvents return values <contract-events-return>` for details about the returned event object.
+- `"receipt"` returns `Object`: is fired when the transaction *receipt* is available. Receipts from contracts will have no `logs` property, but instead an `events` property with event names as keys and events as properties. See [`getPastEvents return values`](#contract-events-return) for details about the returned event object.
 - `"confirmation"` returns `Number`, `Object`: is fired for every confirmation up to the 24th confirmation. Receives the confirmation number as the first and the receipt as the second argument. Fired from confirmation 1 on, which is the block where it's mined.
 - `"error"` returns `Error`: is fired if an error occurs during sending. If an out of gas error, the second parameter is the receipt.
 
@@ -621,7 +621,7 @@ Parameters
 
 Returns
 
-`Promise<number>` - The gas amount estimated.
+`Promise<number) - The gas amount estimated.
 
 <a name="contract-encodeABI"/>
 
@@ -698,7 +698,7 @@ Parameters
 2. `options` - `Object` (optional): The options used for deployment.
     * `filter` - `Object` (optional): Lets you filter events by indexed parameters, e.g. `{filter: {myNumber: [12,13]}}` means all events where "myNumber" is 12 or 13.
     * `topics` - `Array` (optional): This allows you to manually set the topics for the event filter. If given the filter property and event signature, (topic[0]) will not be set automatically.
-3. `callback` - `Function`: This callback will be fired for the first *event* as the second argument, or an error as the first argument. See :ref:`getPastEvents return values <contract-events-return>` for details about the event structure.
+3. `callback` - `Function`: This callback will be fired for the first *event* as the second argument, or an error as the first argument. See [`getPastEvents return values`](# contract-events-return) for details about the event structure.
 
 Returns
 
@@ -792,7 +792,7 @@ The structure of the returned event `Object` looks as follows:
     myContract.events.allEvents([options][, callback])
 ```
 
-Same as :ref:`events <contract-events>` but receives all events from this smart contract.
+Same as [`events'](#contract-events) but receives all events from this smart contract.
 Optionally the filter property can filter those events.
 
 ## getPastEvents
@@ -854,4 +854,4 @@ Returns
 
 `Promise` returns `Array`: An array with the past event `Objects`, matching the given event name and filter.
 
-For the structure of a returned event `Object` see :ref:`getPastEvents return values <contract-events-return>`.
+For the structure of a returned event `Object` see [`getPastEvents return values`] (#contract-events-return).
