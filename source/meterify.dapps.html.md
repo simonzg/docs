@@ -85,9 +85,9 @@ Create a file called `index.js`, and include the `meterify` and `web3` requireme
 > index.js
 
 ```js
-const meterify = require("meterify").meterify;
+const mtr = require("meterify").meterify;
 const Web3 = require("web3");
-const web3 = meterify(new Web3(), "http://test.meter.io:8669");
+const meterify = mtr(new Web3(), "http://test.meter.io:8669");
 ```
 
 ```bash
@@ -105,10 +105,10 @@ Next, follow each step to add function and other code snippets `index.js`.
 ## Step 3 - Creating an Account Generating Function
 
 ```javascript
-web3.eth.accounts.create()
+meterify.eth.accounts.create()
 ```
 
-The `web3.eth.accounts` package contains functions for generating accounts and signing transactions and data. Create an object, using Alice's and Bob's names as keys. Perform a loop on the object, calling the `create` function. This will generate new local accounts that contain both a private key and a public key. Add each account to the object as is created.
+The `meterify.eth.accounts` package contains functions for generating accounts and signing transactions and data. Create an object, using Alice's and Bob's names as keys. Perform a loop on the object, calling the `create` function. This will generate new local accounts that contain both a private key and a public key. Add each account to the object as is created.
 
 ```js
 var accounts = createAccounts({"alice":{},"bob":{}});
@@ -116,7 +116,7 @@ var accounts = createAccounts({"alice":{},"bob":{}});
 function createAccounts(accounts){
 
   for(key in accounts){
-    accounts[key] = web3.eth.accounts.create();
+    accounts[key] = meterify.eth.accounts.create();
   }
 
   return accounts;
@@ -130,13 +130,13 @@ function createAccounts(accounts){
 meterify.eth.accounts.wallet;
 ```
 
-`web3.eth.accounts` also contains an in memory wallet to store multiple accounts. Loop through the object returned by the `createAccounts` function, and add Alice's and Bob's accounts to the wallet, using each account's private key.
+`meterify.eth.accounts` also contains an in memory wallet to store multiple accounts. Loop through the object returned by the `createAccounts` function, and add Alice's and Bob's accounts to the wallet, using each account's private key.
 
 ```js
 function addAccountsToWallet(accounts){
 
   for(var key in accounts){
-    web3.eth.accounts.wallet.add(accounts[key].privateKey);
+    meterify.eth.accounts.wallet.add(accounts[key].privateKey);
   }
 
 }
@@ -160,7 +160,7 @@ sendCrypto(accounts.alice.address, accounts.bob.address, '0000000001', '10000000
 
 function sendCrypto(fromAddress, toAddress, code, amount){
 
-  web3.eth.sendTransaction(
+  meterify.eth.sendTransaction(
     {
       from: fromAddress,
       to: toAddress,
@@ -220,7 +220,7 @@ function loadContract(file){
 function deployContract(data,address){
   console.log("Deploying contract.");
 
-  contractInstance = new web3.eth.Contract(data.token_abiDefinition)
+  contractInstance = new meterify.eth.Contract(data.token_abiDefinition)
   contractInstance.options.data = data.token_byteCode
   contractInstance.deploy(
     {
