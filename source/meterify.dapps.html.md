@@ -78,7 +78,7 @@ $ npm install web3@1.0.0-beta.37 --save
 $ npm install solc@0.4.24 --save
 ```
 
-### Step 2 - Test the Connection
+## Step 2 - Test the Connection
 
 Create a file called `index.js`, and include the `meterify` and `web3` requirements, then call the file with `node` to test the connection to the testnet.
 
@@ -97,10 +97,6 @@ $ node index.js
 If the code runs without any errors the connection was successful.
 
 <a name="create-application-functions"/>
-
-## Create the Application Functions
-
-Next, follow each step to add function and other code snippets `index.js`.
 
 ## Step 3 - Creating an Account Generating Function
 

@@ -66,11 +66,11 @@ Follow [this guide](https://www.bitcoin.com/get-started/how-to-setup-a-bitcoin-a
 
 Meter is actively working with mining pool providers for future mining support. We have also setup two dedicated Meter mining pools for testing purpose:
 
-```
+
 stratum+tcp://34.222.111.82:3256
 stratum+tcp://54.184.235.97:3256
-```
-!> BE AWARE NO REWARD will be distributed from these pools, as the logic has not been implemented yet.
+
+**BE AWARE** NO REWARD will be distributed from these pools, as the logic has not been implemented yet. For real mining please setup private mining pools.
 
 The following are the rough production parameters for different mining hardware on the Meter testnet, tuned to 1 meter = 10 kwh on an Antminer S9:
 
